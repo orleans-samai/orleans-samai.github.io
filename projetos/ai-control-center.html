@@ -11,90 +11,165 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f6f6f3; --bg-elev:#ffffff; --bg-soft:#efefe9;
+    --bg:#f6f6f3; --bg-elev:#ffffff; --bg-soft:#efefe9; --bg-sunken:#ecece5;
     --text:#181816; --text-dim:#605e57; --border:#e4e2da;
-    --accent:#17694a; --accent-2:#c96f34; --accent-bg:#e5f2ea;
+    --accent:#17694a; --accent-2:#c96f34; --accent-bg:#e5f2ea; --accent2-bg:#f7ead9;
     --badge-priv:#8a5a00; --badge-priv-bg:#fbead0;
     --shadow: 0 1px 2px rgba(20,20,10,.04), 0 8px 24px rgba(20,20,10,.06);
+    --shadow-hover: 0 4px 12px rgba(20,20,10,.07), 0 18px 36px rgba(20,20,10,.09);
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#121316; --bg-elev:#1b1d21; --bg-soft:#202226;
+      --bg:#121316; --bg-elev:#1b1d21; --bg-soft:#202226; --bg-sunken:#1a1c1f;
       --text:#eef0f1; --text-dim:#9fa3aa; --border:#2b2e34;
-      --accent:#5fd39a; --accent-2:#f0a06a; --accent-bg:#17241d;
+      --accent:#5fd39a; --accent-2:#f0a06a; --accent-bg:#17241d; --accent2-bg:#2a2015;
       --badge-priv:#e3b567; --badge-priv-bg:#2c2415;
       --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.4);
+      --shadow-hover: 0 4px 14px rgba(0,0,0,.4), 0 20px 44px rgba(0,0,0,.5);
     }
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
     margin:0; background:var(--bg); color:var(--text);
     font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.6; -webkit-font-smoothing:antialiased;
+    line-height:1.62; -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:760px;margin:0 auto;padding:0 20px 90px}
   .topbar{
     border-bottom:1px solid var(--border); background:var(--bg-soft);
-    padding:18px 20px; margin-bottom:48px;
+    padding:16px 20px;
   }
-  .topbar-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .back{
-    font-size:13.5px;font-weight:600;color:var(--text-dim);text-decoration:none;
-    display:inline-flex;align-items:center;gap:6px;
-  }
+  .topbar-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .back{font-size:13.5px;font-weight:600;color:var(--text-dim);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
   .back:hover{color:var(--accent)}
+  .crumb{font-size:12.5px;color:var(--text-dim);font-variant-numeric:tabular-nums}
   .brand{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--text);text-decoration:none}
 
-  .hero{margin-bottom:40px}
+  .hero{
+    position:relative; padding:52px 20px 44px;
+    background:
+      radial-gradient(520px 260px at 8% -20%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 68%),
+      radial-gradient(420px 220px at 100% -10%, color-mix(in srgb, var(--accent-2) 13%, transparent), transparent 70%),
+      var(--bg-soft);
+    border-bottom:1px solid var(--border);
+  }
+  .hero-inner{max-width:1040px;margin:0 auto}
   .icon-badge{
-    font-size:38px;width:72px;height:72px;border-radius:18px;
+    font-size:34px;width:64px;height:64px;border-radius:16px;
     background:var(--bg-elev);border:1px solid var(--border);box-shadow:var(--shadow);
-    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
   }
   .title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4.6vw,36px);margin:0;letter-spacing:-0.015em}
-  .badge{
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4.6vw,38px);margin:0;letter-spacing:-0.015em;text-wrap:balance}
+  .pill{
     font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
     padding:4px 10px;border-radius:999px;white-space:nowrap;
     display:inline-flex;align-items:center;gap:5px;
   }
-  .badge::before{content:'';width:6px;height:6px;border-radius:50%}
-  .badge.public{color:var(--accent);background:var(--accent-bg)}
-  .badge.public::before{background:var(--accent)}
-  .badge.private{color:var(--badge-priv);background:var(--badge-priv-bg)}
-  .badge.private::before{background:var(--badge-priv)}
-  .tagline{font-size:17px;color:var(--text-dim);max-width:56ch;margin:0 0 20px}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-  .tag{font-size:11.5px;font-weight:600;color:var(--text-dim);background:var(--bg-soft);border:1px solid var(--border);padding:4px 10px;border-radius:6px}
-  .repo-link{
-    margin-top:16px;display:inline-flex;align-items:center;gap:7px;
-    padding:10px 18px;border-radius:9px;font-size:14px;font-weight:600;
-    text-decoration:none;background:var(--accent);color:#0c1210;
+  .pill::before{content:'';width:6px;height:6px;border-radius:50%}
+  .pill.public{color:var(--accent);background:var(--accent-bg)}
+  .pill.public::before{background:var(--accent)}
+  .pill.private{color:var(--badge-priv);background:var(--badge-priv-bg)}
+  .pill.private::before{background:var(--badge-priv)}
+  .pill.producao{color:var(--accent);background:var(--accent-bg)}
+  .pill.producao::before{background:var(--accent)}
+  .pill.mvp{color:var(--accent-2);background:var(--accent2-bg)}
+  .pill.mvp::before{background:var(--accent-2)}
+  .tagline{font-size:18px;color:var(--text-dim);max-width:58ch;margin:0 0 18px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:11.5px;font-weight:600;color:var(--text-dim);background:var(--bg-elev);border:1px solid var(--border);padding:4px 10px;border-radius:6px}
+
+  .layout{max-width:1040px;margin:0 auto;padding:44px 20px 90px;display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start}
+  @media (max-width:800px){.layout{grid-template-columns:1fr}}
+
+  main section{margin-bottom:44px}
+  main section:last-child{margin-bottom:0}
+  h2{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin:0 0 16px}
+  .lead{font-size:16px;color:var(--text);max-width:68ch;margin:0}
+
+  .flow{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+  .flow li{
+    position:relative;padding:0 0 26px 40px;
+  }
+  .flow li:last-child{padding-bottom:0}
+  .flow li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+    background:var(--bg-elev);border:1.5px solid var(--accent);color:var(--accent);
+    font-family:'Fraunces',serif;font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .flow li::after{
+    content:'';position:absolute;left:13px;top:26px;bottom:0;width:1.5px;
+    background:var(--border);
+  }
+  .flow li:last-child::after{display:none}
+  .flow li p{margin:2px 0 0;font-size:14.5px;color:var(--text)}
+
+  .feat-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:560px){.feat-grid{grid-template-columns:1fr}}
+  .feat-grid li{
+    background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;font-size:13.5px;color:var(--text);
+    display:flex;gap:10px;align-items:flex-start;box-shadow:var(--shadow);
+  }
+  .feat-grid li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0;line-height:1.5}
+
+  .metrics{display:flex;flex-wrap:wrap;gap:14px}
+  .metric{
+    background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;
+    padding:16px 20px;box-shadow:var(--shadow);min-width:120px;flex:1;
+  }
+  .metric .n{font-family:'Fraunces',serif;font-weight:700;font-size:26px;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.1}
+  .metric .l{font-size:12px;color:var(--text-dim);margin-top:4px}
+
+  blockquote{
+    margin:0;padding:20px 24px;border-left:3px solid var(--accent-2);
+    background:var(--accent2-bg);border-radius:0 12px 12px 0;
+    font-family:'Fraunces',serif;font-size:17px;font-style:italic;font-weight:500;
+    color:var(--text);line-height:1.5;
+  }
+
+  aside{display:flex;flex-direction:column;gap:20px;position:sticky;top:20px}
+  .side-card{
+    background:var(--bg-elev);border:1px solid var(--border);border-radius:14px;
+    padding:20px;box-shadow:var(--shadow);
+  }
+  .side-card h3{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-dim);margin:0 0 12px}
+  .side-card p{margin:0;font-size:13.5px;color:var(--text)}
+  .stack-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .stack-list li{font-size:13px;color:var(--text);padding-left:16px;position:relative}
+  .stack-list li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+  .cta-links{display:flex;flex-direction:column;gap:10px}
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:10px 16px;border-radius:9px;font-size:13.5px;font-weight:600;
+    text-decoration:none;border:1px solid var(--border);color:var(--text);
+    background:var(--bg-soft);transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#0c1210}
+
+  .pagenav{
+    max-width:1040px;margin:0 auto;padding:0 20px 70px;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  .pagenav a{
+    flex:1;min-width:220px;text-decoration:none;color:var(--text);
+    background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;
+    padding:16px 18px;display:flex;flex-direction:column;gap:4px;
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  .repo-link:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .pagenav a:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+  .pagenav .dir{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-dim);font-weight:700}
+  .pagenav .pname{font-family:'Fraunces',serif;font-size:15px;font-weight:600}
+  .pagenav .next{text-align:right;align-items:flex-end}
 
-  section{margin-bottom:36px}
-  h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin:0 0 14px}
-  .card{background:var(--bg-elev);border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:var(--shadow)}
-  p{margin:0;color:var(--text)}
-  .dim{color:var(--text-dim)}
-  ul.feat{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
-  ul.feat li{padding-left:22px;position:relative;font-size:14.5px;color:var(--text)}
-  ul.feat li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700}
-  ul.stack{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
-  ul.stack li{
-    font-size:13px;font-weight:600;color:var(--text);background:var(--bg-soft);
-    border:1px solid var(--border);padding:6px 12px;border-radius:8px;
-  }
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  @media (max-width:600px){.grid2{grid-template-columns:1fr}}
-
-  footer{border-top:1px solid var(--border);padding-top:26px;margin-top:56px;color:var(--text-dim);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer{border-top:1px solid var(--border);padding:26px 20px;color:var(--text-dim);font-size:13px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
   footer a{color:var(--text-dim);text-decoration:none}
   footer a:hover{color:var(--accent)}
 </style>
@@ -105,59 +180,87 @@
   <div class="topbar-inner">
     <a class="back" href="../index.html">← Portfólio</a>
     <a class="brand" href="../index.html">orleans-samai</a>
+    <span class="crumb">14 / 14</span>
   </div>
 </div>
 
-<div class="wrap">
-
-  <section class="hero">
+<header class="hero">
+  <div class="hero-inner">
     <div class="icon-badge">🧠</div>
     <div class="title-row">
       <h1>AI Control Center</h1>
-      <span class="badge private">Privado</span>
+      <span class="pill private">Privado</span>
+      <span class="pill producao">Em produção</span>
     </div>
     <p class="tagline">Diário local do uso de Claude Code, 100% offline.</p>
     <div class="tags"><span class="tag">Electron</span><span class="tag">Privacidade</span></div>
-    <p class="dim" style="font-size:13.5px;margin-top:14px">Repositório privado — disponível para demonstração sob solicitação.</p>
-  </section>
-
-  <section>
-    <h2>O que faz</h2>
-    <div class="card"><p>Central pessoal que lê Skills, Agents, projetos, sessões do Claude Code e repositórios Git do próprio computador do usuário, e monta uma timeline, resumo semanal, consumo de tokens/custo e um módulo de ranking de portfólio de projetos — tudo 100% local, sem nenhuma requisição de rede.</p></div>
-  </section>
-
-  <div class="grid2">
-    <section>
-      <h2>Para quem é</h2>
-      <div class="card"><p class="dim">Uso pessoal do próprio desenvolvedor para entender e priorizar seu uso de IA e seu portfólio de projetos.</p></div>
-    </section>
-    <section>
-      <h2>Status</h2>
-      <div class="card"><p class="dim">Em produção para uso pessoal — módulos ainda não implementados documentados (exportação PDF, outros provedores de IA).</p></div>
-    </section>
   </div>
+</header>
 
-  <section>
-    <h2>Stack técnica</h2>
-    <ul class="stack"><li>Electron 42</li><li>React 19</li><li>TypeScript</li><li>Vite</li><li>Tailwind v4</li><li>better-sqlite3 (SQLite local com WAL)</li></ul>
-  </section>
+<div class="layout">
+  <main>
 
-  <section>
-    <h2>Principais funcionalidades</h2>
-    <div class="card"><ul class="feat"><li>Dashboard e timeline de atividade real (sessões, commits, skills usadas)</li><li>Sanitização automática de segredos antes de qualquer gravação</li><li>Consumo de tokens e custo estimado por sessão e por prompt</li><li>Tela de pendências de Git com commit assistido</li><li>Ranking de projetos com 8 critérios e confiança da recomendação</li><li>Backup/exportação em JSON e Markdown</li><li>153 testes automatizados cobrindo segurança e sanitização</li></ul></div>
-  </section>
+    <section>
+      <h2>O que faz</h2>
+      <p class="lead">Central pessoal que lê Skills, Agents, projetos, sessões do Claude Code e repositórios Git do próprio computador do usuário, e monta uma timeline, resumo semanal, consumo de tokens/custo e um módulo de ranking de portfólio de projetos — tudo 100% local, sem nenhuma requisição de rede.</p>
+    </section>
 
-  <section>
-    <h2>Diferencial</h2>
-    <div class="card"><p class="dim">Privacidade levada a sério com testes dedicados e zero telemetria — raro em ferramentas de produtividade com IA.</p></div>
-  </section>
+    <section>
+      <h2>Como funciona</h2>
+      <ol class="flow"><li data-n="1"><p>App lê sessões, skills e commits locais do Claude Code</p></li><li data-n="2"><p>Sanitiza automaticamente qualquer segredo antes de gravar</p></li><li data-n="3"><p>Monta timeline, resumo semanal e custo estimado em tokens</p></li><li data-n="4"><p>Cruza dados dos repositórios locais para o ranking de portfólio</p></li><li data-n="5"><p>Tudo fica salvo localmente em SQLite, sem rede</p></li></ol>
+    </section>
 
-  <footer>
-    <p>© <span id="year"></span> orleans-samai</p>
-    <p><a href="../index.html">← Voltar ao portfólio</a></p>
-  </footer>
+    <section><h2>Em números</h2><div class="metrics"><div class="metric"><div class="n">153</div><div class="l">testes automatizados</div></div><div class="metric"><div class="n">8</div><div class="l">critérios de ranking</div></div><div class="metric"><div class="n">0</div><div class="l">requisições de rede</div></div></div></section>
 
+    <section>
+      <h2>Principais funcionalidades</h2>
+      <ul class="feat-grid"><li>Dashboard e timeline de atividade real (sessões, commits, skills usadas)</li><li>Sanitização automática de segredos antes de qualquer gravação</li><li>Consumo de tokens e custo estimado por sessão e por prompt</li><li>Tela de pendências de Git com commit assistido</li><li>Ranking de projetos com 8 critérios e confiança da recomendação</li><li>Backup/exportação em JSON e Markdown</li><li>153 testes automatizados cobrindo segurança e sanitização</li></ul>
+    </section>
+
+    <section>
+      <h2>Diferencial</h2>
+      <blockquote>Privacidade levada a sério com testes dedicados e zero telemetria — raro em ferramentas de produtividade com IA.</blockquote>
+    </section>
+
+  </main>
+
+  <aside>
+    <div class="side-card">
+      <h3>Para quem é</h3>
+      <p>Uso pessoal do próprio desenvolvedor para entender e priorizar seu uso de IA e seu portfólio de projetos.</p>
+    </div>
+    <div class="side-card">
+      <h3>Stack técnica</h3>
+      <ul class="stack-list"><li>Electron 42</li><li>React 19</li><li>TypeScript</li><li>Vite</li><li>better-sqlite3</li></ul>
+    </div>
+    <div class="side-card">
+      <h3>Status</h3>
+      <p>Em produção para uso pessoal — módulos ainda não implementados documentados (exportação PDF, outros provedores de IA).</p>
+    </div>
+    <div class="cta-links">
+      <div class="btn" style="cursor:default">Repositório privado</div>
+      <a class="btn" href="../index.html">← Voltar ao portfólio</a>
+    </div>
+  </aside>
 </div>
+
+<nav class="pagenav">
+  <a href="backend-python-simulator.html">
+    <span class="dir">← Anterior</span>
+    <span class="pname">Backend Python Simulator</span>
+  </a>
+  <a class="next" href="ebike-suporte.html">
+    <span class="dir">Próximo →</span>
+    <span class="pname">EBike Suporte</span>
+  </a>
+</nav>
+
+<footer>
+  <span>© <span id="year"></span> orleans-samai</span>
+  <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">github.com/orleans-samai</a>
+  <a href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">linkedin.com/in/orleans-samai</a>
+</footer>
+
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
