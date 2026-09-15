@@ -29,6 +29,8 @@
     --badge-priv-bg:#fbead0;
     --shadow: 0 1px 2px rgba(20,20,10,.04), 0 8px 24px rgba(20,20,10,.06);
     --shadow-hover: 0 4px 10px rgba(20,20,10,.06), 0 16px 36px rgba(20,20,10,.10);
+    --ink:#0a0a0a;
+    --ink-text:#ffffff;
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark){
@@ -102,6 +104,30 @@
   .btn:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
   .btn.primary{background:var(--accent);border-color:var(--accent);color:#0c1210}
   .btn.primary:hover{box-shadow:var(--shadow-hover)}
+
+  /* Shimmer buttons (LinkedIn / GitHub) */
+  @keyframes shimmer-spin{to{transform:rotate(360deg)}}
+  .btn-shimmer{
+    position:relative;
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:999px;
+    font-size:14px;font-weight:600;
+    text-decoration:none;color:var(--ink-text);
+    background:var(--ink);border:1px solid var(--ink);
+    isolation:isolate;overflow:hidden;
+    transition:transform .18s ease;
+  }
+  .btn-shimmer:hover{transform:scale(1.05)}
+  .btn-shimmer .shimmer-ring{
+    position:absolute;inset:0;border-radius:inherit;z-index:-1;
+    padding:1.5px;
+    background:conic-gradient(from 0deg, transparent 0%, color-mix(in srgb, var(--accent) 90%, white) 12%, transparent 24%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite:exclude;
+    animation:shimmer-spin 2.6s linear infinite;
+  }
 
   /* Sections */
   section{margin-bottom:64px}
@@ -201,8 +227,8 @@
       <h1>orleans-samai</h1>
       <p class="lede">Construtor de software vertical e produtos locais/mobile para pequenas operações — do ticket de oficina à projeção de culto, passando por privacidade on-device.</p>
       <div class="links">
-        <a class="btn primary" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">in LinkedIn ↗</a>
-        <a class="btn" href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn-shimmer" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>in LinkedIn ↗</a>
+        <a class="btn-shimmer" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>GitHub ↗</a>
       </div>
     </div>
   </div>
