@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap — orleans-samai</title>
+<meta name="description" content="Painel de acompanhamento dos projetos: status, prioridade, nota comercial e próxima melhoria de cada um.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f6f3; --bg-elev:#ffffff; --bg-soft:#efefe9;
+    --text:#181816; --text-dim:#605e57; --border:#e4e2da;
+    --accent:#17694a; --accent-2:#c96f34; --accent-bg:#e5f2ea;
+    --badge-priv:#8a5a00; --badge-priv-bg:#fbead0;
+    --pri-c:#5c6169; --pri-c-bg:#e9e9e4;
+    --pri-d:#a24d3d; --pri-d-bg:#f3e3dd;
+    --shadow: 0 1px 2px rgba(20,20,10,.04), 0 8px 24px rgba(20,20,10,.06);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#121316; --bg-elev:#1b1d21; --bg-soft:#202226;
+      --text:#eef0f1; --text-dim:#9fa3aa; --border:#2b2e34;
+      --accent:#5fd39a; --accent-2:#f0a06a; --accent-bg:#17241d;
+      --badge-priv:#e3b567; --badge-priv-bg:#2c2415;
+      --pri-c:#a6a89a; --pri-c-bg:#2a2b23;
+      --pri-d:#e08872; --pri-d-bg:#372420;
+      --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.4);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 90px}
+
+  .sitenav{border-bottom:1px solid var(--border);background:var(--bg-elev)}
+  .sitenav-inner{max-width:1040px;margin:0 auto;padding:14px 20px;display:flex;gap:22px;align-items:center}
+  .sitenav a{font-size:13.5px;font-weight:600;color:var(--text-dim);text-decoration:none}
+  .sitenav a:hover{color:var(--accent)}
+  .sitenav a[aria-current="page"]{color:var(--text)}
+
+  header.head{padding:44px 0 30px}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(26px,4vw,36px);margin:0 0 10px;letter-spacing:-.01em}
+  .lede{color:var(--text-dim);font-size:15.5px;max-width:64ch;margin:0}
+
+  /* filtros */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 22px}
+  .filters button{
+    font:600 12.5px/1 'Inter';padding:8px 14px;border-radius:999px;border:1px solid var(--border);
+    background:var(--bg-elev);color:var(--text-dim);cursor:pointer;transition:border-color .15s,color .15s;
+  }
+  .filters button:hover{border-color:var(--accent);color:var(--text)}
+  .filters button.active{background:var(--text);color:var(--bg-elev);border-color:var(--text)}
+
+  .board{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .rcard{
+    background:var(--bg-elev);border:1px solid var(--border);border-radius:14px;padding:20px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;
+  }
+  .rcard-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .rcard-head h3{font-family:'Fraunces',serif;font-size:16.5px;font-weight:600;margin:0}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .pri{font:700 10px/1 'Inter';letter-spacing:.03em;text-transform:uppercase;padding:4px 8px;border-radius:999px;white-space:nowrap}
+  .pri.A{color:var(--accent);background:var(--accent-bg)}
+  .pri.B{color:var(--badge-priv);background:var(--badge-priv-bg)}
+  .pri.C{color:var(--pri-c);background:var(--pri-c-bg)}
+  .pri.D{color:var(--pri-d);background:var(--pri-d-bg)}
+  .status{font:600 11.5px/1 'Inter';padding:5px 10px;border-radius:999px;background:var(--bg-soft);color:var(--text-dim);white-space:nowrap}
+
+  .scores{display:flex;gap:18px}
+  .scores .sc{display:flex;flex-direction:column;gap:2px}
+  .scores .sc b{font-family:'Fraunces',serif;font-size:17px;font-variant-numeric:tabular-nums;font-weight:600}
+  .scores .sc span{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.03em}
+
+  .progress-row{display:flex;align-items:center;gap:10px}
+  .progress{flex:1;height:6px;border-radius:999px;background:var(--bg-soft);overflow:hidden}
+  .progress > i{display:block;height:100%;background:var(--accent);border-radius:999px}
+  .progress-pct{font-size:11.5px;font-weight:700;color:var(--text-dim);font-variant-numeric:tabular-nums;width:32px;text-align:right}
+
+  .next{font-size:12.5px;color:var(--text-dim)}
+  .next b{color:var(--text);font-weight:600}
+
+  details.checklist{border-top:1px solid var(--border);padding-top:10px}
+  details.checklist summary{font-size:12.5px;font-weight:600;color:var(--text-dim);cursor:pointer;list-style:none}
+  details.checklist summary::-webkit-details-marker{display:none}
+  details.checklist summary::before{content:'▸ ';color:var(--accent)}
+  details.checklist[open] summary::before{content:'▾ '}
+  .checklist ul{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+  .checklist li{font-size:12.5px;color:var(--text-dim);display:flex;gap:7px;align-items:flex-start}
+  .checklist li .box{flex-shrink:0;margin-top:1px}
+  .checklist li.done{color:var(--text-dim);text-decoration:line-through;opacity:.65}
+
+  .obs{font-size:12px;color:var(--text-dim);font-style:italic;margin:0}
+  .repo-link{font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+  .repo-link:hover{gap:7px}
+  .repo-link span{transition:transform .15s ease}
+
+  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--border);color:var(--text-dim);font-size:12.5px}
+</style>
+</head>
+<body>
+
+<nav class="sitenav"><div class="sitenav-inner">
+  <a href="index.html">Página inicial</a>
+  <a href="roadmap.html" aria-current="page">Roadmap</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="head">
+    <h1>Roadmap</h1>
+    <p class="lede">Onde cada projeto está agora, o que falta e qual é a próxima tarefa. Dados em <code>ROADMAP</code>, no script no fim do arquivo — edite ali para atualizar o painel.</p>
+  </header>
+
+  <div class="filters" id="filters"></div>
+  <div class="board" id="board"></div>
+
+  <footer>Priorização detalhada na análise comercial de 15 set 2026. Prioridade A = investir agora · B = investir depois · C = deixar em espera · D = arquivar/descartar.</footer>
+</div>
+
+<script>
+/* ── dados: edite aqui para atualizar o painel ──────────────────
+ * status: 'ideia' | 'desenvolvimento' | 'mvp' | 'teste' | 'pronto' | 'producao'
+ * priority: 'A' | 'B' | 'C' | 'D'
+ * venda / facilidade: 0–10
+ * percent: 0–100 (estimativa de conclusão até MVP vendável)
+ * melhorias: [{text, done}]
+ * ──────────────────────────────────────────────────────────── */
+const STATUS_LABEL = {
+  ideia:'Ideia', desenvolvimento:'Em desenvolvimento', mvp:'MVP',
+  teste:'Em teste', pronto:'Pronto para venda', producao:'Em produção',
+};
+
+const ROADMAP = [
+  { name:'Autoatendimento QR', repo:'autoatendimento', status:'mvp', priority:'A', venda:9, facilidade:8.5, percent:75,
+    proxima:'Cobrança recorrente (Pix/assinatura)', obs:'Já tem apresentação comercial (PPTX) e app Android prontos.',
+    melhorias:[
+      {text:'API de pedidos + comandas (FastAPI)', done:true},
+      {text:'Autenticação própria (PBKDF2+HMAC)', done:true},
+      {text:'Impressão térmica ESC/POS', done:true},
+      {text:'App Android', done:true},
+      {text:'Cobrança recorrente (Pix/assinatura)', done:false},
+      {text:'Modo multi-loja num único deploy', done:false},
+      {text:'Onboarding sem configuração manual', done:false},
+    ]},
+  { name:'Frota Lite', repo:'frota-lite', status:'mvp', priority:'A', venda:8, facilidade:7.5, percent:70,
+    proxima:'Cobrança recorrente e onboarding guiado', obs:'Auth com papéis (dono/gerente/membro) e testes de invariante já escritos.',
+    melhorias:[
+      {text:'Dashboard de atrasados/próximos/em dia', done:true},
+      {text:'Auth com convite por código e papéis', done:true},
+      {text:'5 migrations (auth, frota, anexos, equipe)', done:true},
+      {text:'Testes de invariante de auth', done:true},
+      {text:'Cobrança recorrente', done:false},
+      {text:'Onboarding guiado para dono não-técnico', done:false},
+      {text:'Relatório de custo por km exportável', done:false},
+    ]},
+  { name:'NetDiag Pro', repo:'network-diagnostic', status:'mvp', priority:'A', venda:7, facilidade:9, percent:80,
+    proxima:'Sistema simples de chave de licença', obs:'Sem banco, sem backend — só falta empacotar e vender.',
+    melhorias:[
+      {text:'Coleta de sistema + testes de conectividade', done:true},
+      {text:'Relatório em PDF/TXT', done:true},
+      {text:'Empacotamento PyInstaller (.spec, build.ps1)', done:true},
+      {text:'Chave de licença', done:false},
+      {text:'Assinatura de código do .exe', done:false},
+      {text:'Landing com PDF de exemplo', done:false},
+    ]},
+  { name:'Lúmen', repo:'igreja-projetor', status:'teste', priority:'A', venda:6.5, facilidade:6.5, percent:65,
+    proxima:'Fechar 3–4 temas prontos para sair usando', obs:'Projeto mais documentado do portfólio (docs/banner.svg, docs/janelas.svg).',
+    melhorias:[
+      {text:'App Electron (main/preload/entry)', done:true},
+      {text:'Integração de mídia e YouTube', done:true},
+      {text:'Reconhecimento de fala para acompanhar a live', done:true},
+      {text:'3–4 temas prontos', done:false},
+      {text:'Instalador assinado', done:false},
+      {text:'Atualização automática', done:false},
+    ]},
+  { name:'EBike Suporte', repo:'ebike-support', status:'mvp', priority:'B', venda:5, facilidade:7, percent:70,
+    proxima:'Validar com a primeira loja piloto', obs:'Stack de produção já pronta (Docker, testes, Postgres) — mercado (lojas de e-bike) ainda pequeno.',
+    melhorias:[
+      {text:'Auth JWT (bcryptjs + jose) + middleware de rotas', done:true},
+      {text:'docker-compose para subir tudo', done:true},
+      {text:'Migrations SQL + smoke test', done:true},
+      {text:'Cliente piloto validado', done:false},
+    ]},
+  { name:'Central de Automações', repo:'central-automacoes', status:'pronto', priority:'B', venda:4.5, facilidade:9.5, percent:95,
+    proxima:'Definir nicho que Power Automate Desktop não atende bem', obs:'Roadmap próprio já 7/7 concluído — falta diferenciação de mercado, não código.',
+    melhorias:[
+      {text:'Motor de automações + editor visual', done:true},
+      {text:'Agendamento e gatilhos por processo', done:true},
+      {text:'Testes, build e empacotamento (.wxs installer)', done:true},
+      {text:'Posicionamento de nicho definido', done:false},
+    ]},
+  { name:'Central da Festividade', repo:'central-festividade', status:'teste', priority:'B', venda:5.5, facilidade:4.5, percent:60,
+    proxima:'Simplificar operação da stack (Postgres/SSE) para deploy em cliente', obs:'Projeto mais trabalhado do portfólio (46 commits), com PIN de recepção separado do login normal.',
+    melhorias:[
+      {text:'Sessão HMAC + papéis + modo PIN de recepção', done:true},
+      {text:'Tempo real via SSE', done:true},
+      {text:'Deploy configurado (vercel.json)', done:true},
+      {text:'Runbook de deploy para novo cliente', done:false},
+    ]},
+  { name:'Linux Cyber Academy', repo:'linux-cyber-academy', status:'desenvolvimento', priority:'B', venda:6.5, facilidade:3.5, percent:35,
+    proxima:'Autenticação e progresso persistente', obs:'Terminal via SSH real já funciona (xterm+ssh2+ws) — falta a camada de usuário.',
+    melhorias:[
+      {text:'Terminal interativo real (xterm.js + ssh2)', done:true},
+      {text:'IA explicando comandos (Anthropic SDK)', done:true},
+      {text:'Autenticação de usuário', done:false},
+      {text:'Progresso persistente', done:false},
+      {text:'Cobrança/assinatura', done:false},
+    ]},
+  { name:'Backend Python Simulator', repo:'backend-python-simulator', status:'mvp', priority:'B', venda:5.5, facilidade:5, percent:55,
+    proxima:'Plataforma de gestão de turma', obs:'Engine de correção já testado (8 arquivos de teste pytest).',
+    melhorias:[
+      {text:'Engine de correção testado (pytest)', done:true},
+      {text:'Empacotamento multi-plataforma (AppImage/deb/exe)', done:true},
+      {text:'Plataforma de gestão de turma/aluno', done:false},
+      {text:'Mais trilhas de conteúdo', done:false},
+    ]},
+  { name:'Sistema de Chamados', repo:'sistema-chamados', status:'pronto', priority:'C', venda:2.5, facilidade:8.5, percent:85,
+    proxima:'—', obs:'Tecnicamente pronto, mas o próprio README já o descreve como laboratório de treinamento, não produto comercial.',
+    melhorias:[
+      {text:'SLA, base de conhecimento, export Excel/PDF', done:true},
+      {text:'Seed de dados + smoke test', done:true},
+      {text:'Diferencial comercial claro', done:false},
+    ]},
+  { name:'Excel Dashboard', repo:'excel-dashboard', status:'desenvolvimento', priority:'C', venda:2.5, facilidade:null, percent:null,
+    proxima:'Não identificado no projeto', obs:'Não inspecionado por código nesta rodada.', melhorias:[]},
+  { name:'Fundo Fora (PNG Foto)', repo:'png-foto', status:'desenvolvimento', priority:'C', venda:4, facilidade:null, percent:null,
+    proxima:'Publicar na Play Store e validar aquisição', obs:'O que falta é aquisição de usuário (B2C), não código — motor ONNX on-device já funciona.', melhorias:[]},
+  { name:'Nexora (python-game)', repo:'python-game', status:'ideia', priority:'C', venda:3.5, facilidade:null, percent:null,
+    proxima:'Não identificado no projeto', obs:'Apenas 1 commit — ainda conceito.', melhorias:[]},
+  { name:'SlideRevive Church AI', repo:'slide-revive-church-ai', status:'ideia', priority:'C', venda:4, facilidade:null, percent:null,
+    proxima:'Não identificado no projeto', obs:'Apenas 1 commit — complementa o Lúmen para o mesmo comprador.', melhorias:[]},
+  { name:'AI Control Center', repo:'ai-control-center', status:'desenvolvimento', priority:'C', venda:2, facilidade:null, percent:null,
+    proxima:'Não identificado no projeto', obs:'Feito para uso pessoal — mercado limitado a power users do Claude Code.', melhorias:[]},
+  { name:'AI Orchestrator', repo:'ai-orchestrator', status:'desenvolvimento', priority:'C', venda:2, facilidade:null, percent:null,
+    proxima:'Não identificado no projeto', obs:'Ferramenta de nicho técnico, público propenso a usar versão open-source grátis.', melhorias:[]},
+  { name:'FocusForge', repo:'FocusForge', status:'desenvolvimento', priority:'D', venda:1.5, facilidade:null, percent:null,
+    proxima:'—', obs:'Mercado saturado (Notion, Todoist) sem diferencial claro.', melhorias:[]},
+  { name:'Voice Finance', repo:'voice-finance', status:'desenvolvimento', priority:'D', venda:2, facilidade:null, percent:null,
+    proxima:'—', obs:'Compete com Mobills/Organizze, mais a barreira de confiança de um app financeiro novo.', melhorias:[]},
+  { name:'wsl-hyperv-manager', repo:'wsl-hyperv-manager', status:'desenvolvimento', priority:'D', venda:1.5, facilidade:null, percent:null,
+    proxima:'Decidir entre este e o wsl-hyperv-gerenciador', obs:'Dois repositórios resolvendo o mesmo problema — escolher um e arquivar o outro.', melhorias:[]},
+  { name:'wsl-hyperv-gerenciador', repo:'wsl-hyperv-gerenciador', status:'desenvolvimento', priority:'D', venda:1, facilidade:null, percent:null,
+    proxima:'Decidir entre este e o wsl-hyperv-manager', obs:'Dois repositórios resolvendo o mesmo problema — escolher um e arquivar o outro.', melhorias:[]},
+];
+
+const board = document.getElementById('board');
+const filtersEl = document.getElementById('filters');
+let active = 'all';
+
+function render(){
+  board.innerHTML = '';
+  const list = active === 'all' ? ROADMAP : ROADMAP.filter(r => r.priority === active);
+  list.forEach(r => {
+    const done = r.melhorias.filter(m => m.done).length;
+    const total = r.melhorias.length;
+    const pct = r.percent != null ? r.percent : (total ? Math.round(done/total*100) : null);
+    const card = document.createElement('div');
+    card.className = 'rcard';
+    card.innerHTML = `
+      <div class="rcard-head">
+        <h3>${r.name}</h3>
+        <div class="tags"><span class="pri ${r.priority}">Prioridade ${r.priority}</span><span class="status">${STATUS_LABEL[r.status]}</span></div>
+      </div>
+      <div class="scores">
+        <div class="sc"><b>${r.venda.toFixed(1)}</b><span>Venda</span></div>
+        <div class="sc"><b>${r.facilidade!=null ? r.facilidade.toFixed(1) : '—'}</b><span>Construir</span></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress"><i style="width:${pct ?? 0}%"></i></div>
+        <span class="progress-pct">${pct!=null ? pct+'%' : '—'}</span>
+      </div>
+      <p class="next">Próxima: <b>${r.proxima}</b></p>
+      ${total ? `<details class="checklist"><summary>${done}/${total} melhorias concluídas</summary>
+        <ul>${r.melhorias.map(m=>`<li class="${m.done?'done':''}"><span class="box">${m.done?'☑':'☐'}</span>${m.text}</li>`).join('')}</ul>
+      </details>` : ''}
+      <p class="obs">${r.obs}</p>
+      <a class="repo-link" href="https://github.com/orleans-samai/${r.repo}" target="_blank" rel="noopener">Ver repositório <span>→</span></a>
+    `;
+    board.appendChild(card);
+  });
+}
+
+['all','A','B','C','D'].forEach(p=>{
+  const b = document.createElement('button');
+  b.textContent = p==='all' ? 'Todos' : `Prioridade ${p}`;
+  b.className = p===active ? 'active' : '';
+  b.onclick = () => { active = p; [...filtersEl.children].forEach(c=>c.classList.toggle('active', c===b)); render(); };
+  filtersEl.appendChild(b);
+});
+render();
+</script>
+</body>
+</html>

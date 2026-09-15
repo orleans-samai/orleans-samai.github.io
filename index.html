@@ -284,9 +284,20 @@
     .hero-inner{gap:18px}
     .avatar{width:64px;height:64px;border-radius:16px}
   }
+
+  .sitenav{border-bottom:1px solid var(--border);background:var(--bg-elev)}
+  .sitenav-inner{max-width:960px;margin:0 auto;padding:14px 20px;display:flex;gap:22px;align-items:center}
+  .sitenav a{font-size:13.5px;font-weight:600;color:var(--text-dim);text-decoration:none}
+  .sitenav a:hover{color:var(--accent)}
+  .sitenav a[aria-current="page"]{color:var(--text)}
 </style>
 </head>
 <body>
+
+<nav class="sitenav"><div class="sitenav-inner">
+  <a href="index.html" aria-current="page">Página inicial</a>
+  <a href="roadmap.html">Roadmap</a>
+</div></nav>
 
 <header class="hero">
   <div class="hero-inner">
