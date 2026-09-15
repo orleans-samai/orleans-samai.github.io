@@ -206,9 +206,11 @@
   .about p{max-width:65ch;color:var(--text-dim);font-size:15px}
 
   footer{border-top:1px solid var(--border);padding-top:26px;color:var(--text-dim);font-size:13px;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
   footer a{color:var(--text-dim);text-decoration:none}
   footer a:hover{color:var(--accent)}
+  footer .links{display:flex;gap:10px;flex-wrap:wrap}
+  .btn-shimmer.small{padding:7px 15px;font-size:12.5px}
 
   @media (max-width:600px){
     header.hero{padding:56px 20px 40px}
@@ -415,7 +417,10 @@
 
   <footer>
     <p>© <span id="year"></span> orleans-samai</p>
-    <p><a href="https://github.com/orleans-samai" target="_blank" rel="noopener">github.com/orleans-samai</a> · <a href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">linkedin.com/in/orleans-samai</a></p>
+    <div class="links">
+      <a class="btn-shimmer small" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>in LinkedIn ↗</a>
+      <a class="btn-shimmer small" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>GitHub ↗</a>
+    </div>
   </footer>
 
 </div>
