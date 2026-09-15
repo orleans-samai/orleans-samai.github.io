@@ -210,6 +210,43 @@
 
   .about p{max-width:65ch;color:var(--text-dim);font-size:15px}
 
+  /* Corredor 3D de projetos — versão vanilla CSS/JS do ImageStreamHero (React) */
+  .corridor-section .section-sub{margin-bottom:22px}
+  .corridor-stage{
+    position:relative;
+    height:420px;
+    border-radius:18px;
+    overflow:hidden;
+    background:
+      radial-gradient(560px 280px at 50% 10%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+      var(--bg-soft);
+    border:1px solid var(--border);
+  }
+  .corridor-stage::before,.corridor-stage::after{
+    content:"";position:absolute;left:0;right:0;height:70px;z-index:2;pointer-events:none;
+  }
+  .corridor-stage::before{top:0;background:linear-gradient(to bottom, var(--bg-soft), transparent)}
+  .corridor-stage::after{bottom:0;background:linear-gradient(to top, var(--bg-soft), transparent)}
+  .corridor-persp{position:absolute;inset:0}
+  .corridor-3d{position:absolute;inset:0}
+  .corridor-card{position:absolute;overflow:hidden;box-shadow:var(--shadow);backface-visibility:hidden}
+  .corridor-card-inner{
+    width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--border);
+  }
+  .corridor-card-emoji{font-size:40px;line-height:1}
+  .corridor-card-name{font-size:12.5px;font-weight:700;text-align:center;padding:0 10px;color:var(--text)}
+  .corridor-caption{
+    position:absolute;inset:auto 0 0 0;z-index:3;text-align:center;padding:0 20px 22px;
+    pointer-events:none;
+  }
+  .corridor-caption p{margin:0;font-size:13px;color:var(--text-dim);
+    background:color-mix(in srgb, var(--bg-soft) 82%, transparent);
+    display:inline-block;padding:6px 14px;border-radius:999px;border:1px solid var(--border);
+  }
+  @media (prefers-reduced-motion: reduce){.corridor-card{animation-play-state:paused !important}}
+  @media (max-width:600px){.corridor-stage{height:260px}}
+
   footer{border-top:1px solid var(--border);padding-top:26px;color:var(--text-dim);font-size:13px;
     display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
   footer a{color:var(--text-dim);text-decoration:none}
@@ -420,6 +457,21 @@
     <p style="margin-left:38px">Foco em software vertical para operações pequenas — oficinas, restaurantes, frotas, igrejas — e em produtos mobile com privacidade on-device. Prioridade para prova com clientes reais e distribuição, não acúmulo de protótipos.</p>
   </section>
 
+  <section class="corridor-section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Tudo em um só lugar</h2>
+    </div>
+    <p class="section-sub">Um retrato rápido do portfólio inteiro passando pela tela — role para cima para ver cada projeto em detalhe.</p>
+
+    <div class="corridor-stage" id="corridorStage">
+      <div class="corridor-persp" id="corridorPersp" aria-hidden="true">
+        <div class="corridor-3d" id="corridorTrack"></div>
+      </div>
+      <div class="corridor-caption"><p>14 projetos construídos e em produção</p></div>
+    </div>
+  </section>
+
   <footer>
     <p>© <span id="year"></span> orleans-samai</p>
     <div class="links">
@@ -447,6 +499,98 @@
   } else {
     cards.forEach(c => c.classList.add('in'));
   }
+
+  /* ── Corredor 3D de projetos ──────────────────────────────────────
+   * Porta vanilla do componente React ImageStreamHero: duas trilhas de
+   * cards vindo do fundo em direção à tela via CSS 3D perspective. A
+   * profundidade é amostrada geometricamente (crescimento por razão
+   * constante) e as keyframes são geradas em JS porque dependem do
+   * container em runtime — sem build step, sem React.
+   * ────────────────────────────────────────────────────────────── */
+  (function corridor(){
+    const stage = document.getElementById('corridorStage');
+    const track = document.getElementById('corridorTrack');
+    if (!stage || !track) return;
+
+    const PROJECTS = [
+      { emoji:'🚲', name:'EBike Suporte' },
+      { emoji:'🍔', name:'Autoatendimento QR' },
+      { emoji:'🚚', name:'Frota Lite' },
+      { emoji:'✝️', name:'Lúmen' },
+      { emoji:'🖼️', name:'PNG Foto' },
+      { emoji:'🎙️', name:'Voice Finance' },
+      { emoji:'🎫', name:'Sistema de Chamados' },
+      { emoji:'🤖', name:'AI Orchestrator' },
+      { emoji:'📊', name:'Excel Dashboard' },
+      { emoji:'🎉', name:'Central da Festividade' },
+      { emoji:'📽️', name:'SlideRevive Church AI' },
+      { emoji:'📡', name:'NetDiag Pro' },
+      { emoji:'🐍', name:'Backend Python Simulator' },
+      { emoji:'🧠', name:'AI Control Center' },
+    ];
+
+    const BG = [
+      'linear-gradient(155deg, color-mix(in srgb, var(--accent) 24%, var(--bg-elev)), var(--bg-elev))',
+      'linear-gradient(155deg, color-mix(in srgb, var(--accent-2) 24%, var(--bg-elev)), var(--bg-elev))',
+      'linear-gradient(155deg, color-mix(in srgb, var(--accent) 15%, var(--bg-elev)), color-mix(in srgb, var(--accent-2) 15%, var(--bg-elev)))',
+    ];
+
+    const PATH = {
+      perspective: 30, cardWidth: 18, cardHeight: 25, cardRadius: 0.4,
+      birthHeight: 2.6, exitHeight: 46, railBirth: -11, railExit: 44,
+      fan: 3.3, turnBirth: 6, turnExit: 28, stops: 24,
+    };
+    const CARDS_PER_RAIL = 9;
+    const SPEED = 18;
+    const AXIS = 55;
+
+    function railKeyframes(dir, name, p) {
+      const steps = [];
+      for (let s = 0; s <= p.stops; s++) {
+        const u = s / p.stops;
+        const scale = (p.birthHeight / p.cardHeight) * Math.pow(p.exitHeight / p.birthHeight, u);
+        const z = p.perspective * (1 - 1 / scale);
+        const rail = p.railExit - (p.railExit - p.railBirth) * Math.pow(1 - u, p.fan);
+        const turn = p.turnBirth + (p.turnExit - p.turnBirth) * u;
+        steps.push(`${(u * 100).toFixed(2)}%{transform:translate3d(${(dir * rail).toFixed(2)}cqw,0,${z.toFixed(2)}cqw) rotateY(${(-dir * turn).toFixed(2)}deg)}`);
+      }
+      return `@keyframes ${name}{${steps.join('')}}`;
+    }
+
+    const id = Math.random().toString(36).slice(2, 8);
+    const rightName = `ish-r-${id}`;
+    const leftName = `ish-l-${id}`;
+    const style = document.createElement('style');
+    style.textContent = railKeyframes(1, rightName, PATH) + railKeyframes(-1, leftName, PATH);
+    document.head.appendChild(style);
+
+    stage.style.containerType = 'inline-size';
+    document.getElementById('corridorPersp').style.perspective = `${PATH.perspective}cqw`;
+    document.getElementById('corridorPersp').style.perspectiveOrigin = `50% ${AXIS}%`;
+    track.style.transformStyle = 'preserve-3d';
+
+    [rightName, leftName].forEach((railName) => {
+      for (let i = 0; i < CARDS_PER_RAIL; i++) {
+        const proj = PROJECTS[i % PROJECTS.length];
+        const el = document.createElement('div');
+        el.className = 'corridor-card';
+        Object.assign(el.style, {
+          left: '50%', top: `${AXIS}%`,
+          width: `${PATH.cardWidth}cqw`, height: `${PATH.cardHeight}cqw`,
+          marginLeft: `${-PATH.cardWidth / 2}cqw`, marginTop: `${-PATH.cardHeight / 2}cqw`,
+          borderRadius: `${PATH.cardRadius}cqw`,
+          animation: `${railName} ${SPEED}s linear infinite`,
+          animationDelay: `${-(i * SPEED) / CARDS_PER_RAIL}s`,
+        });
+        const inner = document.createElement('div');
+        inner.className = 'corridor-card-inner';
+        inner.style.background = BG[i % BG.length];
+        inner.innerHTML = `<span class="corridor-card-emoji">${proj.emoji}</span><span class="corridor-card-name">${proj.name}</span>`;
+        el.appendChild(inner);
+        track.appendChild(el);
+      }
+    });
+  })();
 </script>
 
 </body>
