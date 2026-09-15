@@ -105,29 +105,33 @@
   .btn.primary{background:var(--accent);border-color:var(--accent);color:#0c1210}
   .btn.primary:hover{box-shadow:var(--shadow-hover)}
 
-  /* Shimmer buttons (LinkedIn / GitHub) */
+  /* Shimmer buttons (LinkedIn / GitHub) — brilho restrito à borda */
   @keyframes shimmer-spin{to{transform:rotate(360deg)}}
   .btn-shimmer{
     position:relative;
     display:inline-flex;align-items:center;gap:8px;
-    padding:11px 22px;border-radius:999px;
+    padding:12.5px 23.5px;border-radius:999px;
     font-size:14px;font-weight:600;
     text-decoration:none;color:var(--ink-text);
-    background:var(--ink);border:1px solid var(--ink);
-    isolation:isolate;overflow:hidden;
+    background:transparent;border:none;
+    isolation:isolate;
     transition:transform .18s ease;
   }
   .btn-shimmer:hover{transform:scale(1.05)}
+  /* camada de trás: gira e forma o anel de brilho na borda */
   .btn-shimmer .shimmer-ring{
-    position:absolute;inset:0;border-radius:inherit;z-index:-1;
-    padding:1.5px;
-    background:conic-gradient(from 0deg, transparent 0%, color-mix(in srgb, var(--accent) 90%, white) 12%, transparent 24%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-    mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    mask-composite:exclude;
+    position:absolute;inset:0;border-radius:inherit;z-index:0;
+    background:
+      conic-gradient(from 0deg, transparent 0%, color-mix(in srgb, var(--accent) 90%, white) 8%, transparent 20%),
+      var(--ink);
     animation:shimmer-spin 2.6s linear infinite;
   }
+  /* camada da frente: cobre tudo menos 1.5px de borda, deixando só o anel visível */
+  .btn-shimmer .shimmer-fill{
+    position:absolute;inset:1.5px;border-radius:inherit;z-index:1;
+    background:var(--ink);
+  }
+  .btn-shimmer .label{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px}
 
   /* Sections */
   section{margin-bottom:64px}
@@ -229,8 +233,8 @@
       <h1>orleans-samai</h1>
       <p class="lede">Construtor de software vertical e produtos locais/mobile para pequenas operações — do ticket de oficina à projeção de culto, passando por privacidade on-device.</p>
       <div class="links">
-        <a class="btn-shimmer" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>in LinkedIn ↗</a>
-        <a class="btn-shimmer" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>GitHub ↗</a>
+        <a class="btn-shimmer" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">in LinkedIn ↗</span></a>
+        <a class="btn-shimmer" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">GitHub ↗</span></a>
       </div>
     </div>
   </div>
@@ -418,8 +422,8 @@
   <footer>
     <p>© <span id="year"></span> orleans-samai</p>
     <div class="links">
-      <a class="btn-shimmer small" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>in LinkedIn ↗</a>
-      <a class="btn-shimmer small" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span>GitHub ↗</a>
+      <a class="btn-shimmer small" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">in LinkedIn ↗</span></a>
+      <a class="btn-shimmer small" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">GitHub ↗</span></a>
     </div>
   </footer>
 
