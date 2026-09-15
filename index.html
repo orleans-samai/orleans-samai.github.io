@@ -105,33 +105,34 @@
   .btn.primary{background:var(--accent);border-color:var(--accent);color:#0c1210}
   .btn.primary:hover{box-shadow:var(--shadow-hover)}
 
-  /* Shimmer buttons (LinkedIn / GitHub) — brilho restrito à borda */
-  @keyframes shimmer-spin{to{transform:rotate(360deg)}}
+  /* Shimmer buttons (LinkedIn / GitHub) — uma luz percorre o contorno */
+  @keyframes comet-move{to{offset-distance:100%}}
   .btn-shimmer{
     position:relative;
     display:inline-flex;align-items:center;gap:8px;
     padding:12.5px 23.5px;border-radius:999px;
     font-size:14px;font-weight:600;
     text-decoration:none;color:var(--ink-text);
-    background:transparent;border:none;
-    isolation:isolate;
+    background:var(--ink);
+    border:1px solid color-mix(in srgb, var(--ink) 55%, var(--text-dim) 45%);
     transition:transform .18s ease;
   }
   .btn-shimmer:hover{transform:scale(1.05)}
-  /* camada de trás: gira e forma o anel de brilho na borda */
-  .btn-shimmer .shimmer-ring{
-    position:absolute;inset:0;border-radius:inherit;z-index:0;
-    background:
-      conic-gradient(from 0deg, transparent 0%, color-mix(in srgb, var(--accent) 90%, white) 8%, transparent 20%),
-      var(--ink);
-    animation:shimmer-spin 2.6s linear infinite;
+  /* pontinho de luz que percorre o contorno do botão */
+  .btn-shimmer .comet{
+    position:absolute;inset:0;
+    width:9px;height:9px;margin:auto 0 0 auto;
+    border-radius:50%;
+    background:radial-gradient(circle, color-mix(in srgb, var(--accent) 92%, white) 0%, color-mix(in srgb, var(--accent) 60%, transparent) 55%, transparent 75%);
+    filter:blur(.5px);
+    offset-path:border-box;
+    offset-distance:0%;
+    offset-rotate:0deg;
+    animation:comet-move 2.6s linear infinite;
+    pointer-events:none;
   }
-  /* camada da frente: cobre tudo menos 1.5px de borda, deixando só o anel visível */
-  .btn-shimmer .shimmer-fill{
-    position:absolute;inset:1.5px;border-radius:inherit;z-index:1;
-    background:var(--ink);
-  }
-  .btn-shimmer .label{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px}
+  .btn-shimmer.small .comet{width:7px;height:7px}
+  .btn-shimmer .label{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px}
 
   /* Sections */
   section{margin-bottom:64px}
@@ -233,8 +234,8 @@
       <h1>orleans-samai</h1>
       <p class="lede">Construtor de software vertical e produtos locais/mobile para pequenas operações — do ticket de oficina à projeção de culto, passando por privacidade on-device.</p>
       <div class="links">
-        <a class="btn-shimmer" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">in LinkedIn ↗</span></a>
-        <a class="btn-shimmer" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">GitHub ↗</span></a>
+        <a class="btn-shimmer" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="comet" aria-hidden="true"></span><span class="label">in LinkedIn ↗</span></a>
+        <a class="btn-shimmer" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="comet" aria-hidden="true"></span><span class="label">GitHub ↗</span></a>
       </div>
     </div>
   </div>
@@ -422,8 +423,8 @@
   <footer>
     <p>© <span id="year"></span> orleans-samai</p>
     <div class="links">
-      <a class="btn-shimmer small" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">in LinkedIn ↗</span></a>
-      <a class="btn-shimmer small" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="shimmer-ring" aria-hidden="true"></span><span class="shimmer-fill" aria-hidden="true"></span><span class="label">GitHub ↗</span></a>
+      <a class="btn-shimmer small" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener"><span class="comet" aria-hidden="true"></span><span class="label">in LinkedIn ↗</span></a>
+      <a class="btn-shimmer small" href="https://github.com/orleans-samai" target="_blank" rel="noopener"><span class="comet" aria-hidden="true"></span><span class="label">GitHub ↗</span></a>
     </div>
   </footer>
 
