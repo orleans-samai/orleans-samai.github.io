@@ -13,7 +13,7 @@ import os
 import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'projetos')
-LI = 'https://www.linkedin.com/in/orleans-samai'
+LI = 'https://www.linkedin.com/in/orleanssamai/'
 
 # ── ilustrações ──────────────────────────────────────────────────
 F = 'font-family="Manrope,sans-serif"'
