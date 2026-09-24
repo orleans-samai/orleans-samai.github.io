@@ -299,25 +299,31 @@
 
   /* sobre + números */
   .duo{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:20px}
-  .about{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);overflow:hidden}
-  .about-photo{position:relative;min-height:440px;overflow:hidden}
-  .about-photo img{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;
+  .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);overflow:hidden}
+  /* retrato em círculo, com o mesmo anel em degradê do logo */
+  .about-photo{
+    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:24px;padding:40px 24px;
+    background:radial-gradient(closest-side at 50% 42%,rgba(47,123,255,.2),rgba(47,123,255,0));
   }
-  .about-photo::before{
-    content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(90deg,rgba(10,23,48,0) 72%,rgba(10,23,48,1) 100%),
-      linear-gradient(180deg,rgba(5,11,26,0) 60%,rgba(5,11,26,.55));
+  .portrait{
+    position:relative;width:clamp(200px,24vw,296px);aspect-ratio:1;border-radius:50%;padding:4px;
+    background:conic-gradient(from 210deg,#8fc2ff,#2f7bff 30%,#1747b8 55%,#2f7bff 80%,#8fc2ff);
+    box-shadow:0 0 0 1px rgba(143,194,255,.15),0 0 60px -8px rgba(47,123,255,.65);
   }
-  .about-photo{background:var(--panel)}
-  .fields{
-    position:absolute;left:18px;bottom:18px;z-index:2;margin:0;padding:14px 16px;list-style:none;
-    border-radius:12px;background:rgba(5,11,26,.62);border:1px solid rgba(91,157,255,.35);
-    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    box-shadow:0 0 30px -10px rgba(47,123,255,.7);
+  .portrait::after{
+    content:'';position:absolute;inset:-14px;border-radius:50%;pointer-events:none;
+    border:1px solid rgba(91,157,255,.22);
   }
-  .fields li{font-size:10.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b9ccec;line-height:2}
+  .portrait img{
+    display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 30%;
+    border:5px solid var(--panel);background:var(--panel);
+  }
+  .fields{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0;padding:0;list-style:none}
+  .fields li{
+    padding:6px 12px;border-radius:99px;font-size:10.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:#b9ccec;background:rgba(5,11,26,.5);border:1px solid var(--line-hi);
+  }
   .about-text{padding:34px 32px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
   .about-text p{margin:0 0 24px;color:var(--text-2);font-size:15px;line-height:1.7}
   .about-text p strong{color:var(--text)}
@@ -421,11 +427,10 @@
   }
   @media (max-width:760px){
     .about{grid-template-columns:1fr}
-    .about-photo{min-height:440px}
-    .about-photo img{object-position:50% 20%}
-    .fields{left:12px;right:12px;bottom:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:0 14px;padding:8px 12px}
-    .fields li{font-size:9.5px;letter-spacing:.18em}
-    .about-photo::before{background:linear-gradient(180deg,rgba(10,23,48,0) 60%,rgba(10,23,48,1) 100%)}
+    .about-photo{padding:36px 20px 8px;gap:22px}
+    .portrait{width:220px}
+    .fields{display:grid;grid-template-columns:repeat(2,auto);justify-content:center;gap:8px}
+    .fields li{font-size:9.5px;letter-spacing:.14em;padding:5px 10px;text-align:center}
     .about-text{padding:26px 22px 28px}
     .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     .principles{grid-template-columns:1fr}
@@ -774,7 +779,7 @@
   <div class="wrap duo">
     <div class="about glass reveal">
       <div class="about-photo">
-        <img src="img/orleans.jpg" alt="Foto de Orleans" width="1424" height="1004" loading="lazy" decoding="async">
+        <div class="portrait"><img src="img/orleans.jpg" alt="Foto de Orleans" width="1424" height="1004" loading="lazy" decoding="async"></div>
         <ul class="fields" aria-label="Setores atendidos">
           <li>Oficinas</li><li>Restaurantes</li><li>Frotas</li><li>Igrejas</li>
         </ul>
