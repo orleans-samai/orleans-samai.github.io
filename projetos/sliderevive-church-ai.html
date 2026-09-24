@@ -2,360 +2,142 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SlideRevive Church AI — orleans-samai</title>
-<meta name="description" content="Planejamento de slides de culto, complementar ao Lúmen.">
-<meta property="og:title" content="SlideRevive Church AI — orleans-samai">
-<meta property="og:description" content="Planejamento de slides de culto, complementar ao Lúmen.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SlideRevive Church AI — Orleans</title>
+<meta name="description" content="Converte o PDF ou o PowerPoint da pregação em slides 16:9 para o telão, processado no navegador. Primeira versão.">
+<meta property="og:title" content="SlideRevive Church AI — PDF da pregação vira slides">
+<meta property="og:description" content="Converte o PDF ou o PowerPoint da pregação em slides 16:9 para o telão, processado no navegador. Primeira versão.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📽️</text></svg>">
+<meta name="theme-color" content="#050b1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23050b1a%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%232f7bff%22 stroke-width=%2210%22/><circle cx=%2257%22 cy=%2244%22 r=%2216%22 fill=%22%23050b1a%22/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#050b1a; --tint:#0a1730; --tint-2:#0d1d3b;
-    --ink:#eaf1ff; --ink-soft:#a9bbd8;
-    --blue:#4f8fff; --blue-deep:#7fb0ff; --on-blue:#ffffff;
-    --sky:#244478; --rule:#16294b; --slate:#7f96b9;
-    --grid-line:rgba(91,157,255,.06);
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -12px rgba(0,0,0,.6);
-    --shadow-lift:0 0 0 1px rgba(47,123,255,.18), 0 18px 50px -18px rgba(47,123,255,.45);
-    --display:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --body:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --mono:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    color-scheme:dark;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
-  }
-  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
-
-  /* ── topo ────────────────────────────────────────────────────── */
-  .topbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
-  .topbar-inner{
-    max-width:1040px;margin:0 auto;padding:13px 24px;
-    display:flex;align-items:center;gap:18px;
-  }
-  .back{
-    font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;
-    color:var(--slate);text-decoration:none;transition:color .18s;
-  }
-  .back:hover{color:var(--blue)}
-  .brand{
-    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--blue);text-decoration:none;
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .brand::before{content:'';width:9px;height:9px;border-radius:2px;background:var(--blue)}
-  .crumb{
-    margin-left:auto;font-family:var(--mono);font-size:11.5px;font-weight:500;
-    letter-spacing:.09em;color:var(--slate);
-  }
-
-  /* ── hero = cabeçalho da ordem ───────────────────────────────── */
-  .hero{
-    position:relative;background:var(--tint);border-bottom:1px solid var(--rule);
-    padding:52px 24px 62px;margin-bottom:56px;overflow:hidden;
-  }
-  .hero::before{
-    content:'';position:absolute;inset:0;pointer-events:none;
-    background-image:
-      linear-gradient(var(--grid-line) 1px,transparent 1px),
-      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
-    background-size:28px 28px;
-    -webkit-mask-image:radial-gradient(130% 105% at 50% 0%,#000 32%,transparent 80%);
-    mask-image:radial-gradient(130% 105% at 50% 0%,#000 32%,transparent 80%);
-  }
-  .hero::after{
-    content:'';position:absolute;left:0;right:0;bottom:-1px;height:13px;
-    background:radial-gradient(circle at 7px 13px,var(--paper) 6px,transparent 6.5px) repeat-x;
-    background-size:20px 13px;
-  }
-  .hero-inner{position:relative;max-width:1040px;margin:0 auto;padding:0 24px}
-  .icon-badge{
-    width:56px;height:56px;border-radius:13px;margin-bottom:22px;
-    display:flex;align-items:center;justify-content:center;font-size:28px;line-height:1;
-    background:var(--paper);border:1px solid var(--rule);box-shadow:var(--shadow);
-  }
-  .title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-  h1{
-    font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 116;
-    font-size:clamp(32px,5.4vw,52px);line-height:1;letter-spacing:-.018em;
-    margin:0;text-transform:uppercase;
-  }
-  .pill{
-    font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
-    text-transform:uppercase;padding:4px 9px;border-radius:5px;white-space:nowrap;
-    display:inline-flex;align-items:center;gap:6px;
-  }
-  .pill::before{content:'';width:6px;height:6px;border-radius:50%}
-  .pill.public{background:var(--blue);border:1px solid var(--blue);color:var(--on-blue)}
-  .pill.public::before{background:var(--on-blue)}
-  .pill.private{background:var(--tint);border:1px solid var(--rule);color:var(--slate)}
-  .pill.private::before{background:var(--slate)}
-  .pill.producao{background:var(--tint);border:1px solid var(--blue);color:var(--blue)}
-  .pill.producao::before{background:var(--blue)}
-  .pill.mvp{background:var(--tint);border:1px dashed var(--sky);color:var(--ink-soft)}
-  .pill.mvp::before{background:var(--sky)}
-  .tagline{margin:0 0 18px;font-size:17.5px;line-height:1.5;color:var(--ink-soft);max-width:56ch}
-  .tags{display:flex;gap:7px;flex-wrap:wrap}
-  .tag{
-    font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.05em;
-    color:var(--ink-soft);background:var(--paper);border:1px solid var(--rule);
-    padding:3px 9px;border-radius:5px;
-  }
-
-  /* ── layout duas colunas ─────────────────────────────────────── */
-  .layout{
-    max-width:1040px;margin:0 auto;padding:0 24px 80px;
-    display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:52px;align-items:start;
-  }
-  main section{margin-bottom:44px}
-  main section:last-child{margin-bottom:0}
-  h2{
-    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--slate);margin:0 0 14px;
-    padding-bottom:9px;border-bottom:1px solid var(--rule);
-  }
-  .lead{margin:0;font-size:16.5px;line-height:1.7;color:var(--ink-soft)}
-  main p{color:var(--ink-soft)}
-
-  /* fluxo: sequência real de operação, por isso numerada */
-  .flow{list-style:none;margin:0;padding:0;counter-reset:none}
-  .flow li{position:relative;padding:0 0 20px 44px}
-  .flow li::before{
-    content:attr(data-n);position:absolute;left:0;top:0;
-    width:27px;height:27px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);font-size:11.5px;font-weight:600;
-    background:var(--tint);border:1px solid var(--sky);color:var(--blue);
-  }
-  .flow li::after{
-    content:'';position:absolute;left:13px;top:31px;bottom:2px;width:1px;
-    background:var(--rule);
-  }
-  .flow li:last-child{padding-bottom:0}
-  .flow li:last-child::after{display:none}
-  .flow li p{margin:2px 0 0;font-size:15px;line-height:1.55}
-
-  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
-  .metric{
-    background:var(--tint);border:1px solid var(--rule);border-radius:10px;
-    padding:16px 17px;
-  }
-  .metric .n{
-    font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 114;
-    font-size:30px;line-height:1;color:var(--blue);
-  }
-  .metric .l{
-    font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.11em;
-    text-transform:uppercase;color:var(--slate);margin-top:7px;
-  }
-
-  .feat-grid{
-    list-style:none;margin:0;padding:0;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:9px 22px;
-  }
-  .feat-grid li{
-    position:relative;padding-left:20px;font-size:14.5px;line-height:1.5;color:var(--ink-soft);
-  }
-  .feat-grid li::before{
-    content:'';position:absolute;left:0;top:9px;
-    width:7px;height:7px;border-radius:2px;background:var(--blue);
-  }
-
-  blockquote{
-    margin:0;padding:2px 0 2px 20px;border-left:2px solid var(--blue);
-    font-size:16px;line-height:1.65;color:var(--ink-soft);
-  }
-
-  /* ── coluna lateral ──────────────────────────────────────────── */
-  aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:78px}
-  .side-card{
-    background:var(--paper);border:1px solid var(--rule);border-radius:11px;
-    padding:17px 18px;box-shadow:var(--shadow);
-  }
-  .side-card h3{
-    margin:0 0 9px;font-family:var(--mono);font-size:10px;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--slate);
-  }
-  .side-card p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-soft)}
-  .stack-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
-  .stack-list li{
-    position:relative;padding-left:16px;font-size:13.5px;line-height:1.45;color:var(--ink-soft);
-  }
-  .stack-list li::before{
-    content:'';position:absolute;left:0;top:8px;width:6px;height:1px;background:var(--sky);
-  }
-  .cta-links{display:flex;flex-direction:column;gap:9px}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:12px 18px;border-radius:8px;
-    font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.03em;
-    text-decoration:none;color:var(--ink);background:var(--paper);
-    border:1px solid var(--rule);
-    transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease,background .18s ease;
-  }
-  .btn:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:var(--shadow)}
-  .btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
-  .btn.primary:hover{background:var(--blue-deep);border-color:var(--blue-deep);box-shadow:var(--shadow-lift)}
-
-  /* ── navegação entre projetos ────────────────────────────────── */
-  .pagenav{
-    max-width:1040px;margin:0 auto 46px;padding:0 24px;
-    display:grid;grid-template-columns:1fr 1fr;gap:14px;
-  }
-  .pagenav a{
-    display:flex;flex-direction:column;gap:5px;
-    padding:15px 17px;border-radius:10px;text-decoration:none;
-    background:var(--paper);border:1px solid var(--rule);
-    transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
-  }
-  .pagenav a:hover{border-color:var(--sky);transform:translateY(-2px);box-shadow:var(--shadow)}
-  .pagenav a.next{text-align:right}
-  .pagenav .dir{
-    font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--blue);
-  }
-  .pagenav .pname{
-    font-family:var(--display);font-weight:700;font-variation-settings:'wdth' 108;
-    font-size:15.5px;color:var(--ink);line-height:1.2;
-  }
-
-  footer{
-    max-width:1040px;margin:0 auto;padding:22px 24px 44px;
-    border-top:1px solid var(--rule);
-    display:flex;gap:16px;flex-wrap:wrap;align-items:center;
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--slate);
-  }
-  footer a{color:var(--slate);text-decoration:none;transition:color .18s}
-  footer a:hover{color:var(--blue)}
-
-  @media (max-width:880px){
-    .layout{grid-template-columns:1fr;gap:38px}
-    aside{position:static}
-  }
-  @media (max-width:640px){
-    .hero{padding:38px 20px 50px;margin-bottom:40px}
-    .hero-inner,.layout,.pagenav,footer{padding-left:20px;padding-right:20px}
-    .topbar-inner{padding:13px 20px;gap:12px}
-    .pagenav{grid-template-columns:1fr}
-    .pagenav a.next{text-align:left}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *{transition-duration:.01ms !important}
-  }
-
-  /* ── tema da página inicial: marinho profundo + azul elétrico ── */
-  h1{text-transform:none;letter-spacing:-.035em;font-weight:800}
-  .sitenav,.topbar{background:rgba(5,11,26,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-  .navmark,.brand{
-    font-family:var(--body);font-size:18px;font-weight:800;letter-spacing:-.02em;
-    text-transform:none;color:var(--ink);gap:9px;
-  }
-  .navmark::before,.brand::before{display:none}
-  .logo-ring{width:24px;height:24px;flex-shrink:0}
-  .rcard,.side-card,.metric,.pagenav a{
-    background:linear-gradient(180deg,rgba(13,29,59,.72),rgba(8,19,40,.72));
-  }
-  .rcard:hover,.pagenav a:hover{border-color:var(--sky);box-shadow:var(--shadow-lift)}
-  .btn,.filters button{border-radius:999px}
-  .btn.primary,.filters button.active,.pri.A,.pill.public{
-    background:linear-gradient(180deg,#3a86ff,#1f63e8);border-color:#4b92ff;color:#fff;
-  }
-  .btn.primary:hover{background:linear-gradient(180deg,#4a92ff,#2a6ff2);border-color:#5b9dff}
-  .pill.public::before{background:#fff}
-  .progress i{background:linear-gradient(90deg,#1f63e8,#5b9dff);box-shadow:0 0 12px rgba(47,123,255,.6)}
-</style>
+<link rel="stylesheet" href="projeto.css">
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <a class="back" href="../index.html">← Portfólio</a>
-    <a class="brand" href="../index.html"><svg class="logo-ring" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lgx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fc2ff"/><stop offset=".5" stop-color="#2f7bff"/><stop offset="1" stop-color="#1747b8"/></linearGradient></defs><circle cx="16" cy="16" r="11" fill="none" stroke="url(#lgx)" stroke-width="4.5"/><path d="M9 20a9 9 0 0 0 13-12" fill="none" stroke="#050b1a" stroke-width="2.4" stroke-linecap="round"/></svg>Orleans</a>
-    <span class="crumb">11 / 14</span>
-  </div>
-</div>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<header class="hero">
-  <div class="hero-inner">
-    <div class="icon-badge">📽️</div>
-    <div class="title-row">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol><symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></symbol><symbol id="i-logo" viewBox="0 0 32 32"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fc2ff"/><stop offset=".5" stop-color="#2f7bff"/><stop offset="1" stop-color="#1747b8"/></linearGradient></defs><circle cx="16" cy="16" r="11" fill="none" stroke="url(#lg)" stroke-width="4.5"/><path d="M9 20a9 9 0 0 0 13-12" fill="none" stroke="#050b1a" stroke-width="2.4" stroke-linecap="round"/></symbol></svg>
+
+<nav class="nav" aria-label="Principal">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html" aria-label="Orleans, página inicial"><svg aria-hidden="true"><use href="#i-logo"/></svg>Orleans</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projetos">Projetos</a></li>
+      <li><a href="../roadmap.html">Roadmap</a></li>
+    </ul>
+    <a class="btn btn-sm" href="#contato">Fale comigo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</nav>
+
+<main id="conteudo">
+
+<header class="p-hero">
+  <div class="wrap p-hero-grid">
+    <div>
+      <p class="crumbs"><a href="../index.html#projetos">Projetos</a><span aria-hidden="true">/</span><span>Igrejas</span></p>
       <h1>SlideRevive Church AI</h1>
-      <span class="pill private">Privado</span>
-      <span class="pill mvp">MVP / Funcional</span>
+      <p class="pitch">O PDF da pregação <span class="grad">vira slides para o telão.</span></p>
+      <p class="lede">Importe o PDF ou o PowerPoint recebido e receba slides 16:9 prontos, com o tema escolhido pelo conteúdo — processado no navegador, sem enviar o arquivo.</p>
+      <div class="p-status"><span class="chip"><span class="dot" aria-hidden="true"></span>Ideia</span><span class="chip dim">Código privado</span><span class="chip dim">Web</span><span class="chip dim">Primeira versão</span></div>
+      
+      <div class="p-actions"><a class="btn btn-primary" href="#contato">Conversar sobre o projeto <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+      <p class="p-note">Código privado. Primeira versão, ainda não testada com equipes de igreja.</p>
     </div>
-    <p class="tagline">Planejamento de slides de culto, complementar ao Lúmen.</p>
-    <div class="tags"><span class="tag">Web</span><span class="tag">PDF</span></div>
+
+    <figure class="p-art glass" style="margin:0">
+      <svg viewBox="0 0 560 380" role="img" aria-label="Ilustração do SlideRevive: PDF da pregação sendo convertido em slides 16:9 para o telão"><defs><radialGradient id="bg" cx=".65" cy=".3" r=".9"><stop offset="0" stop-color="#143a78"/><stop offset="1" stop-color="#050b1a"/></radialGradient><linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d2550"/><stop offset="1" stop-color="#040a18"/></linearGradient><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f7bff" stop-opacity=".45"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/></linearGradient></defs><rect width="560" height="380" fill="url(#bg)"/><g transform="rotate(-5 130 190)"><rect x="52" y="60" width="150" height="200" rx="6" fill="#eaf1ff" /><rect x="52" y="60" width="150" height="22" rx="6" fill="#c9d8f2" /><text x="64" y="75" text-anchor="start" fill="#081328" font-family="Manrope,sans-serif" font-weight="800" font-size="8" >pregacao-domingo.pdf</text><rect x="64" y="96" width="120" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="111" width="110" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="126" width="126" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="141" width="90" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="156" width="118" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="171" width="104" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="186" width="124" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="201" width="80" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="216" width="112" height="5" rx="2.5" fill="#9fb2d0" /><rect x="64" y="231" width="96" height="5" rx="2.5" fill="#9fb2d0" /></g><path d="M226 190 H290" stroke="#5b9dff" stroke-width="2.5" stroke-dasharray="6 5"/><path d="M284 182 l10 8 -10 8" fill="none" stroke="#5b9dff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="306" y="104" width="224" height="126" rx="10" fill="url(#scr)" stroke="#3b73d6" stroke-opacity=".8"/><text x="418" y="158" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="16" >Buscai primeiro</text><text x="418" y="180" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="16" >o Reino de Deus</text><text x="418" y="204" text-anchor="middle" fill="#8fbcff" font-family="Manrope,sans-serif" font-weight="800" font-size="8" letter-spacing="2">MATEUS 6:33</text><rect x="306" y="244" width="68" height="40" rx="6" fill="#0d1d3b" stroke="#2f7bff" /><rect x="316" y="260" width="48" height="4" rx="2.0" fill="#5b9dff" /><rect x="384" y="244" width="68" height="40" rx="6" fill="#0d1d3b" stroke="#244478" /><rect x="394" y="260" width="48" height="4" rx="2.0" fill="#35507e" /><rect x="462" y="244" width="68" height="40" rx="6" fill="#0d1d3b" stroke="#244478" /><rect x="472" y="260" width="48" height="4" rx="2.0" fill="#35507e" /><text x="418" y="312" text-anchor="middle" fill="#a9bbd8" font-family="Manrope,sans-serif" font-weight="700" font-size="9" >16:9 · tema escolhido pelo conteúdo</text></svg>
+    </figure>
   </div>
 </header>
 
-<div class="layout">
-  <main>
+<div class="wrap">
 
-    <section>
-      <h2>O que faz</h2>
-      <p class="lead">Converte PDFs e apresentações (.pptx/.ppsx) com texto editável em slides 16:9 prontos para telão de igreja, com classificação automática de tema — tudo processado localmente no navegador, sem upload para API.</p>
-    </section>
+  <section aria-label="Números do projeto">
+    <div class="proof glass" style="--pcols:3"><div class="proof-item"><b>7</b><span>temas prontos</span></div><div class="proof-item"><b>25 MB</b><span>tamanho máximo do arquivo</span></div><div class="proof-item"><b>100</b><span>páginas ou slides por arquivo</span></div></div>
+    <p class="proof-note">Conferido no código e no README do repositório privado em 24 set 2026.</p>
+  </section>
 
-    <section>
-      <h2>Como funciona</h2>
-      <ol class="flow"><li data-n="1"><p>Equipe importa o PDF ou PPTX da pregação</p></li><li data-n="2"><p>Sistema extrai o texto localmente, sem enviar a servidor</p></li><li data-n="3"><p>Classifica o tema automaticamente e monta os slides 16:9</p></li><li data-n="4"><p>Equipe reordena, edita tema e revisa no modo apresentação</p></li><li data-n="5"><p>Exporta de volta para PowerPoint ou usa direto no culto</p></li></ol>
-    </section>
-
-    <section><h2>Em números</h2><div class="metrics"><div class="metric"><div class="n">25 MB</div><div class="l">tamanho máx. de importação</div></div><div class="metric"><div class="n">7</div><div class="l">temas cinematográficos</div></div></div></section>
-
-    <section>
-      <h2>Principais funcionalidades</h2>
-      <ul class="feat-grid"><li>Importação de PDF/PPTX/PPSX até 25 MB</li><li>Extração local de texto com classificação heurística em português</li><li>Editor de slides com tema, duplicação e reordenação por arrastar</li><li>Modo apresentação em tela cheia</li><li>Exportação de volta para .pptx ou .ppsx</li><li>Sete temas cinematográficos</li><li>Opção de limpar dados sensíveis salvos no dispositivo</li></ul>
-    </section>
-
-    <section>
-      <h2>Diferencial</h2>
-      <blockquote>Complementa o Lúmen no fluxo de preparação — enquanto o Lúmen projeta ao vivo, este prepara o material antes do culto, também 100% local.</blockquote>
-    </section>
-
-  </main>
-
-  <aside>
-    <div class="side-card">
-      <h3>Para quem é</h3>
-      <p>Equipes de mídia/projeção de igreja que recebem material de pregação em PDF/PowerPoint e precisam adaptar rápido para o telão.</p>
+  <section class="sec" aria-labelledby="entregue">
+    <div class="sec-head">
+      <p class="eyebrow">Prova de entrega</p>
+      <h2 class="h2" id="entregue">O que já funciona hoje</h2>
     </div>
-    <div class="side-card">
-      <h3>Stack técnica</h3>
-      <ul class="stack-list"><li>Next.js</li><li>React</li><li>TypeScript</li><li>Zustand</li><li>Framer Motion</li><li>pdfjs-dist</li></ul>
+    <div class="duo">
+      <div class="card glass">
+        <h3>Já entregue</h3>
+        <ul class="done-list"><li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Importa PDF, PPTX e PPSX</b> até 25 MB</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Lê o texto localmente</b> e escolhe o tema pelo conteúdo</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Editor de slides</b> com duplicar e arrastar para reordenar</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Modo apresentação</b> em tela cheia</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Exporta de volta</b> para PowerPoint</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Botão para apagar</b> os dados salvos no aparelho</span></li></ul>
+      </div>
+      <div class="card glass">
+        <h3>Como está construído</h3><ul class="done-list built"><li><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg><span><b>Next.js e TypeScript</b>, com Zustand e Framer Motion</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg><span><b>pdfjs-dist</b> lê o PDF dentro do navegador</span></li><li><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg><span><b>Primeira versão</b> em 29 ago 2026</span></li></ul>
+      </div>
     </div>
-    <div class="side-card">
-      <h3>Status</h3>
-      <p>MVP funcional, com limites documentados (sem OCR de imagem ainda, até 100 páginas/slides).</p>
+  </section>
+
+  <section class="sec" aria-labelledby="como">
+    <div class="sec-head">
+      <p class="eyebrow">Antes do culto</p>
+      <h2 class="h2" id="como">Do arquivo recebido ao telão</h2>
     </div>
-    <div class="cta-links">
-      <div class="btn" style="cursor:default">Repositório privado</div>
-      <a class="btn" href="../index.html">← Voltar ao portfólio</a>
+    <ol class="flow" style="--cols:5"><li class="glass"><p><b>Importa</b>Abre o PDF ou o PowerPoint da pregação.</p></li><li class="glass"><p><b>Lê</b>O texto é extraído no próprio navegador.</p></li><li class="glass"><p><b>Monta</b>Os slides 16:9 saem com o tema escolhido.</p></li><li class="glass"><p><b>Revisa</b>A equipe reordena e ajusta.</p></li><li class="glass"><p><b>Usa</b>Apresenta direto ou exporta para PowerPoint.</p></li></ol>
+  </section>
+
+  <section class="sec" aria-labelledby="porque">
+    <div class="sec-head">
+      <p class="eyebrow">Por que o SlideRevive</p>
+      <h2 class="h2" id="porque">Preparar a projeção mais rápido</h2>
     </div>
-  </aside>
+    <div class="why"><div class="card glass"><span class="why-ico"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg></span><h3>Complementa o Lúmen</h3><p>O SlideRevive prepara o material; o Lúmen projeta ao vivo.</p></div><div class="card glass"><span class="why-ico"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg></span><h3>O arquivo não sai do computador</h3><p>Tudo é processado no navegador, sem upload.</p></div><div class="card glass"><span class="why-ico"><svg class="ico" aria-hidden="true"><use href="#i-file"/></svg></span><h3>Volta para o PowerPoint</h3><p>Exporta em .pptx ou .ppsx para quem usa outro programa.</p></div></div>
+    <p class="vs glass"><svg class="ico" aria-hidden="true"><use href="#i-swap"/></svg><span><strong>Em vez de copiar o texto da pregação slide por slide:</strong> importe o arquivo e só revise.</span></p>
+  </section>
+
+  <section class="sec" aria-labelledby="proximo">
+    <div class="sec-head">
+      <p class="eyebrow">Transparência</p>
+      <h2 class="h2" id="proximo">O que vem a seguir</h2>
+    </div>
+    <div class="next">
+      <div class="next-main glass">
+        <span class="label">Próximo passo</span>
+        <h3>Ainda não definido</h3>
+        <p>É uma primeira versão: funciona com PDF e apresentações com texto editável, ainda sem ler texto de imagens. O roadmap ainda não definiu a próxima etapa.</p>
+        <p style="margin-top:14px"><a class="link" href="../roadmap.html">Ver no roadmap <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+      </div>
+      <div class="spec glass">
+        <dl><div><dt>Para quem é</dt><dd>Equipes de mídia de igreja que recebem a pregação em PDF ou PowerPoint e precisam adaptar para o telão.</dd></div><div><dt>Como usar</dt><dd>Abre no navegador; os arquivos ficam no próprio aparelho.</dd></div><div><dt>Tecnologia</dt><dd>Next.js, React, TypeScript, Zustand, Framer Motion e pdfjs-dist.</dd></div></dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="cta glass" aria-labelledby="cta-title">
+    <div>
+      <h2 id="cta-title">Sua equipe de mídia recebe a pregação em PDF?</h2>
+      <p>Me chama no LinkedIn e conversamos sobre o projeto.</p>
+    </div>
+    <a class="btn btn-primary" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">Fale comigo no LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+  </section>
+
+  <nav class="pager" aria-label="Outros projetos">
+    <a class="glass" href="central-da-festividade.html"><span class="dir">← Anterior</span><span class="pname">Central da Festividade</span></a>
+    <a class="glass next-p" href="netdiag-pro.html"><span class="dir">Próximo →</span><span class="pname">NetDiag Pro</span></a>
+  </nav>
+
 </div>
+</main>
 
-<nav class="pagenav">
-  <a href="central-da-festividade.html">
-    <span class="dir">← Anterior</span>
-    <span class="pname">Central da Festividade</span>
-  </a>
-  <a class="next" href="netdiag-pro.html">
-    <span class="dir">Próximo →</span>
-    <span class="pname">NetDiag Pro</span>
-  </a>
-</nav>
-
-<footer>
-  <span>© <span id="year"></span> orleans-samai</span>
-  <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">github.com/orleans-samai</a>
-  <a href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">linkedin.com/in/orleans-samai</a>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <span>© <span id="year">2026</span> Orleans</span>
+    <nav aria-label="Rodapé">
+      <a href="../index.html">Início</a>
+      <a href="../index.html#projetos">Projetos</a>
+      <a href="../roadmap.html">Roadmap</a>
+      <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>

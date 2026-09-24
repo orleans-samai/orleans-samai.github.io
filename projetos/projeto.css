@@ -134,7 +134,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 .p-art svg{width:100%;height:auto}
 
 /* ── faixa de números verificáveis ──────────────────────────── */
-.proof{padding:22px 26px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;align-items:start}
+.proof{padding:22px 26px;display:grid;grid-template-columns:repeat(var(--pcols,5),minmax(0,1fr));gap:16px;align-items:start}
 .proof-item b{display:block;font-size:clamp(24px,2.6vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
 .proof-item span{display:block;margin-top:3px;font-size:12.5px;line-height:1.4;color:var(--text-2)}
 .proof-note{margin:10px 2px 0;font-size:12px;color:var(--muted)}
@@ -149,6 +149,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 .done-list{margin:0;padding:0;list-style:none;display:grid;gap:11px}
 .done-list li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.5;color:var(--text-2)}
 .done-list li .ico{width:19px;height:19px;color:var(--blue-hi);margin-top:1px}
+.built li .ico{color:var(--blue-soft)}
+.p-note{margin:12px 0 0;font-size:13px;color:var(--muted)}
 .done-list li b{color:var(--text);font-weight:700}
 
 .timeline{margin:0;padding:0;list-style:none;position:relative}
@@ -163,7 +165,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 .timeline p{margin:2px 0 0;font-size:14.5px;line-height:1.5;color:var(--text-2)}
 
 /* fluxo: sequência real de uso, por isso numerada */
-.flow{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:passo}
+.flow{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(var(--cols,5),minmax(0,1fr));gap:14px;counter-reset:passo}
 .flow li{counter-increment:passo;padding:20px 18px;display:flex;flex-direction:column;gap:10px}
 .flow li::after{
   content:counter(passo);order:-1;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
