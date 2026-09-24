@@ -5,9 +5,8 @@ Uso, na raiz do repositório:
     python3 tools/gerar_projetos.py              # regera todas
     python3 tools/gerar_projetos.py frota-lite   # regera só as páginas indicadas
 
-Segue o mesmo modelo de projetos/lumen.html, que é escrita à mão e não passa
-por aqui. O CSS compartilhado fica em projetos/projeto.css. Só usa a
-biblioteca padrão do Python 3.
+Gera as 14 páginas, inclusive a do Lúmen. O CSS compartilhado fica em
+projetos/projeto.css. Só usa a biblioteca padrão do Python 3.
 """
 import html
 import os
@@ -41,6 +40,58 @@ def svg(inner, label):
             '</defs><rect width="560" height="380" fill="url(#bg)"/>' + inner + '</svg>')
 def pill(x, y, w, label, fill='#2f7bff', txt='#fff'):
     return r(x, y, w, 16, 8, fill, None, 'fill-opacity=".2"' if fill != '#1f63e8' else '') + t(x + w / 2, y + 11, label, 8, 800, txt, 'middle')
+
+LUMEN_ART = '''<!-- janela da cabine -->
+        <rect x="28" y="30" width="430" height="300" rx="12" fill="#081328" stroke="#244478"/>
+        <rect x="28" y="30" width="430" height="30" rx="12" fill="#0a1730"/>
+        <circle cx="46" cy="45" r="4" fill="#244478"/><circle cx="60" cy="45" r="4" fill="#244478"/><circle cx="74" cy="45" r="4" fill="#244478"/>
+        <text x="243" y="49" text-anchor="middle" fill="#a9bbd8" font-family="Manrope,sans-serif" font-weight="700" font-size="10">Lúmen — Cabine</text>
+        <circle cx="440" cy="45" r="5" fill="#ffb454"><animate attributeName="opacity" values="1;.35;1" dur="2.2s" repeatCount="indefinite"/></circle>
+        <!-- programação do culto -->
+        <text x="44" y="84" fill="#7289ad" font-family="Manrope,sans-serif" font-weight="800" font-size="8" letter-spacing="1.5">CULTO DE DOMINGO</text>
+        <g font-family="Manrope,sans-serif" font-size="9" font-weight="700">
+          <rect x="40" y="94" width="112" height="24" rx="6" fill="#0d1d3b"/><text x="50" y="110" fill="#a9bbd8">Abertura</text>
+          <rect x="40" y="122" width="112" height="24" rx="6" fill="#1f63e8"/><text x="50" y="138" fill="#fff">Leitura · Salmo 23</text>
+          <rect x="40" y="150" width="112" height="24" rx="6" fill="#0d1d3b"/><text x="50" y="166" fill="#a9bbd8">Louvor</text>
+          <rect x="40" y="178" width="112" height="24" rx="6" fill="#0d1d3b"/><text x="50" y="194" fill="#a9bbd8">Avisos</text>
+          <rect x="40" y="206" width="112" height="24" rx="6" fill="#0d1d3b"/><text x="50" y="222" fill="#a9bbd8">Pregação</text>
+        </g>
+        <!-- no ar -->
+        <rect x="166" y="76" width="278" height="160" rx="8" fill="url(#scr)" stroke="#3b73d6" stroke-opacity=".8"/>
+        <rect x="176" y="86" width="48" height="14" rx="7" fill="#ffb454" fill-opacity=".18" stroke="#ffb454" stroke-opacity=".7"/>
+        <text x="200" y="96" text-anchor="middle" fill="#ffcf8f" font-family="Manrope,sans-serif" font-weight="800" font-size="7" letter-spacing="1">NO AR</text>
+        <text x="305" y="146" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="17">O Senhor é o meu pastor;</text>
+        <text x="305" y="170" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="17">nada me faltará.</text>
+        <text x="305" y="204" text-anchor="middle" fill="#8fbcff" font-family="Manrope,sans-serif" font-weight="700" font-size="9" letter-spacing="2.5">SALMOS 23:1 · ALMEIDA 1819</text>
+        <!-- próximos slides -->
+        <g>
+          <rect x="166" y="248" width="86" height="50" rx="6" fill="#0d1d3b" stroke="#2f7bff"/>
+          <rect x="262" y="248" width="86" height="50" rx="6" fill="#0d1d3b" stroke="#244478"/>
+          <rect x="358" y="248" width="86" height="50" rx="6" fill="#0d1d3b" stroke="#244478"/>
+          <rect x="178" y="266" width="62" height="4" rx="2" fill="#5b9dff"/><rect x="186" y="276" width="46" height="4" rx="2" fill="#5b9dff" opacity=".6"/>
+          <rect x="274" y="266" width="62" height="4" rx="2" fill="#35507e"/><rect x="282" y="276" width="46" height="4" rx="2" fill="#35507e"/>
+          <rect x="370" y="266" width="62" height="4" rx="2" fill="#35507e"/><rect x="378" y="276" width="46" height="4" rx="2" fill="#35507e"/>
+        </g>
+        <text x="40" y="258" fill="#7289ad" font-family="Manrope,sans-serif" font-weight="700" font-size="8">F5 apresenta</text>
+        <text x="40" y="274" fill="#7289ad" font-family="Manrope,sans-serif" font-weight="700" font-size="8">F9 emergência</text>
+        <text x="40" y="290" fill="#7289ad" font-family="Manrope,sans-serif" font-weight="700" font-size="8">B apaga o telão</text>
+        <!-- celular como controle -->
+        <g transform="rotate(6 470 250)">
+          <rect x="420" y="150" width="110" height="200" rx="18" fill="#060d1d" stroke="#5b9dff" stroke-opacity=".8" stroke-width="1.5"/>
+          <rect x="458" y="160" width="34" height="6" rx="3" fill="#16294b"/>
+          <text x="475" y="186" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="10">Controle</text>
+          <rect x="432" y="196" width="86" height="54" rx="8" fill="url(#scr)" stroke="#244478"/>
+          <rect x="442" y="216" width="66" height="4" rx="2" fill="#eaf1ff" opacity=".85"/><rect x="450" y="226" width="50" height="4" rx="2" fill="#eaf1ff" opacity=".6"/>
+          <rect x="432" y="262" width="40" height="40" rx="10" fill="#0d1d3b" stroke="#244478"/>
+          <rect x="478" y="262" width="40" height="40" rx="10" fill="#1f63e8"/>
+          <path d="M456 274l-8 8 8 8" fill="none" stroke="#a9bbd8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M494 274l8 8-8 8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="432" y="312" width="86" height="22" rx="11" fill="#0d1d3b" stroke="#244478"/>
+          <text x="475" y="326.5" text-anchor="middle" fill="#8fbcff" font-family="Manrope,sans-serif" font-weight="800" font-size="8">Pedir versículo</text>
+        </g>'''
+
+def art_lumen():
+    return svg(LUMEN_ART, 'Ilustração da cabine do Lúmen: programação do culto, versículo no ar e controle pelo celular')
 
 def art_ebike():
     s = window(28, 30, 504, 316, 'EBike Suporte — Chamados')
@@ -279,6 +330,8 @@ ICONS = {
  'zap': '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
  'gift': '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
  'mic': '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+ 'moon': '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+ 'cpu': '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
  'eye': '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
  'flask': '<path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7.5 15h9"/>',
  'clock': '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
