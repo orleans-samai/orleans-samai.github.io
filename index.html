@@ -2,752 +2,922 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>orleans-samai — Portfólio</title>
-<meta name="description" content="Software vertical e produtos locais/mobile para pequenas operações — de oficinas a igrejas, com privacidade on-device.">
-<meta property="og:title" content="orleans-samai — Portfólio">
-<meta property="og:description" content="Software vertical e produtos locais/mobile para pequenas operações.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orleans — Projetos digitais</title>
+<meta name="description" content="Sistemas SaaS, apps desktop e mobile e sites para operações pequenas — de oficinas a igrejas, com modo offline e privacidade on-device.">
+<meta property="og:title" content="Orleans — Projetos digitais">
+<meta property="og:description" content="Sistemas SaaS, apps desktop e mobile e sites para operações pequenas.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://github.com/orleans-samai.png">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#1457d6">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%231457d6%22/><path d=%22M24 30h52M24 50h52M24 70h32%22 stroke=%22white%22 stroke-width=%229%22 stroke-linecap=%22round%22/></svg>">
+<meta name="theme-color" content="#050b1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23050b1a%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%232f7bff%22 stroke-width=%2210%22/><circle cx=%2257%22 cy=%2244%22 r=%2216%22 fill=%22%23050b1a%22/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* ═══════════════════════════════════════════════════════════════
-     Ordem de serviço — tinta azul sobre papel.
-     Claro: formulário impresso.  Escuro: negativo de blueprint.
+     Azul elétrico sobre marinho profundo.
+     Um só tema, escuro: a luz azul das bordas é o que guia o olho.
      ═══════════════════════════════════════════════════════════════ */
   :root{
-    --paper:#ffffff;
-    --tint:#eff5fe;
-    --tint-2:#e3edfc;
-    --ink:#0a2342;
-    --ink-soft:#1b3a63;
-    --blue:#1457d6;
-    --blue-deep:#0b3fa8;
-    --on-blue:#ffffff;
-    --sky:#a9cbf7;
-    --rule:#d8e6fa;
-    --slate:#5b7592;
-    --grid-line:rgba(20,87,214,.055);
-    --shadow:0 1px 2px rgba(10,35,66,.05), 0 10px 30px rgba(10,35,66,.07);
-    --shadow-lift:0 2px 6px rgba(10,35,66,.07), 0 22px 48px rgba(20,87,214,.15);
-    --display:'Archivo','Arial Narrow',sans-serif;
-    --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    color-scheme:light dark;
-  }
-  @media (prefers-color-scheme:dark){
-    :root{
-      --paper:#071a33;
-      --tint:#0c2646;
-      --tint-2:#103055;
-      --ink:#e6f0ff;
-      --ink-soft:#c2d8f5;
-      --blue:#6fa8ff;
-      --blue-deep:#9cc4ff;
-      --on-blue:#07203d;
-      --sky:#2f6bb5;
-      --rule:#17406f;
-      --slate:#8faecd;
-      --grid-line:rgba(160,200,255,.07);
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
-      --shadow-lift:0 2px 8px rgba(0,0,0,.45), 0 22px 48px rgba(0,0,0,.55);
-    }
+    --bg:#050b1a;
+    --bg-2:#081328;
+    --panel:#0a1730;
+    --panel-2:#0d1d3b;
+    --line:#16294b;
+    --line-hi:#244478;
+    --blue:#2f7bff;
+    --blue-hi:#5b9dff;
+    --blue-soft:#8fbcff;
+    --text:#eaf1ff;
+    --text-2:#a9bbd8;
+    --muted:#7289ad;
+    --glow:0 0 0 1px rgba(47,123,255,.18), 0 18px 50px -18px rgba(47,123,255,.45);
+    --font:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --r:14px;
+    --wrap:1200px;
+    --gutter:24px;
+    color-scheme:dark;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
   body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:var(--body);font-size:16px;line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:var(--font);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-wrap:break-word;
   }
+  img,svg{max-width:100%;display:block}
+  a{color:inherit}
   a:focus-visible,button:focus-visible,summary:focus-visible{
-    outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;
+    outline:2px solid var(--blue-hi);outline-offset:3px;border-radius:8px;
   }
-  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 96px}
-  .flabel{
-    display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--slate);
-    margin-bottom:6px;
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .skip{
+    position:absolute;left:16px;top:-60px;z-index:100;padding:10px 16px;border-radius:10px;
+    background:var(--blue);color:#fff;font-weight:700;text-decoration:none;transition:top .2s;
+  }
+  .skip:focus{top:12px}
+
+  /* ── tipografia comum ────────────────────────────────────────── */
+  .eyebrow{
+    margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--text-2);
+  }
+  .h2{
+    margin:0 0 16px;font-size:clamp(28px,3.4vw,36px);font-weight:800;
+    line-height:1.12;letter-spacing:-.025em;
+  }
+  .grad{
+    background:linear-gradient(95deg,#2f7bff 0%,#4f97ff 45%,#8fc2ff 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .ico{width:22px;height:22px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ── botões ──────────────────────────────────────────────────── */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:48px;padding:0 24px;border-radius:999px;
+    font:700 14.5px/1 var(--font);text-decoration:none;white-space:nowrap;
+    border:1px solid var(--line-hi);color:var(--text);background:rgba(10,23,48,.5);
+    transition:border-color .2s ease,background .2s ease,box-shadow .2s ease,transform .2s ease;
+  }
+  .btn .ico{width:17px;height:17px;transition:transform .2s ease}
+  .btn:hover{border-color:var(--blue-hi);box-shadow:var(--glow)}
+  .btn:hover .ico{transform:translateX(3px)}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{
+    background:linear-gradient(180deg,#3a86ff,#1f63e8);border-color:#4b92ff;color:#fff;
+    box-shadow:0 10px 30px -10px rgba(47,123,255,.8), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+  .btn-primary:hover{background:linear-gradient(180deg,#4a92ff,#2a6ff2);box-shadow:0 14px 40px -10px rgba(47,123,255,.95), inset 0 1px 0 rgba(255,255,255,.22)}
+  .btn-sm{min-height:40px;padding:0 18px;font-size:13.5px}
+  .link{
+    display:inline-flex;align-items:center;gap:8px;min-height:32px;
+    font-weight:700;font-size:14px;color:var(--blue-hi);text-decoration:none;
+  }
+  .link .ico{width:16px;height:16px;transition:transform .2s ease}
+  .link:hover{color:var(--blue-soft)}
+  .link:hover .ico{transform:translateX(3px)}
+
+  /* ── cartão com borda de luz ─────────────────────────────────── */
+  .glass{
+    position:relative;border-radius:var(--r);
+    background:linear-gradient(180deg,rgba(13,29,59,.72),rgba(8,19,40,.72));
+    border:1px solid var(--line);
+    transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease;
+  }
+  .glass::before{
+    content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
+    background:linear-gradient(160deg,rgba(91,157,255,.55),rgba(91,157,255,0) 38%,rgba(91,157,255,0) 70%,rgba(47,123,255,.35));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
   }
 
-  /* ── barra de navegação = cabeçalho do formulário ────────────── */
-  .sitenav{
-    position:sticky;top:0;z-index:20;
-    background:var(--paper);border-bottom:1px solid var(--rule);
+  /* ── navegação ───────────────────────────────────────────────── */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(5,11,26,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .25s ease;
   }
-  .sitenav-inner{
-    max-width:1000px;margin:0 auto;padding:13px 24px;
-    display:flex;gap:18px;align-items:center;
+  .nav.scrolled{border-bottom-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;gap:24px;height:72px}
+  .brand{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+    font-weight:800;font-size:20px;letter-spacing:-.02em;
   }
-  .navmark{
-    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--blue);text-decoration:none;
-    display:inline-flex;align-items:center;gap:8px;
+  .brand svg{width:28px;height:28px}
+  .menu{display:flex;gap:2px;margin:0 auto;padding:0;list-style:none}
+  .menu a{
+    position:relative;display:block;padding:10px 14px;border-radius:8px;
+    font-size:14px;font-weight:600;color:var(--text-2);text-decoration:none;transition:color .2s;
   }
-  .navmark::before{content:'';width:9px;height:9px;border-radius:2px;background:var(--blue)}
-  .navlinks{margin-left:auto;display:flex;gap:20px}
-  .sitenav a.nl{
-    font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;
-    color:var(--slate);text-decoration:none;padding-bottom:2px;
-    border-bottom:1.5px solid transparent;transition:color .18s,border-color .18s;
+  .menu a:hover{color:var(--text)}
+  .menu a[aria-current="true"]{color:var(--blue-hi)}
+  .menu a[aria-current="true"]::after{
+    content:'';position:absolute;left:14px;right:14px;bottom:2px;height:2px;border-radius:2px;
+    background:var(--blue);box-shadow:0 0 12px var(--blue);
   }
-  .sitenav a.nl:hover{color:var(--ink)}
-  .sitenav a.nl[aria-current="page"]{color:var(--ink);border-bottom-color:var(--blue)}
+  .nav-cta{flex-shrink:0}
+  .burger{
+    display:none;margin-left:auto;width:44px;height:44px;border-radius:12px;cursor:pointer;
+    border:1px solid var(--line-hi);background:transparent;color:var(--text);
+    align-items:center;justify-content:center;
+  }
+  .burger .ico{width:20px;height:20px}
 
-  /* ── hero = ordem de serviço preenchida ──────────────────────── */
-  .hero{
-    position:relative;background:var(--tint);
-    border-bottom:1px solid var(--rule);
-    padding:60px 24px 74px;margin-bottom:76px;overflow:hidden;
-  }
-  .hero-grid{
-    position:absolute;inset:0;pointer-events:none;
-    background-image:
-      linear-gradient(var(--grid-line) 1px,transparent 1px),
-      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
-    background-size:28px 28px;
-    -webkit-mask-image:radial-gradient(130% 105% at 50% 0%,#000 32%,transparent 80%);
-    mask-image:radial-gradient(130% 105% at 50% 0%,#000 32%,transparent 80%);
+  /* ── hero ────────────────────────────────────────────────────── */
+  .hero{position:relative;overflow:hidden;padding:56px 0 40px}
+  .hero::before{
+    content:'';position:absolute;pointer-events:none;
+    width:1500px;height:1500px;border-radius:50%;right:-760px;top:-1180px;
+    border:1px solid rgba(120,175,255,.35);
+    box-shadow:0 40px 120px -40px rgba(47,123,255,.55), inset 0 -40px 110px -60px rgba(47,123,255,.6);
   }
   .hero::after{
-    content:'';position:absolute;left:0;right:0;bottom:-1px;height:13px;
-    background:radial-gradient(circle at 7px 13px,var(--paper) 6px,transparent 6.5px) repeat-x;
-    background-size:20px 13px;
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 420px at 78% 38%,rgba(47,123,255,.16),transparent 70%),
+      radial-gradient(500px 300px at 10% 0%,rgba(47,123,255,.08),transparent 70%);
   }
-  .hero-inner{position:relative;max-width:952px;margin:0 auto}
-  .doc-head{
-    display:flex;align-items:center;gap:14px;margin-bottom:40px;
-    font-family:var(--mono);font-size:11px;font-weight:500;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--slate);
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:16px;align-items:center}
+  .hero h1{
+    margin:0 0 22px;font-size:clamp(38px,4.6vw,60px);font-weight:800;
+    line-height:1.04;letter-spacing:-.035em;
   }
-  .doc-head .line{flex:1;height:1px;background:var(--rule)}
-  .hero-body{display:flex;gap:44px;align-items:flex-start;flex-wrap:wrap}
-  .hero-fields{flex:1;min-width:290px;display:flex;flex-direction:column;gap:26px}
-  h1{
-    font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 118;
-    font-size:clamp(38px,6.6vw,66px);line-height:.98;
-    letter-spacing:-.018em;margin:0;text-transform:uppercase;
+  .hero-lede{margin:0 0 32px;max-width:48ch;font-size:17px;line-height:1.65;color:var(--text-2)}
+  .hero-lede strong{color:var(--text);font-weight:700}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .perks{
+    display:flex;flex-wrap:wrap;gap:16px 24px;
+    margin:44px 0 0;padding:0;list-style:none;
   }
-  .lede{margin:0;font-size:17.5px;line-height:1.55;color:var(--ink-soft);max-width:52ch}
-  .live{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);
+  .perks li{display:flex;align-items:center;gap:12px;font-size:13px;line-height:1.4;color:var(--muted);min-width:0}
+  .perks b{display:block;color:var(--text);font-weight:700;font-size:13.5px}
+  .perk-ico{
+    width:44px;height:44px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
+    color:var(--blue-hi);border:1px solid var(--line-hi);
+    background:radial-gradient(circle at 50% 30%,rgba(47,123,255,.22),rgba(47,123,255,.04));
+    box-shadow:0 0 18px -4px rgba(47,123,255,.5);
   }
-  .live i{
-    width:8px;height:8px;border-radius:50%;background:var(--blue);
-    box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 20%,transparent);
-  }
-  .hero-side{display:flex;flex-direction:column;align-items:center;gap:26px;padding-top:4px}
-  .avatar{
-    width:104px;height:104px;border-radius:12px;display:block;
-    border:1px solid var(--rule);background:var(--paper);box-shadow:var(--shadow);
-  }
-  .stamp{
-    width:116px;height:116px;border-radius:50%;flex-shrink:0;
-    border:2.5px solid var(--blue);outline:1px solid var(--blue);outline-offset:5px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    color:var(--blue);transform:rotate(-7deg);opacity:.9;
-  }
-  .stamp b{
-    font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 112;
-    font-size:34px;line-height:1;
-  }
-  .stamp span{
-    font-family:var(--mono);font-size:8.5px;font-weight:600;letter-spacing:.14em;
-    text-transform:uppercase;text-align:center;margin-top:5px;line-height:1.4;
-  }
-  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:38px}
+  .perk-ico .ico{width:20px;height:20px}
 
-  .btn{
-    display:inline-flex;align-items:center;gap:9px;
-    padding:12px 21px;border-radius:8px;
-    font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.02em;
-    text-decoration:none;color:var(--ink);
-    background:var(--paper);border:1px solid var(--rule);
-    transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease,background .18s ease;
+  /* palco do notebook */
+  .stage{position:relative;aspect-ratio:1.18;perspective:1700px;min-width:0}
+  .laptop{
+    position:absolute;left:4%;top:4%;width:88%;z-index:1;
+    transform-style:preserve-3d;transform:rotateX(9deg) rotateY(-24deg) rotateZ(3deg);
+    animation:float 9s ease-in-out infinite;
   }
-  .btn:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:var(--shadow)}
-  .btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
-  .btn.primary:hover{background:var(--blue-deep);border-color:var(--blue-deep);box-shadow:var(--shadow-lift)}
+  @keyframes float{
+    0%,100%{transform:rotateX(9deg) rotateY(-24deg) rotateZ(3deg) translateY(0)}
+    50%{transform:rotateX(9deg) rotateY(-22deg) rotateZ(3deg) translateY(-10px)}
+  }
+  .lid{
+    position:relative;aspect-ratio:16/10.4;border-radius:16px;padding:2.3%;
+    background:linear-gradient(160deg,#1d2b44,#0a111e 60%);
+    border:1px solid #33496f;
+    box-shadow:0 0 0 1px rgba(91,157,255,.25),0 0 70px -6px rgba(47,123,255,.55),0 40px 80px -30px #000;
+  }
+  .screen{
+    position:relative;height:100%;border-radius:8px;overflow:hidden;container-type:inline-size;
+    background:radial-gradient(120% 90% at 70% 10%,#11305f 0%,#081630 45%,#040914 100%);
+  }
+  .screen .mtn{position:absolute;inset:auto 0 0 0;width:100%;height:78%}
+  .scr-nav{
+    position:absolute;left:5%;right:5%;top:6%;display:flex;align-items:center;gap:3cqw;
+    font-size:1.9cqw;color:#b8cdef;font-weight:600;
+  }
+  .scr-nav .logo{display:flex;align-items:center;gap:1cqw;font-weight:800;color:#fff;font-size:2.4cqw;margin-right:auto}
+  .scr-nav .logo i{width:2.6cqw;height:2.6cqw;border-radius:50%;border:.55cqw solid var(--blue)}
+  .scr-nav .pill{border:1px solid rgba(91,157,255,.7);border-radius:99px;padding:.7cqw 2cqw;color:#dbe8ff}
+  .scr-title{
+    position:absolute;left:8%;top:30%;margin:0;
+    font-size:7.4cqw;line-height:1.02;font-weight:800;font-style:italic;letter-spacing:-.01em;
+    color:#fff;text-shadow:0 0 30px rgba(47,123,255,.55);
+  }
+  .scr-foot{position:absolute;left:8%;bottom:9%;font-size:1.5cqw;letter-spacing:.3em;color:#8fa9cf;font-weight:700}
+  .scr-note{position:absolute;right:6%;bottom:14%;width:24%;font-size:1.55cqw;line-height:1.5;color:#9db4d8}
+  .deck{
+    position:absolute;left:-6%;right:-6%;top:calc(100% - 2px);height:64px;
+    transform-origin:top center;transform:rotateX(64deg);
+    border-radius:4px 4px 22px 22px;
+    background:linear-gradient(180deg,#34465f 0%,#1a2638 35%,#0b121e 100%);
+    box-shadow:0 0 50px -8px rgba(47,123,255,.6);
+  }
+  .deck::after{
+    content:'';position:absolute;left:38%;right:38%;top:0;height:5px;border-radius:0 0 6px 6px;background:#0a1220;
+  }
+  .rocks{position:absolute;left:-18%;bottom:-8%;width:136%;max-width:none;height:auto;pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 88%,transparent)}
 
   /* ── seções ──────────────────────────────────────────────────── */
-  .section{margin-bottom:82px}
-  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
-  .sec-tag{
-    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;
-    text-transform:uppercase;color:var(--blue);
-    border:1px solid var(--sky);border-radius:5px;padding:4px 9px;
-    background:var(--tint);white-space:nowrap;
-  }
-  h2{
-    font-family:var(--display);font-weight:700;font-variation-settings:'wdth' 112;
-    font-size:clamp(23px,3vw,30px);letter-spacing:-.01em;margin:0;text-transform:uppercase;
-  }
-  .sec-rule{flex:1;min-width:24px;height:1px;background:var(--rule)}
-  .section-sub{margin:0 0 30px;color:var(--slate);font-size:15px;max-width:62ch}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:20px}
-  .grid.compact{grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:16px}
+  .section{padding:44px 0}
+  .section-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
+  .section-top .eyebrow{margin:0}
 
-  /* ── card = talão destacável ─────────────────────────────────── */
-  .card{
-    position:relative;display:flex;flex-direction:column;overflow:hidden;
-    background:var(--paper);border:1px solid var(--rule);border-radius:11px;
-    box-shadow:var(--shadow);
-    transition:box-shadow .2s ease,border-color .2s ease;
+  /* projetos em destaque */
+  .projects{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+  .proj{display:flex;flex-direction:column;overflow:hidden;text-decoration:none}
+  .proj:hover{border-color:var(--line-hi);box-shadow:var(--glow);transform:translateY(-4px)}
+  .proj-art{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line)}
+  .proj-art svg{width:100%;height:100%;transition:transform .5s ease}
+  .proj:hover .proj-art svg{transform:scale(1.04)}
+  .proj-art::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,transparent 55%,rgba(8,19,40,.9));
   }
-  html.js .card{opacity:0;transform:translateY(12px)}
-  html.js .card.in{
-    opacity:1;transform:translateY(0);
-    transition:opacity .5s ease,transform .5s ease,box-shadow .2s ease,border-color .2s ease;
+  .corner{
+    position:absolute;top:12px;right:12px;z-index:1;width:32px;height:32px;border-radius:9px;
+    display:grid;place-items:center;color:var(--text);
+    background:rgba(5,11,26,.6);border:1px solid var(--line-hi);
   }
-  .card::before{
-    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);
-    transform:scaleY(0);transform-origin:top;transition:transform .28s ease;
+  .corner .ico{width:15px;height:15px}
+  .proj-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .proj-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+  .chip{
+    font-size:11px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:99px;
+    color:var(--blue-soft);background:rgba(47,123,255,.12);border:1px solid rgba(47,123,255,.3);
   }
-  .card:hover{border-color:var(--sky);box-shadow:var(--shadow-lift)}
-  .card:hover::before{transform:scaleY(1)}
-  .card-strip{
-    display:flex;align-items:center;justify-content:space-between;gap:10px;
-    padding:10px 16px;border-bottom:1px dashed var(--rule);background:var(--tint);
-    font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--slate);
-  }
-  .status{display:inline-flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap}
-  .status::before{content:'';width:6px;height:6px;border-radius:50%}
-  .status.public{color:var(--blue)}
-  .status.public::before{background:var(--blue)}
-  .status.private{color:var(--slate)}
-  .status.private::before{background:var(--slate)}
-  .card-body{padding:17px 16px 16px;display:flex;flex-direction:column;gap:11px;flex:1}
-  .grid.compact .card-body{padding:14px 15px;gap:9px}
-  .card-title{display:flex;align-items:center;gap:10px;min-width:0}
-  .seal{
-    width:32px;height:32px;border-radius:8px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;
-    background:var(--tint);border:1px solid var(--rule);
-  }
-  .grid.compact .seal{width:28px;height:28px;font-size:15px}
-  .card h3{
-    margin:0;font-family:var(--display);font-weight:700;font-variation-settings:'wdth' 108;
-    font-size:17px;letter-spacing:-.005em;line-height:1.2;
-  }
-  .grid.compact .card h3{font-size:14.5px}
-  .card p{margin:0;color:var(--slate);font-size:14px;line-height:1.55}
-  .grid.compact .card p{font-size:13px}
-  .tags{display:flex;flex-wrap:wrap;gap:6px}
-  .tag{
-    font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.05em;
-    color:var(--ink-soft);background:var(--tint);border:1px solid var(--rule);
-    padding:3px 8px;border-radius:5px;
-  }
-  .card-links{display:flex;gap:16px;margin-top:auto;padding-top:4px;flex-wrap:wrap}
-  .card-links a{
-    font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.03em;
-    text-decoration:none;display:inline-flex;align-items:center;gap:5px;
-    transition:gap .16s ease,color .16s ease;
-  }
-  .lnk-detail{color:var(--blue)}
-  .lnk-repo{color:var(--slate)}
-  .lnk-repo:hover{color:var(--ink)}
-  .card-links a:hover{gap:9px}
+  .chip.dim{color:var(--text-2);background:transparent;border-color:var(--line-hi)}
+  .proj h3{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+  .proj p{margin:0;font-size:14px;line-height:1.55;color:var(--text-2)}
+  .proj .link{margin-top:auto;padding-top:6px}
 
-  /* ── sobre ───────────────────────────────────────────────────── */
-  .about-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
-  .about-note{border-left:2px solid var(--sky);padding:2px 0 2px 18px}
-  .about-note p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.65}
+  /* catálogo completo */
+  .catalog{margin-top:20px}
+  .catalog > summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+    min-height:52px;padding:0 20px;border-radius:var(--r);
+    font-weight:700;font-size:14.5px;color:var(--text-2);
+    border:1px dashed var(--line-hi);transition:color .2s,border-color .2s,background .2s;
+  }
+  .catalog > summary::-webkit-details-marker{display:none}
+  .catalog > summary:hover{color:var(--text);border-color:var(--blue-hi);background:rgba(47,123,255,.05)}
+  .catalog > summary .ico{width:18px;height:18px;transition:transform .25s ease}
+  .catalog[open] > summary .ico{transform:rotate(180deg)}
+  .catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:16px}
+  .mini{display:flex;flex-direction:column;gap:6px;padding:16px 18px;text-decoration:none}
+  .mini:hover{border-color:var(--line-hi);box-shadow:var(--glow)}
+  .mini h4{margin:0;font-size:15.5px;font-weight:800;letter-spacing:-.01em;display:flex;justify-content:space-between;gap:10px}
+  .mini h4 .ico{width:15px;height:15px;color:var(--blue-hi);margin-top:3px}
+  .mini p{margin:0;font-size:13.5px;line-height:1.5;color:var(--text-2)}
 
-  /* ── corredor: a assinatura da página ────────────────────────── */
-  .corridor-stage{
-    position:relative;height:430px;border-radius:14px;overflow:hidden;
-    border:1px solid var(--rule);background:var(--tint);
-  }
-  .corridor-bp{
-    position:absolute;inset:0;pointer-events:none;z-index:1;
-    background-image:
-      linear-gradient(var(--grid-line) 1px,transparent 1px),
-      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
-    background-size:34px 34px;
-  }
-  .corridor-stage::before,.corridor-stage::after{
-    content:'';position:absolute;left:0;right:0;height:76px;z-index:3;pointer-events:none;
-  }
-  .corridor-stage::before{top:0;background:linear-gradient(to bottom,var(--tint),transparent)}
-  .corridor-stage::after{bottom:0;background:linear-gradient(to top,var(--tint),transparent)}
-  .corridor-persp{position:absolute;inset:0;z-index:2}
-  .corridor-3d{position:absolute;inset:0}
-  .corridor-card{position:absolute;overflow:hidden;box-shadow:var(--shadow);backface-visibility:hidden}
-  .corridor-card-inner{
-    width:100%;height:100%;display:flex;flex-direction:column;
-    background:var(--paper);border:1px solid var(--rule);
-  }
-  .ct-head{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:9px 11px 8px;flex-shrink:0;
-    font:500 9.5px/1 var(--mono);letter-spacing:.09em;color:var(--slate);
-  }
-  .ct-head .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-  .ct-rule{border-top:1px dashed var(--rule);margin:0 11px;flex-shrink:0}
-  .ct-body{
-    flex:1;min-height:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:8px;padding:8px 12px 14px;
-  }
-  .ct-seal{
-    width:40px;height:40px;border-radius:10px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;
-    background:var(--tint);border:1px solid var(--rule);
-  }
-  .ct-name{
-    font-family:var(--display);font-weight:700;font-variation-settings:'wdth' 106;
-    font-size:13.5px;text-align:center;color:var(--ink);line-height:1.15;
-  }
-  .ct-tags{
-    font:500 8.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;
-    color:var(--slate);text-align:center;
-  }
-  .ct-perf{
-    height:11px;flex-shrink:0;
-    background-image:radial-gradient(circle 5px,var(--tint) 4.6px,transparent 4.7px);
-    background-size:16px 16px;background-position:8px -5.5px;background-repeat:repeat-x;
-  }
-  .corridor-caption{
-    position:absolute;inset:auto 0 0 0;z-index:4;text-align:center;
-    padding:0 20px 22px;pointer-events:none;
-  }
-  .corridor-caption p{
-    margin:0;display:inline-block;padding:7px 15px;border-radius:7px;
-    font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.06em;
-    text-transform:uppercase;color:var(--slate);
-    background:var(--paper);border:1px solid var(--rule);
-  }
+  /* serviços */
+  .services{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(4,minmax(0,1fr));gap:20px;align-items:stretch}
+  .services-intro{padding:8px 12px 8px 0;display:flex;flex-direction:column;align-items:flex-start}
+  .services-intro p{margin:0 0 26px;color:var(--text-2);font-size:15.5px;line-height:1.7}
+  .svc{padding:26px 22px 22px;display:flex;flex-direction:column;gap:10px}
+  .svc:hover{border-color:var(--line-hi);box-shadow:var(--glow)}
+  .svc-ico{color:var(--blue-hi);filter:drop-shadow(0 0 8px rgba(47,123,255,.7));margin-bottom:8px}
+  .svc-ico .ico{width:30px;height:30px;stroke-width:1.5}
+  .svc h3{margin:0;font-size:17px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+  .svc p{margin:0;font-size:14px;line-height:1.6;color:var(--text-2)}
+  .svc .ex{font-size:12.5px;color:var(--muted)}
+  .svc .link{margin-top:auto}
 
-  /* ── rodapé ──────────────────────────────────────────────────── */
-  footer{
-    border-top:1px solid var(--rule);padding-top:26px;
-    display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
-    font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--slate);
+  /* sobre + números */
+  .duo{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px}
+  .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);overflow:hidden}
+  .about-photo{position:relative;min-height:320px;overflow:hidden}
+  .about-photo img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:grayscale(1) contrast(1.08) brightness(.95);mix-blend-mode:luminosity;opacity:.92;
   }
-  footer .flinks{display:flex;gap:10px;flex-wrap:wrap}
-  footer .flinks a{
-    color:var(--slate);text-decoration:none;
-    border:1px solid var(--rule);border-radius:6px;padding:6px 12px;
-    transition:color .18s,border-color .18s;
+  .about-photo::before{
+    content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(90deg,rgba(5,11,26,0) 55%,rgba(10,23,48,1) 100%),
+      linear-gradient(180deg,rgba(47,123,255,.28),rgba(5,11,26,.35) 70%, rgba(5,11,26,.8));
+    mix-blend-mode:normal;
   }
-  footer .flinks a:hover{color:var(--blue);border-color:var(--sky)}
+  .about-photo{background:linear-gradient(160deg,#1b4fae,#0a1a3a)}
+  .fields{
+    position:absolute;left:18px;bottom:18px;z-index:2;margin:0;padding:14px 16px;list-style:none;
+    border-radius:12px;background:rgba(5,11,26,.62);border:1px solid rgba(91,157,255,.35);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 0 30px -10px rgba(47,123,255,.7);
+  }
+  .fields li{font-size:10.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#b9ccec;line-height:2}
+  .about-text{padding:34px 32px;display:flex;flex-direction:column;align-items:flex-start}
+  .about-text p{margin:0 0 24px;color:var(--text-2);font-size:15px;line-height:1.7}
+  .about-text p strong{color:var(--text)}
+  .stats{padding:30px 26px 26px}
+  .stats-head{display:flex;justify-content:space-between;gap:16px;margin-bottom:20px}
+  .stats-head .h2{margin:0}
+  .stats-note{margin:0;font-size:12.5px;line-height:1.6;color:var(--muted);padding-left:16px;border-left:1px solid var(--line-hi);align-self:center}
+  .stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .stat{
+    padding:18px 14px 16px;border-radius:12px;text-align:center;
+    background:rgba(5,11,26,.45);border:1px solid var(--line);
+  }
+  .stat .ico{margin:0 auto 10px;color:var(--blue-hi);width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(47,123,255,.7))}
+  .stat b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .stat span{display:block;margin-top:4px;font-size:12px;line-height:1.35;color:var(--text-2)}
+  .stats .link{margin-top:16px}
 
+  /* como trabalho */
+  .principles{display:grid;grid-template-columns:minmax(0,.9fr) repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+  .principles-intro p{margin:0;color:var(--text-2);font-size:15px;line-height:1.7}
+  .rule{padding:24px 22px;display:flex;flex-direction:column;gap:12px}
+  .rule-ico{
+    width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--blue-hi);
+    background:rgba(47,123,255,.12);border:1px solid rgba(47,123,255,.3);
+  }
+  .rule-ico .ico{width:20px;height:20px}
+  .rule h3{margin:0;font-size:16.5px;font-weight:800;letter-spacing:-.01em;line-height:1.35}
+  .rule p{margin:0;font-size:14px;line-height:1.6;color:var(--text-2)}
+  .rule .proof{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  .rule .proof strong{color:var(--text);font-weight:700}
+
+  /* chamada final */
+  .cta{
+    display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:32px;align-items:center;
+    padding:26px 32px;overflow:hidden;
+  }
+  .cta::after{
+    content:'';position:absolute;right:-80px;top:50%;width:360px;height:220px;transform:translateY(-50%);
+    background:radial-gradient(closest-side,rgba(47,123,255,.3),transparent);pointer-events:none;
+  }
+  .cta h2{margin:0;font-size:clamp(22px,2.4vw,26px);font-weight:800;line-height:1.2;letter-spacing:-.02em}
+  .cta p{margin:0;padding-left:32px;border-left:1px solid var(--line-hi);font-size:14.5px;color:var(--text-2);line-height:1.6}
+  .cta .btn{position:relative;z-index:1}
+
+  /* rodapé */
+  .foot{padding:36px 0 44px}
+  .foot-inner{display:grid;grid-template-columns:auto 1fr auto auto;gap:32px;align-items:center}
+  .foot .brand{font-size:19px}
+  .foot-tag{display:block;margin-top:2px;font-size:12.5px;font-weight:500;color:var(--muted);letter-spacing:0}
+  .foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 8px;margin:0;padding:0;list-style:none}
+  .foot-links a{display:block;padding:8px 10px;font-size:13.5px;color:var(--text-2);text-decoration:none;border-radius:8px}
+  .foot-links a:hover{color:var(--text)}
+  .social{display:flex;gap:8px}
+  .social a{
+    width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--text);
+    border:1px solid var(--line);transition:border-color .2s,color .2s,box-shadow .2s;
+  }
+  .social a:hover{border-color:var(--blue-hi);color:var(--blue-soft);box-shadow:var(--glow)}
+  .social svg{width:19px;height:19px;fill:currentColor}
+  .copy{margin:0;font-size:12.5px;line-height:1.6;color:var(--muted);text-align:right}
+
+  /* revelação ao rolar */
+  .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .js .reveal.in{opacity:1;transform:none}
+  .hero-copy > *{animation:rise .7s ease-out both}
+  .hero-copy > :nth-child(2){animation-delay:.06s}
+  .hero-copy > :nth-child(3){animation-delay:.12s}
+  .hero-copy > :nth-child(4){animation-delay:.18s}
+  .hero-copy > :nth-child(5){animation-delay:.24s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* ── responsivo ──────────────────────────────────────────────── */
+  @media (max-width:1180px){
+    .services{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .services-intro{grid-column:1/-1;padding-right:0}
+    .services-intro p{max-width:62ch}
+    .principles{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .principles-intro{grid-column:1/-1}
+    .principles-intro p{max-width:62ch}
+    .duo{grid-template-columns:1fr}
+    .stat-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  }
+  @media (max-width:1024px){
+    .menu,.nav-cta{display:none}
+    .burger{display:inline-flex}
+    .nav.open .menu{
+      display:flex;flex-direction:column;gap:2px;position:absolute;left:0;right:0;top:72px;margin:0;
+      padding:12px var(--gutter) 20px;background:rgba(5,11,26,.97);border-bottom:1px solid var(--line);
+    }
+    .nav.open .menu a{padding:14px 12px;font-size:16px}
+    .nav.open .menu a[aria-current="true"]::after{left:12px;right:auto;width:28px}
+    .hero{padding-top:36px}
+    .hero-grid{grid-template-columns:1fr;gap:8px}
+    .stage{max-width:640px;width:100%;margin:0 auto}
+    .projects{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .cta{grid-template-columns:1fr auto}
+    .cta p{grid-column:1/-1;grid-row:2;padding-left:0;border-left:0}
+    .foot-inner{grid-template-columns:1fr auto;row-gap:20px}
+    .foot-links{grid-column:1/-1;grid-row:2;justify-content:flex-start;margin-left:-10px}
+    .copy{grid-column:1/-1;text-align:left}
+  }
+  @media (max-width:760px){
+    .about{grid-template-columns:1fr}
+    .about-photo{min-height:260px}
+    .about-photo::before{background:linear-gradient(180deg,rgba(47,123,255,.22),rgba(5,11,26,.2) 55%,rgba(10,23,48,1) 100%)}
+    .about-text{padding:26px 22px 28px}
+    .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .principles{grid-template-columns:1fr}
+    .perks{grid-template-columns:1fr;gap:14px;margin-top:36px}
+  }
   @media (max-width:640px){
-    .hero{padding:44px 20px 60px;margin-bottom:56px}
-    .wrap{padding:0 20px 72px}
-    .hero-body{gap:28px}
-    .hero-side{flex-direction:row;align-items:center;gap:20px}
-    .avatar{width:76px;height:76px}
-    .stamp{width:96px;height:96px}
-    .stamp b{font-size:28px}
-    .doc-head{margin-bottom:28px;font-size:10px;gap:10px}
-    .section{margin-bottom:62px}
-    .corridor-stage{height:270px}
+    :root{--gutter:16px}
+    .projects,.services{grid-template-columns:1fr}
+    .section{padding:36px 0}
+    .section-top{flex-direction:column;gap:6px}
+    .hero-actions .btn{flex:1 1 100%}
+    .stats-head{flex-direction:column;gap:10px}
+    .stats-note{padding-left:0;border-left:0;align-self:flex-start}
+    .cta{grid-template-columns:1fr;padding:24px 20px;gap:14px}
+    .cta p{grid-row:auto}
+    .cta .btn{width:100%}
   }
   @media (prefers-reduced-motion:reduce){
-    *{transition-duration:.01ms !important}
     html{scroll-behavior:auto}
-    html.js .card{opacity:1 !important;transform:none !important}
-    .corridor-card{animation-play-state:paused !important}
+    *,*::before,*::after{animation:none !important;transition-duration:.01ms !important}
+    .js .reveal{opacity:1;transform:none}
   }
 </style>
-<script>document.documentElement.classList.add("js")</script>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<nav class="sitenav"><div class="sitenav-inner">
-  <a class="navmark" href="index.html">orleans-samai</a>
-  <div class="navlinks">
-    <a class="nl" href="index.html" aria-current="page">Portfólio</a>
-    <a class="nl" href="roadmap.html">Roadmap</a>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ícones reutilizados -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-2.3-1.7M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5M12 20h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5" opacity=".55"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1-.5 8.5H7z"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9-.8-.8-2.1-.8-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-4A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1 5 0 5 0M12 15v5s3-.6 4-2c1-1.6 0-5 0-5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 32 32"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fc2ff"/><stop offset=".5" stop-color="#2f7bff"/><stop offset="1" stop-color="#1747b8"/></linearGradient></defs><circle cx="16" cy="16" r="11" fill="none" stroke="url(#lg)" stroke-width="4.5"/><path d="M9 20a9 9 0 0 0 13-12" fill="none" stroke="#050b1a" stroke-width="2.4" stroke-linecap="round"/></symbol>
+</svg>
+
+<nav class="nav" id="nav" aria-label="Principal">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#inicio" aria-label="Orleans, início"><svg aria-hidden="true"><use href="#i-logo"/></svg>Orleans</a>
+    <ul class="menu" id="menu">
+      <li><a href="#inicio" data-spy>Início</a></li>
+      <li><a href="#projetos" data-spy>Projetos</a></li>
+      <li><a href="#servicos" data-spy>Serviços</a></li>
+      <li><a href="#sobre" data-spy>Sobre</a></li>
+      <li><a href="#como-trabalho" data-spy>Como trabalho</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="#contato" data-spy>Contato</a></li>
+    </ul>
+    <a class="btn btn-sm nav-cta" href="#contato">Fale comigo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="sr-only">Abrir menu</span>
+      <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
   </div>
-</div></nav>
+</nav>
 
-<header class="hero">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-inner">
+<main id="conteudo">
 
-    <div class="doc-head">
-      <span>Ordem de serviço</span>
-      <span class="line" aria-hidden="true"></span>
-      <span>OS-2026 / 14 itens</span>
-    </div>
-
-    <div class="hero-body">
-      <div class="hero-fields">
-        <div>
-          <span class="flabel">Responsável</span>
-          <h1>Orleans<br>Samai</h1>
-        </div>
-        <div>
-          <span class="flabel">Escopo</span>
-          <p class="lede">Software vertical e produtos locais para operações pequenas — do ticket de oficina à projeção de culto, com privacidade on-device.</p>
-        </div>
-        <div>
-          <span class="flabel">Situação</span>
-          <span class="live"><i aria-hidden="true"></i>Disponível para novos projetos</span>
-        </div>
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Ideias em soluções digitais</p>
+      <h1>Projetos digitais com <span class="grad">visão, estratégia e execução.</span></h1>
+      <p class="hero-lede">Eu sou o <strong>Orleans</strong> e crio sistemas SaaS, apps desktop e mobile e sites para operações pequenas — de oficinas e restaurantes a igrejas.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projetos">Ver meus projetos <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="#contato">Falar comigo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
+      <ul class="perks">
+        <li><span class="perk-ico"><svg class="ico" aria-hidden="true"><use href="#i-wifi-off"/></svg></span><span><b>Funciona offline</b>sem depender de rede</span></li>
+        <li><span class="perk-ico"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg></span><span><b>Dado no aparelho</b>privacidade on-device</span></li>
+        <li><span class="perk-ico"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg></span><span><b>Sob medida</b>para operações pequenas</span></li>
+      </ul>
+    </div>
 
-      <div class="hero-side">
-        <img class="avatar" src="https://github.com/orleans-samai.png" alt="" loading="eager" width="104" height="104">
-        <div class="stamp" aria-hidden="true">
-          <b>14</b>
-          <span>projetos<br>no portfólio</span>
+    <div class="stage" aria-hidden="true">
+      <div class="laptop">
+        <div class="lid">
+          <div class="screen">
+            <svg class="mtn" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice">
+              <defs>
+                <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d5fae"/><stop offset="1" stop-color="#07101f"/></linearGradient>
+                <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a3b73"/><stop offset="1" stop-color="#040914"/></linearGradient>
+                <linearGradient id="snow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe1ff"/><stop offset="1" stop-color="#5b8fe0" stop-opacity="0"/></linearGradient>
+              </defs>
+              <path d="M150 200 L215 70 L232 92 L262 38 L290 84 L306 72 L352 150 L400 130 L400 200Z" fill="url(#m1)"/>
+              <path d="M262 38 L250 62 L258 60 L262 72 L270 58 L278 66Z" fill="url(#snow)" opacity=".9"/>
+              <path d="M215 70 L207 88 L216 84 L222 94Z" fill="url(#snow)" opacity=".7"/>
+              <path d="M0 200 L0 150 L60 120 L110 150 L170 110 L230 160 L290 128 L340 170 L400 150 L400 200Z" fill="url(#m2)"/>
+              <path d="M262 38 L290 84 L306 72 L352 150" fill="none" stroke="#7fb0ff" stroke-width="1" opacity=".45"/>
+            </svg>
+            <div class="scr-nav"><span class="logo"><i></i>Orleans</span><span>Projetos</span><span>Sobre</span><span class="pill">Vamos conversar</span></div>
+            <p class="scr-title">IDEIAS<br>PRODUTOS<br>RESULTADOS</p>
+            <span class="scr-foot">DO CONCEITO AO RESULTADO</span>
+            <span class="scr-note">Soluções digitais que transformam ideias em negócios reais.</span>
+          </div>
         </div>
+        <div class="deck"></div>
       </div>
+      <svg class="rocks" viewBox="0 0 800 300" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18325e"/><stop offset=".45" stop-color="#0a1732"/><stop offset="1" stop-color="#050b1a"/></linearGradient>
+          <linearGradient id="r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10244a"/><stop offset="1" stop-color="#050b1a"/></linearGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5b9dff" stop-opacity="0"/><stop offset=".55" stop-color="#7fb2ff" stop-opacity=".8"/><stop offset="1" stop-color="#5b9dff" stop-opacity=".1"/></linearGradient>
+        </defs>
+        <path d="M0 300 L0 170 L60 140 L95 152 L150 104 L185 126 L240 92 L290 118 L330 100 L380 132 L440 108 L500 140 L545 96 L600 120 L650 70 L700 106 L760 88 L800 104 L800 300Z" fill="url(#r1)"/>
+        <path d="M0 170 L60 140 L95 152 L150 104 L185 126 L240 92 L290 118 L330 100 L380 132 L440 108 L500 140 L545 96 L600 120 L650 70 L700 106 L760 88 L800 104" fill="none" stroke="url(#rim)" stroke-width="1.6"/>
+        <g fill="none" stroke="#5b9dff" stroke-opacity=".18">
+          <path d="M150 104 L170 170 L140 230"/><path d="M240 92 L262 160 L240 220"/><path d="M545 96 L520 170 L560 240"/><path d="M650 70 L630 150 L668 210"/><path d="M440 108 L452 180"/>
+        </g>
+        <path d="M0 300 L0 220 L80 196 L140 214 L220 180 L300 206 L380 186 L470 214 L560 190 L640 212 L720 190 L800 206 L800 300Z" fill="url(#r2)"/>
+        <path d="M0 220 L80 196 L140 214 L220 180 L300 206 L380 186 L470 214 L560 190 L640 212 L720 190 L800 206" fill="none" stroke="#5b9dff" stroke-opacity=".3"/>
+        <path d="M0 300 L0 262 L120 248 L260 266 L400 250 L540 268 L680 252 L800 262 L800 300Z" fill="#050b1a"/>
+      </svg>
     </div>
-
-    <div class="hero-actions">
-      <a class="btn primary" href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="btn" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn" href="roadmap.html">Ver roadmap →</a>
-    </div>
-
   </div>
 </header>
 
-<div class="wrap">
-
-  <section class="section">
-    <div class="section-head">
-      <span class="sec-tag">Destaque</span>
-      <h2>Frente principal</h2>
-      <span class="sec-rule" aria-hidden="true"></span>
+<section class="section" id="projetos" aria-labelledby="proj-title">
+  <div class="wrap">
+    <div class="section-top">
+      <h2 class="eyebrow" id="proj-title">Projetos em destaque</h2>
+      <a class="link" href="#catalogo" id="ver-todos">Ver todos os projetos <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
-    <p class="section-sub">A principal aposta comercial do portfólio, em ordem de prioridade.</p>
-    <div class="grid">
 
-      <article class="card">
-        <div class="card-strip"><span>N° 001</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🚲</span><h3>EBike Suporte</h3></div>
-          <p>Pós-venda para lojas e oficinas de bicicletas elétricas: histórico por bike, tickets e equipe.</p>
-          <div class="tags"><span class="tag">SaaS</span><span class="tag">B2B</span></div>
-          <div class="card-links"><a class="lnk-detail" href="projetos/ebike-suporte.html">Ver detalhes →</a></div>
+    <div class="projects">
+
+      <a class="proj glass reveal" href="projetos/lumen.html">
+        <div class="proj-art">
+          <span class="corner"><svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <defs><radialGradient id="a1" cx=".6" cy=".3" r=".9"><stop offset="0" stop-color="#153a78"/><stop offset="1" stop-color="#060d1d"/></radialGradient></defs>
+            <rect width="320" height="200" fill="url(#a1)"/>
+            <rect x="28" y="26" width="190" height="112" rx="8" fill="#050b1a" stroke="#3b73d6" stroke-opacity=".7"/>
+            <circle cx="206" cy="38" r="4" fill="#5b9dff"><animate attributeName="opacity" values="1;.35;1" dur="2.4s" repeatCount="indefinite"/></circle>
+            <text x="123" y="72" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="13">O Senhor é o meu pastor;</text>
+            <text x="123" y="92" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="13">nada me faltará.</text>
+            <text x="123" y="120" text-anchor="middle" fill="#8fbcff" font-family="Manrope,sans-serif" font-weight="700" font-size="8" letter-spacing="2">SALMOS 23:1</text>
+            <rect x="232" y="26" width="62" height="150" rx="8" fill="#0a1730" stroke="#244478"/>
+            <rect x="240" y="38" width="46" height="6" rx="3" fill="#2f7bff"/>
+            <rect x="240" y="54" width="38" height="5" rx="2.5" fill="#35507e"/>
+            <rect x="240" y="68" width="42" height="5" rx="2.5" fill="#35507e"/>
+            <rect x="240" y="82" width="30" height="5" rx="2.5" fill="#35507e"/>
+            <rect x="240" y="96" width="40" height="5" rx="2.5" fill="#35507e"/>
+            <rect x="28" y="148" width="190" height="28" rx="8" fill="#0a1730" stroke="#244478"/>
+            <rect x="38" y="157" width="36" height="10" rx="5" fill="#2f7bff"/>
+            <rect x="82" y="157" width="36" height="10" rx="5" fill="#16294b"/>
+            <rect x="126" y="157" width="36" height="10" rx="5" fill="#16294b"/>
+          </svg>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 002</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🍔</span><h3>Autoatendimento QR</h3></div>
-          <p>Pedido por QR code, cozinha e impressão para bares e lanchonetes, com modo offline/LAN.</p>
-          <div class="tags"><span class="tag">QR</span><span class="tag">Offline</span></div>
-          <div class="card-links"><a class="lnk-detail" href="projetos/autoatendimento-qr.html">Ver detalhes →</a></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="chip">Em teste</span><span class="chip dim">Desktop · Offline</span></div>
+          <h3>Lúmen</h3>
+          <p>Projeção de culto no desktop: letras, Bíblia, mídia e controle pelo celular, sem internet.</p>
+          <span class="link">Ver projeto <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </div>
-      </article>
+      </a>
 
-      <article class="card">
-        <div class="card-strip"><span>N° 003</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🚚</span><h3>Frota Lite</h3></div>
-          <p>Manutenção preventiva para pequenas frotas, sem a complexidade de sistemas de telemetria.</p>
-          <div class="tags"><span class="tag">SaaS</span><span class="tag">WhatsApp</span></div>
-          <div class="card-links"><a class="lnk-detail" href="projetos/frota-lite.html">Ver detalhes →</a></div>
+      <a class="proj glass reveal" href="projetos/frota-lite.html">
+        <div class="proj-art">
+          <span class="corner"><svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <defs>
+              <radialGradient id="a2" cx=".3" cy=".2" r=".9"><stop offset="0" stop-color="#143670"/><stop offset="1" stop-color="#060d1d"/></radialGradient>
+              <linearGradient id="a2l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f7bff" stop-opacity=".45"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/></linearGradient>
+            </defs>
+            <rect width="320" height="200" fill="url(#a2)"/>
+            <rect x="24" y="22" width="272" height="160" rx="10" fill="#081328" stroke="#244478"/>
+            <rect x="24" y="22" width="56" height="160" rx="10" fill="#0a1730"/>
+            <rect x="34" y="36" width="34" height="6" rx="3" fill="#eaf1ff" opacity=".8"/>
+            <rect x="34" y="56" width="36" height="8" rx="4" fill="#2f7bff"/>
+            <rect x="34" y="72" width="30" height="5" rx="2.5" fill="#35507e"/>
+            <rect x="34" y="86" width="34" height="5" rx="2.5" fill="#35507e"/>
+            <rect x="34" y="100" width="26" height="5" rx="2.5" fill="#35507e"/>
+            <text x="94" y="42" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="10">Manutenção da frota</text>
+            <g font-family="Manrope,sans-serif" font-size="8" font-weight="700">
+              <rect x="94" y="52" width="60" height="34" rx="6" fill="#0d1d3b" stroke="#244478"/>
+              <text x="101" y="66" fill="#ffb86b">2</text><text x="101" y="79" fill="#a9bbd8">Atrasados</text>
+              <rect x="160" y="52" width="60" height="34" rx="6" fill="#0d1d3b" stroke="#244478"/>
+              <text x="167" y="66" fill="#8fbcff">5</text><text x="167" y="79" fill="#a9bbd8">Próximos</text>
+              <rect x="226" y="52" width="60" height="34" rx="6" fill="#0d1d3b" stroke="#244478"/>
+              <text x="233" y="66" fill="#eaf1ff">14</text><text x="233" y="79" fill="#a9bbd8">Em dia</text>
+            </g>
+            <path d="M94 164 L120 150 L146 156 L172 132 L198 138 L224 116 L250 124 L286 100 L286 172 L94 172Z" fill="url(#a2l)"/>
+            <path d="M94 164 L120 150 L146 156 L172 132 L198 138 L224 116 L250 124 L286 100" fill="none" stroke="#5b9dff" stroke-width="2"/>
+            <circle cx="286" cy="100" r="3.5" fill="#eaf1ff"/>
+          </svg>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 004</span><span class="status public">Público</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">✝️</span><h3>Lúmen</h3></div>
-          <p>Projeção de culto no desktop: letras, Bíblia, retorno de palco e modo offline.</p>
-          <div class="tags"><span class="tag">Desktop</span><span class="tag">Offline</span></div>
-          <div class="card-links">
-            <a class="lnk-detail" href="projetos/lumen.html">Ver detalhes →</a>
-            <a class="lnk-repo" href="https://github.com/orleans-samai/igreja-projetor" target="_blank" rel="noopener">Repositório ↗</a>
-          </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="chip">MVP</span><span class="chip dim">SaaS · WhatsApp</span></div>
+          <h3>Frota Lite</h3>
+          <p>Manutenção preventiva para frotas pequenas: quem está atrasado, próximo ou em dia.</p>
+          <span class="link">Ver projeto <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </div>
-      </article>
+      </a>
 
-      <article class="card">
-        <div class="card-strip"><span>N° 005</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🖼️</span><h3>PNG Foto / Fundo Fora</h3></div>
-          <p>Remoção de fundo on-device — a foto não sai do celular. PNG com alpha, pronto para anúncio.</p>
-          <div class="tags"><span class="tag">Mobile</span><span class="tag">On-device</span></div>
-          <div class="card-links"><a class="lnk-detail" href="projetos/png-foto.html">Ver detalhes →</a></div>
+      <a class="proj glass reveal" href="projetos/netdiag-pro.html">
+        <div class="proj-art">
+          <span class="corner"><svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <defs>
+              <radialGradient id="a3" cx=".45" cy=".45" r=".8"><stop offset="0" stop-color="#0f2b5c"/><stop offset="1" stop-color="#040914"/></radialGradient>
+              <radialGradient id="a3g" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#2a63c6"/><stop offset=".7" stop-color="#0b2149"/><stop offset="1" stop-color="#061129"/></radialGradient>
+            </defs>
+            <rect width="320" height="200" fill="url(#a3)"/>
+            <g fill="#8fbcff" opacity=".5"><circle cx="30" cy="30" r="1"/><circle cx="280" cy="24" r="1.2"/><circle cx="300" cy="80" r=".9"/><circle cx="60" cy="150" r="1"/><circle cx="20" cy="100" r=".8"/><circle cx="250" cy="170" r="1"/></g>
+            <circle cx="130" cy="112" r="78" fill="url(#a3g)" stroke="#5b9dff" stroke-opacity=".6"/>
+            <g fill="none" stroke="#5b9dff" stroke-opacity=".28">
+              <ellipse cx="130" cy="112" rx="30" ry="78"/><ellipse cx="130" cy="112" rx="58" ry="78"/>
+              <path d="M52 112h156M60 78h140M60 146h140"/>
+            </g>
+            <g stroke="#8fbcff" stroke-width="1.2" fill="none" opacity=".85">
+              <path d="M96 84 Q130 50 172 92"/><path d="M172 92 Q190 130 150 150"/><path d="M96 84 Q80 120 110 142"/>
+            </g>
+            <g fill="#eaf1ff"><circle cx="96" cy="84" r="3"/><circle cx="172" cy="92" r="3"/><circle cx="150" cy="150" r="3"/><circle cx="110" cy="142" r="3"/></g>
+            <rect x="196" y="112" width="104" height="54" rx="10" fill="#081328" stroke="#3b73d6" stroke-opacity=".7"/>
+            <text x="208" y="130" fill="#a9bbd8" font-family="Manrope,sans-serif" font-weight="700" font-size="8">Latência média</text>
+            <text x="208" y="154" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="18">18 ms</text>
+            <rect x="262" y="143" width="28" height="13" rx="6.5" fill="#2f7bff" fill-opacity=".25" stroke="#5b9dff"/>
+            <text x="276" y="152.5" text-anchor="middle" fill="#8fbcff" font-family="Manrope,sans-serif" font-weight="800" font-size="7">OK</text>
+          </svg>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 006</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🎙️</span><h3>Voice Finance</h3></div>
-          <p>Registro de gastos por voz em PT-BR, com RLS e controles de privacidade no app mobile.</p>
-          <div class="tags"><span class="tag">React Native</span><span class="tag">Voz</span></div>
-          <div class="card-links"><a class="lnk-detail" href="projetos/voice-finance.html">Ver detalhes →</a></div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="chip">MVP</span><span class="chip dim">Desktop · Rede</span></div>
+          <h3>NetDiag Pro</h3>
+          <p>Diagnóstico de rede para suporte N1/N2, com relatório em PDF pronto para o chamado.</p>
+          <span class="link">Ver projeto <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </div>
-      </article>
+      </a>
 
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <span class="sec-tag">Acervo</span>
-      <h2>Segunda onda</h2>
-      <span class="sec-rule" aria-hidden="true"></span>
-    </div>
-    <p class="section-sub">Produtos técnicos e de conteúdo com potencial de segunda frente.</p>
-    <div class="grid compact">
-
-      <article class="card">
-        <div class="card-strip"><span>N° 007</span><span class="status public">Público</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🎫</span><h3>Sistema de Chamados</h3></div>
-          <p>Service desk em Flask com SLA, base de conhecimento e laboratório N1/N2.</p>
-          <div class="card-links">
-            <a class="lnk-detail" href="projetos/sistema-chamados.html">Detalhes →</a>
-            <a class="lnk-repo" href="https://github.com/orleans-samai/sistema-chamados" target="_blank" rel="noopener">Repo ↗</a>
-          </div>
+      <a class="proj glass reveal" href="projetos/autoatendimento-qr.html">
+        <div class="proj-art">
+          <span class="corner"><svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></span>
+          <svg viewBox="0 0 320 200" aria-hidden="true">
+            <defs><radialGradient id="a4" cx=".7" cy=".3" r=".9"><stop offset="0" stop-color="#153a78"/><stop offset="1" stop-color="#060d1d"/></radialGradient></defs>
+            <rect width="320" height="200" fill="url(#a4)"/>
+            <g transform="rotate(-8 110 110)">
+              <rect x="62" y="20" width="100" height="186" rx="16" fill="#081328" stroke="#3b73d6" stroke-opacity=".8" stroke-width="1.5"/>
+              <rect x="96" y="28" width="32" height="6" rx="3" fill="#16294b"/>
+              <text x="112" y="54" text-anchor="middle" fill="#eaf1ff" font-family="Manrope,sans-serif" font-weight="800" font-size="10">Mesa 12</text>
+              <rect x="78" y="62" width="68" height="68" rx="6" fill="#eaf1ff"/>
+              <g fill="#050b1a"><rect x="83.43" y="67.43" width="17.14" height="17.14" fill="none" stroke="#050b1a" stroke-width="2.86"/><rect x="87.71" y="71.71" width="8.57" height="8.57"/><rect x="123.43" y="67.43" width="17.14" height="17.14" fill="none" stroke="#050b1a" stroke-width="2.86"/><rect x="127.71" y="71.71" width="8.57" height="8.57"/><rect x="83.43" y="107.43" width="17.14" height="17.14" fill="none" stroke="#050b1a" stroke-width="2.86"/><rect x="87.71" y="111.71" width="8.57" height="8.57"/><rect x="102.00" y="66.00" width="2.86" height="2.86"/><rect x="104.86" y="66.00" width="2.86" height="2.86"/><rect x="110.57" y="66.00" width="2.86" height="2.86"/><rect x="116.29" y="66.00" width="2.86" height="2.86"/><rect x="119.14" y="66.00" width="2.86" height="2.86"/><rect x="104.86" y="68.86" width="2.86" height="2.86"/><rect x="107.71" y="68.86" width="2.86" height="2.86"/><rect x="110.57" y="68.86" width="2.86" height="2.86"/><rect x="113.43" y="68.86" width="2.86" height="2.86"/><rect x="116.29" y="68.86" width="2.86" height="2.86"/><rect x="102.00" y="71.71" width="2.86" height="2.86"/><rect x="104.86" y="71.71" width="2.86" height="2.86"/><rect x="116.29" y="71.71" width="2.86" height="2.86"/><rect x="102.00" y="74.57" width="2.86" height="2.86"/><rect x="107.71" y="74.57" width="2.86" height="2.86"/><rect x="110.57" y="74.57" width="2.86" height="2.86"/><rect x="113.43" y="74.57" width="2.86" height="2.86"/><rect x="116.29" y="74.57" width="2.86" height="2.86"/><rect x="102.00" y="77.43" width="2.86" height="2.86"/><rect x="110.57" y="77.43" width="2.86" height="2.86"/><rect x="116.29" y="77.43" width="2.86" height="2.86"/><rect x="119.14" y="77.43" width="2.86" height="2.86"/><rect x="102.00" y="80.29" width="2.86" height="2.86"/><rect x="107.71" y="80.29" width="2.86" height="2.86"/><rect x="110.57" y="80.29" width="2.86" height="2.86"/><rect x="116.29" y="80.29" width="2.86" height="2.86"/><rect x="119.14" y="80.29" width="2.86" height="2.86"/><rect x="107.71" y="83.14" width="2.86" height="2.86"/><rect x="82.00" y="86.00" width="2.86" height="2.86"/><rect x="87.71" y="86.00" width="2.86" height="2.86"/><rect x="90.57" y="86.00" width="2.86" height="2.86"/><rect x="96.29" y="86.00" width="2.86" height="2.86"/><rect x="102.00" y="86.00" width="2.86" height="2.86"/><rect x="116.29" y="86.00" width="2.86" height="2.86"/><rect x="127.71" y="86.00" width="2.86" height="2.86"/><rect x="82.00" y="88.86" width="2.86" height="2.86"/><rect x="96.29" y="88.86" width="2.86" height="2.86"/><rect x="99.14" y="88.86" width="2.86" height="2.86"/><rect x="104.86" y="88.86" width="2.86" height="2.86"/><rect x="107.71" y="88.86" width="2.86" height="2.86"/><rect x="110.57" y="88.86" width="2.86" height="2.86"/><rect x="113.43" y="88.86" width="2.86" height="2.86"/><rect x="116.29" y="88.86" width="2.86" height="2.86"/><rect x="122.00" y="88.86" width="2.86" height="2.86"/><rect x="124.86" y="88.86" width="2.86" height="2.86"/><rect x="127.71" y="88.86" width="2.86" height="2.86"/><rect x="133.43" y="88.86" width="2.86" height="2.86"/><rect x="136.29" y="88.86" width="2.86" height="2.86"/><rect x="90.57" y="91.71" width="2.86" height="2.86"/><rect x="93.43" y="91.71" width="2.86" height="2.86"/><rect x="96.29" y="91.71" width="2.86" height="2.86"/><rect x="104.86" y="91.71" width="2.86" height="2.86"/><rect x="107.71" y="91.71" width="2.86" height="2.86"/><rect x="110.57" y="91.71" width="2.86" height="2.86"/><rect x="113.43" y="91.71" width="2.86" height="2.86"/><rect x="122.00" y="91.71" width="2.86" height="2.86"/><rect x="124.86" y="91.71" width="2.86" height="2.86"/><rect x="127.71" y="91.71" width="2.86" height="2.86"/><rect x="130.57" y="91.71" width="2.86" height="2.86"/><rect x="90.57" y="94.57" width="2.86" height="2.86"/><rect x="104.86" y="94.57" width="2.86" height="2.86"/><rect x="107.71" y="94.57" width="2.86" height="2.86"/><rect x="110.57" y="94.57" width="2.86" height="2.86"/><rect x="116.29" y="94.57" width="2.86" height="2.86"/><rect x="119.14" y="94.57" width="2.86" height="2.86"/><rect x="122.00" y="94.57" width="2.86" height="2.86"/><rect x="124.86" y="94.57" width="2.86" height="2.86"/><rect x="127.71" y="94.57" width="2.86" height="2.86"/><rect x="130.57" y="94.57" width="2.86" height="2.86"/><rect x="133.43" y="94.57" width="2.86" height="2.86"/><rect x="136.29" y="94.57" width="2.86" height="2.86"/><rect x="139.14" y="94.57" width="2.86" height="2.86"/><rect x="82.00" y="97.43" width="2.86" height="2.86"/><rect x="84.86" y="97.43" width="2.86" height="2.86"/><rect x="93.43" y="97.43" width="2.86" height="2.86"/><rect x="96.29" y="97.43" width="2.86" height="2.86"/><rect x="99.14" y="97.43" width="2.86" height="2.86"/><rect x="102.00" y="97.43" width="2.86" height="2.86"/><rect x="104.86" y="97.43" width="2.86" height="2.86"/><rect x="113.43" y="97.43" width="2.86" height="2.86"/><rect x="119.14" y="97.43" width="2.86" height="2.86"/><rect x="122.00" y="97.43" width="2.86" height="2.86"/><rect x="124.86" y="97.43" width="2.86" height="2.86"/><rect x="127.71" y="97.43" width="2.86" height="2.86"/><rect x="133.43" y="97.43" width="2.86" height="2.86"/><rect x="136.29" y="97.43" width="2.86" height="2.86"/><rect x="84.86" y="100.29" width="2.86" height="2.86"/><rect x="90.57" y="100.29" width="2.86" height="2.86"/><rect x="104.86" y="100.29" width="2.86" height="2.86"/><rect x="107.71" y="100.29" width="2.86" height="2.86"/><rect x="110.57" y="100.29" width="2.86" height="2.86"/><rect x="122.00" y="100.29" width="2.86" height="2.86"/><rect x="124.86" y="100.29" width="2.86" height="2.86"/><rect x="84.86" y="103.14" width="2.86" height="2.86"/><rect x="90.57" y="103.14" width="2.86" height="2.86"/><rect x="93.43" y="103.14" width="2.86" height="2.86"/><rect x="96.29" y="103.14" width="2.86" height="2.86"/><rect x="99.14" y="103.14" width="2.86" height="2.86"/><rect x="102.00" y="103.14" width="2.86" height="2.86"/><rect x="110.57" y="103.14" width="2.86" height="2.86"/><rect x="122.00" y="103.14" width="2.86" height="2.86"/><rect x="124.86" y="103.14" width="2.86" height="2.86"/><rect x="127.71" y="103.14" width="2.86" height="2.86"/><rect x="130.57" y="103.14" width="2.86" height="2.86"/><rect x="133.43" y="103.14" width="2.86" height="2.86"/><rect x="113.43" y="106.00" width="2.86" height="2.86"/><rect x="130.57" y="106.00" width="2.86" height="2.86"/><rect x="136.29" y="106.00" width="2.86" height="2.86"/><rect x="104.86" y="108.86" width="2.86" height="2.86"/><rect x="107.71" y="108.86" width="2.86" height="2.86"/><rect x="116.29" y="108.86" width="2.86" height="2.86"/><rect x="119.14" y="108.86" width="2.86" height="2.86"/><rect x="122.00" y="108.86" width="2.86" height="2.86"/><rect x="130.57" y="108.86" width="2.86" height="2.86"/><rect x="102.00" y="111.71" width="2.86" height="2.86"/><rect x="107.71" y="111.71" width="2.86" height="2.86"/><rect x="110.57" y="111.71" width="2.86" height="2.86"/><rect x="124.86" y="111.71" width="2.86" height="2.86"/><rect x="133.43" y="111.71" width="2.86" height="2.86"/><rect x="136.29" y="111.71" width="2.86" height="2.86"/><rect x="139.14" y="111.71" width="2.86" height="2.86"/><rect x="102.00" y="114.57" width="2.86" height="2.86"/><rect x="107.71" y="114.57" width="2.86" height="2.86"/><rect x="110.57" y="114.57" width="2.86" height="2.86"/><rect x="113.43" y="114.57" width="2.86" height="2.86"/><rect x="119.14" y="114.57" width="2.86" height="2.86"/><rect x="122.00" y="114.57" width="2.86" height="2.86"/><rect x="130.57" y="114.57" width="2.86" height="2.86"/><rect x="104.86" y="117.43" width="2.86" height="2.86"/><rect x="107.71" y="117.43" width="2.86" height="2.86"/><rect x="110.57" y="117.43" width="2.86" height="2.86"/><rect x="113.43" y="117.43" width="2.86" height="2.86"/><rect x="119.14" y="117.43" width="2.86" height="2.86"/><rect x="130.57" y="117.43" width="2.86" height="2.86"/><rect x="102.00" y="120.29" width="2.86" height="2.86"/><rect x="107.71" y="120.29" width="2.86" height="2.86"/><rect x="110.57" y="120.29" width="2.86" height="2.86"/><rect x="127.71" y="120.29" width="2.86" height="2.86"/><rect x="102.00" y="123.14" width="2.86" height="2.86"/><rect x="122.00" y="123.14" width="2.86" height="2.86"/><rect x="133.43" y="123.14" width="2.86" height="2.86"/><rect x="136.29" y="123.14" width="2.86" height="2.86"/><rect x="139.14" y="123.14" width="2.86" height="2.86"/></g>
+              <rect x="76" y="140" width="72" height="16" rx="8" fill="#2f7bff"/>
+              <text x="112" y="151" text-anchor="middle" fill="#fff" font-family="Manrope,sans-serif" font-weight="800" font-size="7.5">Fazer pedido</text>
+            </g>
+            <g transform="rotate(5 250 110)">
+              <path d="M200 40 H292 V168 l-8 6 -8-6 -8 6 -8-6 -8 6 -8-6 -8 6 -8-6 -8 6 -8-6 -8 6 -4-3Z" fill="#0d1d3b" stroke="#244478"/>
+              <text x="212" y="60" fill="#8fbcff" font-family="Manrope,sans-serif" font-weight="800" font-size="8" letter-spacing="1">PEDIDO #214</text>
+              <rect x="212" y="72" width="60" height="5" rx="2.5" fill="#35507e"/>
+              <rect x="212" y="86" width="48" height="5" rx="2.5" fill="#35507e"/>
+              <rect x="212" y="100" width="56" height="5" rx="2.5" fill="#35507e"/>
+              <path d="M212 118 H280" stroke="#244478" stroke-dasharray="3 3"/>
+              <rect x="212" y="130" width="34" height="7" rx="3.5" fill="#eaf1ff" opacity=".85"/>
+              <rect x="254" y="130" width="26" height="7" rx="3.5" fill="#5b9dff"/>
+            </g>
+          </svg>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 008</span><span class="status public">Público</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🤖</span><h3>AI Orchestrator</h3></div>
-          <p>Orquestração human-in-the-loop para Antigravity, Codex e Claude Code via CLI.</p>
-          <div class="card-links">
-            <a class="lnk-detail" href="projetos/ai-orchestrator.html">Detalhes →</a>
-            <a class="lnk-repo" href="https://github.com/orleans-samai/ai-orchestrator" target="_blank" rel="noopener">Repo ↗</a>
-          </div>
+        <div class="proj-body">
+          <div class="proj-meta"><span class="chip">MVP</span><span class="chip dim">QR · Offline</span></div>
+          <h3>Autoatendimento QR</h3>
+          <p>Pedido pela mesa, cozinha e impressão térmica para bares e lanchonetes, mesmo sem internet.</p>
+          <span class="link">Ver projeto <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 009</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">📊</span><h3>Excel Dashboard</h3></div>
-          <p>Análise de planilhas no desktop, sem enviar dados à nuvem.</p>
-          <div class="card-links"><a class="lnk-detail" href="projetos/excel-dashboard.html">Detalhes →</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 010</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🎉</span><h3>Central da Festividade</h3></div>
-          <p>Organiza festividades de igreja: recepção, painel em tempo real e escalas.</p>
-          <div class="card-links"><a class="lnk-detail" href="projetos/central-da-festividade.html">Detalhes →</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 011</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">📽️</span><h3>SlideRevive Church AI</h3></div>
-          <p>Planejamento de slides de culto, complementar ao Lúmen.</p>
-          <div class="card-links"><a class="lnk-detail" href="projetos/sliderevive-church-ai.html">Detalhes →</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 012</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">📡</span><h3>NetDiag Pro</h3></div>
-          <p>Diagnóstico de rede para suporte N1/N2 — kit de técnico para MSPs.</p>
-          <div class="card-links"><a class="lnk-detail" href="projetos/netdiag-pro.html">Detalhes →</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 013</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🐍</span><h3>Backend Python Simulator</h3></div>
-          <p>Desafios verificáveis de backend em Python para escolas e trilhas corporativas.</p>
-          <div class="card-links"><a class="lnk-detail" href="projetos/backend-python-simulator.html">Detalhes →</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-strip"><span>N° 014</span><span class="status private">Privado</span></div>
-        <div class="card-body">
-          <div class="card-title"><span class="seal">🧠</span><h3>AI Control Center</h3></div>
-          <p>Diário local do uso de Claude Code — Electron + React + SQLite, 100% offline.</p>
-          <div class="card-links"><a class="lnk-detail" href="projetos/ai-control-center.html">Detalhes →</a></div>
-        </div>
-      </article>
+      </a>
 
     </div>
-  </section>
 
-  <section class="section">
-    <div class="section-head">
-      <span class="sec-tag">Perfil</span>
-      <h2>Sobre</h2>
-      <span class="sec-rule" aria-hidden="true"></span>
-    </div>
-    <div class="about-body">
-      <div class="about-note">
-        <span class="flabel">Onde atuo</span>
-        <p>Software vertical para operações pequenas — oficinas, restaurantes, frotas e igrejas. Sistemas que uma equipe de três pessoas consegue operar sem treinamento.</p>
+    <details class="catalog" id="catalogo">
+      <summary>Mostrar os outros 10 projetos <svg class="ico" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+      <div class="catalog-grid">
+        <a class="mini glass" href="projetos/ebike-suporte.html"><h4>EBike Suporte <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Pós-venda para lojas de bicicletas elétricas: histórico por bike, tickets e equipe.</p></a>
+        <a class="mini glass" href="projetos/png-foto.html"><h4>Fundo Fora (PNG Foto) <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Remoção de fundo no próprio celular: a foto não sai do aparelho.</p></a>
+        <a class="mini glass" href="projetos/voice-finance.html"><h4>Voice Finance <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Registro de gastos por voz em português, com controles de privacidade.</p></a>
+        <a class="mini glass" href="projetos/central-da-festividade.html"><h4>Central da Festividade <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Recepção, painel em tempo real e escalas para festividades de igreja.</p></a>
+        <a class="mini glass" href="projetos/sistema-chamados.html"><h4>Sistema de Chamados <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Service desk em Flask com SLA, base de conhecimento e laboratório N1/N2.</p></a>
+        <a class="mini glass" href="projetos/backend-python-simulator.html"><h4>Backend Python Simulator <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Desafios de backend em Python com correção automática, para escolas.</p></a>
+        <a class="mini glass" href="projetos/excel-dashboard.html"><h4>Excel Dashboard <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Análise de planilhas no desktop, sem enviar dados à nuvem.</p></a>
+        <a class="mini glass" href="projetos/sliderevive-church-ai.html"><h4>SlideRevive Church AI <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Planejamento de slides de culto, complementar ao Lúmen.</p></a>
+        <a class="mini glass" href="projetos/ai-orchestrator.html"><h4>AI Orchestrator <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Orquestração com revisão humana para Codex e Claude Code via linha de comando.</p></a>
+        <a class="mini glass" href="projetos/ai-control-center.html"><h4>AI Control Center <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></h4><p>Diário local do uso do Claude Code — Electron, React e SQLite, 100% offline.</p></a>
       </div>
-      <div class="about-note">
-        <span class="flabel">Como construo</span>
-        <p>Produtos mobile e desktop com privacidade on-device: o dado fica na máquina do cliente. Modo offline é requisito, não recurso extra.</p>
+    </details>
+  </div>
+</section>
+
+<section class="section" id="servicos" aria-labelledby="svc-title">
+  <div class="wrap services">
+    <div class="services-intro">
+      <p class="eyebrow">O que eu faço</p>
+      <h2 class="h2" id="svc-title">Soluções digitais com propósito.</h2>
+      <p>Do design ao código, construo software para quem opera no balcão — sistemas que uma equipe de três pessoas usa sem treinamento.</p>
+      <a class="btn btn-sm" href="roadmap.html">Ver o estágio de cada projeto <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <article class="svc glass reveal">
+      <span class="svc-ico"><svg class="ico" aria-hidden="true"><use href="#i-cloud"/></svg></span>
+      <h3>Sistemas SaaS</h3>
+      <p>Painel web com login, equipe e papéis para quem ainda controla tudo no caderno.</p>
+      <p class="ex">Ex.: Frota Lite, EBike Suporte</p>
+      <a class="link" href="projetos/frota-lite.html">Ver exemplo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+
+    <article class="svc glass reveal">
+      <span class="svc-ico"><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg></span>
+      <h3>Apps desktop offline</h3>
+      <p>Programas para Windows que funcionam sem internet e se atualizam sozinhos.</p>
+      <p class="ex">Ex.: Lúmen, NetDiag Pro</p>
+      <a class="link" href="projetos/lumen.html">Ver exemplo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+
+    <article class="svc glass reveal">
+      <span class="svc-ico"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span>
+      <h3>Apps mobile on-device</h3>
+      <p>O processamento acontece no celular, e o dado do cliente não vai para a nuvem.</p>
+      <p class="ex">Ex.: Fundo Fora, Voice Finance</p>
+      <a class="link" href="projetos/png-foto.html">Ver exemplo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+
+    <article class="svc glass reveal">
+      <span class="svc-ico"><svg class="ico" aria-hidden="true"><use href="#i-rocket"/></svg></span>
+      <h3>Sites e landing pages</h3>
+      <p>Páginas rápidas, responsivas e fáceis de editar — como este portfólio.</p>
+      <p class="ex">Ex.: Site Igreja, este site</p>
+      <a class="link" href="#contato">Pedir um site <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="sobre" aria-labelledby="about-title">
+  <div class="wrap duo">
+    <div class="about glass reveal">
+      <div class="about-photo">
+        <img src="https://github.com/orleans-samai.png" alt="Foto de Orleans" width="460" height="460" loading="lazy">
+        <ul class="fields" aria-label="Setores atendidos">
+          <li>Oficinas</li><li>Restaurantes</li><li>Frotas</li><li>Igrejas</li>
+        </ul>
       </div>
-      <div class="about-note">
-        <span class="flabel">Prioridade</span>
-        <p>Prova com cliente real e distribuição, não acúmulo de protótipos. O roadmap mostra o estágio de cada projeto, inclusive o que está parado.</p>
+      <div class="about-text">
+        <p class="eyebrow">Sobre mim</p>
+        <h2 class="h2" id="about-title">Tecnologia, design e negócios na prática.</h2>
+        <p>Sou o <strong>Orleans</strong>, desenvolvedor e designer. Construo software vertical para operações pequenas, com modo offline como requisito e o dado guardado na máquina do cliente. Minha prioridade é prova com cliente real, não acúmulo de protótipos.</p>
+        <a class="btn btn-sm" href="https://github.com/orleans-samai" target="_blank" rel="noopener">Ver meu GitHub <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
       </div>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="section-head">
-      <span class="sec-tag">Índice</span>
-      <h2>Tudo em um só lugar</h2>
-      <span class="sec-rule" aria-hidden="true"></span>
-    </div>
-    <p class="section-sub">O portfólio inteiro passando pela tela — role para cima para abrir qualquer projeto em detalhe.</p>
-
-    <div class="corridor-stage" id="corridorStage">
-      <div class="corridor-bp" aria-hidden="true"></div>
-      <div class="corridor-persp" id="corridorPersp" aria-hidden="true">
-        <div class="corridor-3d" id="corridorTrack"></div>
+    <div class="stats glass reveal">
+      <div class="stats-head">
+        <div>
+          <p class="eyebrow">Números do portfólio</p>
+          <h2 class="h2">O que já está de pé.</h2>
+        </div>
+        <p class="stats-note">Contados no roadmap.<br>Atualizados em set 2026.</p>
       </div>
-      <div class="corridor-caption"><p>14 projetos catalogados</p></div>
+      <div class="stat-grid">
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><b>14</b><span>Projetos no portfólio</span></div>
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>9</b><span>Com MVP ou além</span></div>
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg><b>4</b><span>Na prioridade A</span></div>
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg><b>6</b><span>Segmentos atendidos</span></div>
+      </div>
+      <a class="link" href="roadmap.html">Abrir o roadmap <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <span>© <span id="year"></span> orleans-samai</span>
-    <div class="flinks">
-      <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="roadmap.html">Roadmap →</a>
+<section class="section" id="como-trabalho" aria-labelledby="how-title">
+  <div class="wrap principles">
+    <div class="principles-intro">
+      <p class="eyebrow">Como eu trabalho</p>
+      <h2 class="h2" id="how-title">Três regras para todo projeto.</h2>
+      <p>Elas valem do primeiro commit à entrega, e dá para conferir cada uma no código.</p>
     </div>
-  </footer>
 
-</div>
+    <article class="rule glass reveal">
+      <span class="rule-ico"><svg class="ico" aria-hidden="true"><use href="#i-wifi-off"/></svg></span>
+      <h3>Offline é requisito, não recurso extra.</h3>
+      <p>Culto, oficina e cozinha não param porque a internet caiu.</p>
+      <p class="proof"><strong>Lúmen</strong> projeta o culto inteiro sem internet.</p>
+    </article>
+
+    <article class="rule glass reveal">
+      <span class="rule-ico"><svg class="ico" aria-hidden="true"><use href="#i-lock"/></svg></span>
+      <h3>O dado fica na máquina do cliente.</h3>
+      <p>Menos servidor para manter e menos informação exposta.</p>
+      <p class="proof"><strong>Fundo Fora</strong> remove o fundo da foto no próprio celular.</p>
+    </article>
+
+    <article class="rule glass reveal">
+      <span class="rule-ico"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg></span>
+      <h3>Cliente real antes de mais código.</h3>
+      <p>Cada projeto tem uma próxima tarefa clara e um estágio público.</p>
+      <p class="proof">O <strong>roadmap</strong> mostra até o que está parado.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="contato" aria-labelledby="cta-title">
+  <div class="wrap">
+    <div class="cta glass">
+      <h2 id="cta-title">Vamos construir<br>seu próximo projeto?</h2>
+      <p>Estou aberto a novos desafios e boas ideias. Me chama no LinkedIn e vamos conversar sobre o seu projeto.</p>
+      <a class="btn btn-primary" href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener">Fale comigo no LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <a class="brand" href="#inicio"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>Orleans<span class="foot-tag">Projetos digitais para operações pequenas.</span></span></a>
+    <ul class="foot-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/orleans-samai" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a>
+      <a href="https://github.com/orleans-samai" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+    </div>
+    <p class="copy">© <span id="year"></span> Orleans.<br>Todos os direitos reservados.</p>
+  </div>
+</footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* revelação dos talões conforme entram na tela */
-  const cards = document.querySelectorAll('.card');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('in'), (i % 6) * 45);
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    cards.forEach(c => io.observe(c));
-  } else {
-    cards.forEach(c => c.classList.add('in'));
+  /* menu no celular */
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  function setMenu(open){
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.querySelector('.sr-only').textContent = open ? 'Fechar menu' : 'Abrir menu';
+    burger.querySelector('use').setAttribute('href', open ? '#i-x' : '#i-menu');
   }
+  burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); burger.focus(); }
+  });
+  matchMedia('(min-width:1025px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
 
-  /* ── Corredor de talões ───────────────────────────────────────────
-   * Duas trilhas de talões vindo do fundo via CSS 3D perspective. A
-   * profundidade é amostrada geometricamente (crescimento por razão
-   * constante) e as keyframes são geradas em JS porque dependem do
-   * tamanho do container em runtime — sem build step, sem React.
-   * ────────────────────────────────────────────────────────────── */
-  (function corridor(){
-    const stage = document.getElementById('corridorStage');
-    const track = document.getElementById('corridorTrack');
-    if (!stage || !track) return;
+  /* borda da barra só depois de rolar */
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive:true }); onScroll();
 
-    const PROJECTS = [
-      { emoji:'🚲', name:'EBike Suporte', status:'private', tags:['SaaS','B2B'] },
-      { emoji:'🍔', name:'Autoatendimento QR', status:'private', tags:['QR','Offline'] },
-      { emoji:'🚚', name:'Frota Lite', status:'private', tags:['SaaS','WhatsApp'] },
-      { emoji:'✝️', name:'Lúmen', status:'public', tags:['Desktop','Offline'] },
-      { emoji:'🖼️', name:'PNG Foto', status:'private', tags:['Mobile','On-device'] },
-      { emoji:'🎙️', name:'Voice Finance', status:'private', tags:['React Native','Voz'] },
-      { emoji:'🎫', name:'Sistema de Chamados', status:'public', tags:['Flask','SLA'] },
-      { emoji:'🤖', name:'AI Orchestrator', status:'public', tags:['CLI','Multiagente'] },
-      { emoji:'📊', name:'Excel Dashboard', status:'private', tags:['Desktop','Offline'] },
-      { emoji:'🎉', name:'Central da Festividade', status:'private', tags:['Tempo real','Escalas'] },
-      { emoji:'📽️', name:'SlideRevive Church AI', status:'private', tags:['Culto','Slides'] },
-      { emoji:'📡', name:'NetDiag Pro', status:'private', tags:['Rede','N1/N2'] },
-      { emoji:'🐍', name:'Backend Python Simulator', status:'private', tags:['Python','Escolas'] },
-      { emoji:'🧠', name:'AI Control Center', status:'private', tags:['Electron','SQLite'] },
-    ];
+  /* "Ver todos os projetos" abre o catálogo */
+  const catalog = document.getElementById('catalogo');
+  document.getElementById('ver-todos').addEventListener('click', () => { catalog.open = true; });
 
-    const PATH = {
-      perspective: 30, cardWidth: 18, cardHeight: 25, cardRadius: 0.5,
-      birthHeight: 2.6, exitHeight: 46, railBirth: -11, railExit: 44,
-      fan: 3.3, turnBirth: 6, turnExit: 28, stops: 24,
-    };
-    const CARDS_PER_RAIL = 9;
-    const SPEED = 18;
-    const AXIS = 55;
+  if ('IntersectionObserver' in window) {
+    /* revelação ao entrar na tela */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (!entry.isIntersecting) return;
+        setTimeout(() => entry.target.classList.add('in'), (i % 4) * 70);
+        io.unobserve(entry.target);
+      });
+    }, { threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    function railKeyframes(dir, name, p) {
-      const steps = [];
-      for (let s = 0; s <= p.stops; s++) {
-        const u = s / p.stops;
-        const scale = (p.birthHeight / p.cardHeight) * Math.pow(p.exitHeight / p.birthHeight, u);
-        const z = p.perspective * (1 - 1 / scale);
-        const rail = p.railExit - (p.railExit - p.railBirth) * Math.pow(1 - u, p.fan);
-        const turn = p.turnBirth + (p.turnExit - p.turnBirth) * u;
-        steps.push(`${(u * 100).toFixed(2)}%{transform:translate3d(${(dir * rail).toFixed(2)}cqw,0,${z.toFixed(2)}cqw) rotateY(${(-dir * turn).toFixed(2)}deg)}`);
-      }
-      return `@keyframes ${name}{${steps.join('')}}`;
-    }
-
-    const id = Math.random().toString(36).slice(2, 8);
-    const rightName = `ish-r-${id}`;
-    const leftName = `ish-l-${id}`;
-    const style = document.createElement('style');
-    style.textContent = railKeyframes(1, rightName, PATH) + railKeyframes(-1, leftName, PATH);
-    document.head.appendChild(style);
-
-    stage.style.containerType = 'inline-size';
-    const persp = document.getElementById('corridorPersp');
-    persp.style.perspective = `${PATH.perspective}cqw`;
-    persp.style.perspectiveOrigin = `50% ${AXIS}%`;
-    track.style.transformStyle = 'preserve-3d';
-
-    [rightName, leftName].forEach((railName) => {
-      for (let i = 0; i < CARDS_PER_RAIL; i++) {
-        const proj = PROJECTS[i % PROJECTS.length];
-        const el = document.createElement('div');
-        el.className = 'corridor-card';
-        Object.assign(el.style, {
-          left: '50%', top: `${AXIS}%`,
-          width: `${PATH.cardWidth}cqw`, height: `${PATH.cardHeight}cqw`,
-          marginLeft: `${-PATH.cardWidth / 2}cqw`, marginTop: `${-PATH.cardHeight / 2}cqw`,
-          borderRadius: `${PATH.cardRadius}cqw`,
-          animation: `${railName} ${SPEED}s linear infinite`,
-          animationDelay: `${-(i * SPEED) / CARDS_PER_RAIL}s`,
+    /* item do menu da seção visível */
+    const links = [...document.querySelectorAll('[data-spy]')];
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        links.forEach(a => {
+          if (a.getAttribute('href') === '#' + entry.target.id) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
         });
-        const num = String(i + 1).padStart(3, '0');
-        const statusColor = proj.status === 'public' ? 'var(--blue)' : 'var(--slate)';
-        const inner = document.createElement('div');
-        inner.className = 'corridor-card-inner';
-        inner.innerHTML = `
-          <div class="ct-head">
-            <span>N° ${num}</span>
-            <span class="dot" style="background:${statusColor}"></span>
-          </div>
-          <div class="ct-rule"></div>
-          <div class="ct-body">
-            <span class="ct-seal">${proj.emoji}</span>
-            <span class="ct-name">${proj.name}</span>
-            <span class="ct-tags">${proj.tags.join(' · ')}</span>
-          </div>
-          <div class="ct-perf"></div>`;
-        el.appendChild(inner);
-        track.appendChild(el);
-      }
-    });
-  })();
+      });
+    }, { rootMargin:'-45% 0px -50% 0px' });
+    links.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s) spy.observe(s); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
 </script>
-
 </body>
 </html>

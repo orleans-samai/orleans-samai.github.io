@@ -11,31 +11,20 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#ffffff; --tint:#eff5fe; --tint-2:#e3edfc;
-    --ink:#0a2342; --ink-soft:#1b3a63;
-    --blue:#1457d6; --blue-deep:#0b3fa8; --on-blue:#ffffff;
-    --sky:#a9cbf7; --rule:#d8e6fa; --slate:#5b7592;
-    --grid-line:rgba(20,87,214,.055);
-    --shadow:0 1px 2px rgba(10,35,66,.05), 0 10px 30px rgba(10,35,66,.07);
-    --shadow-lift:0 2px 6px rgba(10,35,66,.07), 0 22px 48px rgba(20,87,214,.15);
-    --display:'Archivo','Arial Narrow',sans-serif;
-    --body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    color-scheme:light dark;
-  }
-  @media (prefers-color-scheme:dark){
-    :root{
-      --paper:#071a33; --tint:#0c2646; --tint-2:#103055;
-      --ink:#e6f0ff; --ink-soft:#c2d8f5;
-      --blue:#6fa8ff; --blue-deep:#9cc4ff; --on-blue:#07203d;
-      --sky:#2f6bb5; --rule:#17406f; --slate:#8faecd;
-      --grid-line:rgba(160,200,255,.07);
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.45);
-      --shadow-lift:0 2px 8px rgba(0,0,0,.45), 0 22px 48px rgba(0,0,0,.55);
-    }
+    --paper:#050b1a; --tint:#0a1730; --tint-2:#0d1d3b;
+    --ink:#eaf1ff; --ink-soft:#a9bbd8;
+    --blue:#4f8fff; --blue-deep:#7fb0ff; --on-blue:#ffffff;
+    --sky:#244478; --rule:#16294b; --slate:#7f96b9;
+    --grid-line:rgba(91,157,255,.06);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -12px rgba(0,0,0,.6);
+    --shadow-lift:0 0 0 1px rgba(47,123,255,.18), 0 18px 50px -18px rgba(47,123,255,.45);
+    --display:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --body:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color-scheme:dark;
   }
   *{box-sizing:border-box}
   body{
@@ -259,6 +248,27 @@
   @media (prefers-reduced-motion:reduce){
     *{transition-duration:.01ms !important}
   }
+
+  /* ── tema da página inicial: marinho profundo + azul elétrico ── */
+  h1{text-transform:none;letter-spacing:-.035em;font-weight:800}
+  .sitenav,.topbar{background:rgba(5,11,26,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .navmark,.brand{
+    font-family:var(--body);font-size:18px;font-weight:800;letter-spacing:-.02em;
+    text-transform:none;color:var(--ink);gap:9px;
+  }
+  .navmark::before,.brand::before{display:none}
+  .logo-ring{width:24px;height:24px;flex-shrink:0}
+  .rcard,.side-card,.metric,.pagenav a{
+    background:linear-gradient(180deg,rgba(13,29,59,.72),rgba(8,19,40,.72));
+  }
+  .rcard:hover,.pagenav a:hover{border-color:var(--sky);box-shadow:var(--shadow-lift)}
+  .btn,.filters button{border-radius:999px}
+  .btn.primary,.filters button.active,.pri.A,.pill.public{
+    background:linear-gradient(180deg,#3a86ff,#1f63e8);border-color:#4b92ff;color:#fff;
+  }
+  .btn.primary:hover{background:linear-gradient(180deg,#4a92ff,#2a6ff2);border-color:#5b9dff}
+  .pill.public::before{background:#fff}
+  .progress i{background:linear-gradient(90deg,#1f63e8,#5b9dff);box-shadow:0 0 12px rgba(47,123,255,.6)}
 </style>
 </head>
 <body>
@@ -266,7 +276,7 @@
 <div class="topbar">
   <div class="topbar-inner">
     <a class="back" href="../index.html">← Portfólio</a>
-    <a class="brand" href="../index.html">orleans-samai</a>
+    <a class="brand" href="../index.html"><svg class="logo-ring" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lgx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fc2ff"/><stop offset=".5" stop-color="#2f7bff"/><stop offset="1" stop-color="#1747b8"/></linearGradient></defs><circle cx="16" cy="16" r="11" fill="none" stroke="url(#lgx)" stroke-width="4.5"/><path d="M9 20a9 9 0 0 0 13-12" fill="none" stroke="#050b1a" stroke-width="2.4" stroke-linecap="round"/></svg>Orleans</a>
     <span class="crumb">14 / 14</span>
   </div>
 </div>
