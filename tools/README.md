@@ -3,6 +3,14 @@
 Scripts de apoio ao site. Nada aqui é necessário para o site funcionar: o
 GitHub Pages serve o HTML que já está commitado.
 
+## Gerador das páginas
+
+`gerar_projetos.py` gera as 14 páginas de projeto (`projetos/*.html`), as 3
+páginas por segmento (`solucoes/*.html`), o `sitemap.xml` e o `robots.txt`, e
+preenche os números da página inicial (`data-stat` em `index.html`) a partir do
+`ROADMAP` de `roadmap.html`. Se o status ou o percentual de alguma página não
+bater com o roadmap, ele para com erro e diz qual.
+
 ## Gerador das páginas de projeto
 
 `gerar_projetos.py` monta as páginas `projetos/*.html` a partir dos dados em
@@ -24,3 +32,30 @@ rode o gerador. Para mudar o layout de todas, edite o modelo `page()` em
 - **Números** na faixa de prova são só os conferidos no repositório de cada
   projeto (testes, migrações, commits, versões). Não entram depoimentos,
   clientes nem métricas de uso que não existam.
+
+## Imagens de compartilhamento
+
+`gerar_og.mjs` cria `og/*.jpg` (1200×630), a imagem que aparece ao colar o link
+no WhatsApp, no LinkedIn ou em outra rede. Rode depois do gerador:
+
+```bash
+npm install --no-save playwright && npx playwright install chromium
+node tools/gerar_og.mjs
+```
+
+## Verificação
+
+`verificar_site.mjs` abre todas as páginas em 320, 390, 768, 1280 e 1440 px e
+confere erros, rolagem horizontal, links internos e imagens de compartilhamento.
+A GitHub Action `.github/workflows/verificar.yml` roda o gerador e essa
+verificação a cada push.
+
+```bash
+node tools/verificar_site.mjs
+```
+
+## Contato e estatística de visitas
+
+Os botões de WhatsApp, e-mail e agenda e o contador de visitas (GoatCounter,
+sem cookies) ficam em `assets/site.js`. Preencha o objeto `SITE` no topo do
+arquivo; campo vazio não aparece.

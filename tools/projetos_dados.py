@@ -27,7 +27,8 @@ PROJECTS['ebike-suporte'] = dict(
   desc='Pós-venda para lojas de bicicletas elétricas: ficha por bike, chamados com mensagens e equipe com papéis.',
   pitch='Pós-venda de bike elétrica <span class="grad">sem perder o histórico no WhatsApp.</span>',
   lede='Cada bicicleta tem ficha própria, e cada chamado fica registrado com mensagens, fotos e status — para a loja atender rápido e o cliente acompanhar.',
-  status='MVP', chips=['Código privado', 'Web'], percent=70, actions=DEMO, hero_note=PRIV, art=art_ebike(),
+  status='MVP', chips=['Código privado', 'Web', 'Procura loja piloto'], percent=70,
+  actions=[{'label': 'Quero ser a loja piloto', 'href': '#contato', 'primary': True}], hero_note=PRIV, art=art_ebike(),
   proof=[('57', 'casos de teste, com banco real'), ('3', 'migrações SQL versionadas'), ('3', 'papéis: cliente, funcionário e admin'), ('4', 'etapas de status do chamado')],
   proof_note=NOTE_PRIV,
   done=[('Ficha da bicicleta', ' com fotos e comprovante de compra'), ('Chamados com mensagens', ' entre cliente e loja'),
@@ -47,10 +48,11 @@ PROJECTS['ebike-suporte'] = dict(
   spec=[('Para quem é', 'Lojas e oficinas de bicicletas elétricas que precisam de histórico de atendimento por bike e controle de equipe.'),
         ('Como usar', 'Sistema web: a loja e o cliente usam pelo navegador, com o servidor e o banco PostgreSQL hospedados.'),
         ('Tecnologia', 'Next.js 16, TypeScript, PostgreSQL 17, Zod, Tailwind CSS 4 e Vitest.')],
-  cta=('Tem uma loja de bikes elétricas?', 'Me chama no LinkedIn para ver o sistema funcionando com chamados de exemplo.'),
+  cta=('Quer ser a loja piloto?', 'Procuro a primeira loja de bicicletas elétricas para usar o EBike Suporte no dia a dia e ajustar o sistema com o uso real. Me chama no LinkedIn.'),
   pager=(('ai-control-center.html', 'AI Control Center'), ('autoatendimento-qr.html', 'Autoatendimento QR')))
 
 PROJECTS['autoatendimento-qr'] = dict(
+  screens=[('aa-cardapio.webp', 'Cardápio aberto pelo QR code da Mesa 02, no celular do cliente.', 'phone', 780, 1688), ('aa-carrinho.webp', 'Carrinho antes de confirmar o pedido.', 'phone', 780, 1688), ('aa-garcom.webp', 'O mesmo pedido chegando na fila do garçom, para confirmar ou recusar.', 'desktop', 1600, 873)],
   name='Autoatendimento QR', short='Autoatendimento QR', sector='Restaurantes', og='pedido pela mesa',
   desc='Pedido por QR code, fila do garçom em tempo real e impressão na cozinha, funcionando na rede local sem internet.',
   pitch='O cliente pede pela mesa, <span class="grad">a cozinha imprime sozinha.</span>',
@@ -79,6 +81,7 @@ PROJECTS['autoatendimento-qr'] = dict(
   pager=(('ebike-suporte.html', 'EBike Suporte'), ('frota-lite.html', 'Frota Lite')))
 
 PROJECTS['frota-lite'] = dict(
+  screens=[('frota-painel.webp', 'Painel com a frota de exemplo: atrasado no topo, próximo e em dia, e o botão de WhatsApp.', 'desktop', 1600, 1000), ('frota-agenda.webp', 'Agenda da oficina pronta para mandar ou imprimir, com o botão de registrar a volta do veículo.', 'desktop', 1600, 1000), ('frota-celular.webp', 'O mesmo painel no celular, com a barra de navegação embaixo.', 'phone', 780, 1688)],
   name='Frota Lite', short='Frota Lite', sector='Frotas', og='manutenção de frota pequena',
   desc='Manutenção preventiva para frotas pequenas: quem está atrasado, próximo ou em dia, com a lista da oficina pronta para o WhatsApp.',
   pitch='Saiba qual veículo está <span class="grad">atrasado antes de quebrar.</span>',
@@ -107,6 +110,7 @@ PROJECTS['frota-lite'] = dict(
   pager=(('autoatendimento-qr.html', 'Autoatendimento QR'), ('lumen.html', 'Lúmen')))
 
 PROJECTS['lumen'] = dict(
+  screens=[('lumen-musica.webp', 'Cabine com a programação do culto, a letra no preview e os slides da música embaixo.', 'desktop', 1600, 1000), ('lumen-biblia.webp', 'João 3:16 da Almeida 1819, com o aviso de que o texto ficaria ruim no telão e o botão para otimizar.', 'desktop', 1600, 1000)],
   name='Lúmen', short='Lúmen', sector='Igrejas', og='projeção de culto que não trava',
   desc='Projeção de culto para Windows: letra, Bíblia, avisos e mídia no telão, operados por um voluntário, sem internet.',
   pitch='Projeção de culto que <span class="grad">não trava na frente da igreja.</span>',
@@ -142,6 +146,7 @@ PROJECTS['lumen'] = dict(
   pager=(('frota-lite.html', 'Frota Lite'), ('png-foto.html', 'Fundo Fora')))
 
 PROJECTS['png-foto'] = dict(
+  screens=[('png-inicio.webp', 'Tela inicial: galeria, câmera e fotos de exemplo para testar.', 'phone', 780, 1688), ('png-resultado.webp', 'Caneca recortada no próprio aparelho, pronta para salvar em PNG transparente.', 'phone', 780, 1688)],
   name='Fundo Fora', short='Fundo Fora', sector='Vendedores', og='remoção de fundo no celular',
   desc='Remova o fundo da foto do produto no próprio celular e exporte um PNG transparente, sem upload e sem marca d’água.',
   pitch='Fundo removido no celular, <span class="grad">sem a foto sair do aparelho.</span>',
@@ -194,6 +199,7 @@ PROJECTS['voice-finance'] = dict(
   pager=(('png-foto.html', 'Fundo Fora'), ('sistema-chamados.html', 'Sistema de Chamados')))
 
 PROJECTS['sistema-chamados'] = dict(
+  screens=[('chamados-painel.webp', 'Painel com total de chamados, críticos abertos, tempo médio de resolução e gráficos.', 'desktop', 1600, 1000), ('chamados-lista.webp', 'Fila de chamados com prioridade, status e SLA de cada um.', 'desktop', 1600, 1000), ('chamados-lab.webp', 'Laboratório N1/N2: cenários simulados de redes, Windows, Active Directory e segurança.', 'desktop', 1600, 1000)],
   name='Sistema de Chamados', short='Sistema de Chamados', sector='Suporte de TI', og='service desk com laboratório',
   desc='Service desk com SLA, base de conhecimento, auditoria e laboratório de treinamento para analistas N1/N2. Código público.',
   pitch='Service desk completo, <span class="grad">com laboratório para treinar a equipe.</span>',
@@ -252,6 +258,7 @@ PROJECTS['ai-orchestrator'] = dict(
   pager=(('sistema-chamados.html', 'Sistema de Chamados'), ('excel-dashboard.html', 'Excel Dashboard')))
 
 PROJECTS['excel-dashboard'] = dict(
+  screens=[('excel-painel.webp', 'Painel gerado de uma planilha de vendas de exemplo, com a anomalia de agosto detectada na análise.', 'desktop', 1600, 1000), ('excel-colunas.webp', 'Planilha importada, com o tipo de cada coluna detectado sozinho.', 'desktop', 1600, 1000)],
   name='Excel Dashboard', short='Excel Dashboard', sector='Empresas', og='planilha vira painel, offline',
   desc='Transforma uma planilha Excel em painel com indicadores, gráficos e alertas, processado no próprio computador.',
   pitch='Sua planilha vira um painel <span class="grad">sem sair do seu computador.</span>',
@@ -411,3 +418,54 @@ PROJECTS['ai-control-center'] = dict(
         ('Tecnologia', 'Electron 42, React 19, TypeScript, Vite e better-sqlite3.')],
   cta=('Quer uma ferramenta assim para o seu time?', 'Me chama no LinkedIn e conversamos.'),
   pager=(('backend-python-simulator.html', 'Backend Python Simulator'), ('ebike-suporte.html', 'EBike Suporte')))
+
+
+# ── Páginas por segmento (solucoes/*.html) ─────────────────────────
+# projects: slugs de PROJECTS, na ordem em que aparecem.
+# fit: passos numerados (quando há uma sequência de uso) ou
+# problems: pares (problema do cliente, slug do projeto que resolve).
+SEGMENTS = {}
+
+SEGMENTS['igrejas'] = dict(
+  name='Igrejas', title='Software para igrejas', og='projeção, festividades e slides',
+  desc='Projeção de culto, organização de festividades e preparo de slides para igrejas pequenas e médias, funcionando até sem internet.',
+  pitch='Do preparo à projeção, <span class="grad">o culto sem improviso.</span>',
+  lede='Três ferramentas pensadas para a equipe de voluntários: preparar os slides, projetar ao vivo e organizar festividades de vários dias.',
+  hero_img=('lumen-musica.webp', 'Cabine do Lúmen com a programação do culto e a letra no ar', 1600, 1000),
+  projects=['lumen', 'central-da-festividade', 'sliderevive-church-ai'],
+  fit_title='Como as três se encaixam',
+  fit=[('Prepara', 'O SlideRevive transforma o PDF da pregação em slides 16:9.'),
+       ('Projeta', 'O Lúmen põe letra, Bíblia e avisos no telão, mesmo sem internet.'),
+       ('Organiza', 'A Central da Festividade cuida de escalas, visitantes e do painel do dirigente.')],
+  cta=('Sua igreja precisa de alguma dessas?', 'Me chama no LinkedIn e conversamos sobre o culto e os eventos da sua igreja.'),
+  assunto='Olá, Orleans! Vi as soluções para igrejas no seu site e quero conversar.')
+
+SEGMENTS['suporte-ti'] = dict(
+  name='Suporte de TI', title='Software para suporte de TI', og='diagnóstico e service desk',
+  desc='Diagnóstico de rede com relatório pronto e service desk com laboratório de treinamento, para equipes N1/N2 e empresas de suporte.',
+  pitch='Menos tempo no diagnóstico, <span class="grad">mais chamados resolvidos.</span>',
+  lede='Ferramentas para equipes N1/N2 e empresas que prestam suporte: descobrir a causa do problema, registrar o atendimento e treinar a equipe.',
+  hero_img=('chamados-painel.webp', 'Painel do Sistema de Chamados com chamados abertos, críticos e gráficos', 1600, 1000),
+  projects=['netdiag-pro', 'sistema-chamados'],
+  fit_title='Como os dois se encaixam',
+  fit=[('Diagnostica', 'O NetDiag Pro testa a rede na máquina do cliente e aponta a causa provável.'),
+       ('Registra', 'O relatório em PDF vai anexado ao chamado no Sistema de Chamados.'),
+       ('Treina', 'O laboratório N1/N2 prepara a equipe com cenários simulados e gabarito.')],
+  cta=('Tem uma equipe de suporte ou presta suporte de TI?', 'Me chama no LinkedIn para ver um relatório de exemplo e o laboratório funcionando.'),
+  assunto='Olá, Orleans! Vi as soluções para suporte de TI no seu site e quero conversar.')
+
+SEGMENTS['pequenos-negocios'] = dict(
+  name='Pequenos negócios', title='Software para pequenos negócios', og='restaurantes, frotas e lojas',
+  desc='Pedido pela mesa, manutenção de frota, pós-venda, foto de produto e análise de planilhas para operações pequenas.',
+  pitch='Sistemas que a sua equipe <span class="grad">usa sem treinamento.</span>',
+  lede='Para quem ainda controla tudo no caderno, no WhatsApp ou na planilha: restaurantes, frotas, lojas e quem vende pela internet.',
+  hero_img=('frota-painel.webp', 'Painel do Frota Lite com veículos atrasados, próximos e em dia', 1600, 1000),
+  projects=['autoatendimento-qr', 'frota-lite', 'ebike-suporte', 'png-foto', 'excel-dashboard'],
+  fit_title='Qual resolve o seu problema',
+  problems=[('Pedido anotado errado e garçom indo e voltando', 'autoatendimento-qr'),
+            ('Revisão esquecida até o veículo quebrar', 'frota-lite'),
+            ('Atendimento pós-venda perdido no WhatsApp', 'ebike-suporte'),
+            ('Foto de produto com fundo bagunçado', 'png-foto'),
+            ('Planilha que ninguém consegue analisar', 'excel-dashboard')],
+  cta=('Tem um problema desses no seu negócio?', 'Me chama no LinkedIn e conversamos sobre qual ferramenta resolve.'),
+  assunto='Olá, Orleans! Vi as soluções para pequenos negócios no seu site e quero conversar.')

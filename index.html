@@ -5,16 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Orleans — Projetos digitais</title>
 <meta name="description" content="Sistemas SaaS, apps desktop e mobile e sites para operações pequenas — de oficinas a igrejas, com modo offline e privacidade on-device.">
+<link rel="canonical" href="https://orleans-samai.github.io/">
 <meta property="og:title" content="Orleans — Projetos digitais">
 <meta property="og:description" content="Sistemas SaaS, apps desktop e mobile e sites para operações pequenas.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://github.com/orleans-samai.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://orleans-samai.github.io/">
+<meta property="og:image" content="https://orleans-samai.github.io/og/home.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#050b1a">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23050b1a%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%232f7bff%22 stroke-width=%2210%22/><circle cx=%2257%22 cy=%2244%22 r=%2216%22 fill=%22%23050b1a%22/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/manrope.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "Orleans — Projetos digitais", "url": "https://orleans-samai.github.io/", "inLanguage": "pt-BR"}, {"@context": "https://schema.org", "@type": "Person", "name": "Orleans", "url": "https://orleans-samai.github.io/", "image": "https://orleans-samai.github.io/img/orleans.jpg", "jobTitle": "Desenvolvedor e designer", "sameAs": ["https://www.linkedin.com/in/orleanssamai/", "https://github.com/orleans-samai"]}]</script>
+<script src="assets/site.js" defer></script>
 <style>
   /* ═══════════════════════════════════════════════════════════════
      Azul elétrico sobre marinho profundo.
@@ -284,6 +290,19 @@
   .mini h4 .ico{width:15px;height:15px;color:var(--blue-hi);margin-top:3px}
   .mini p{margin:0;font-size:13.5px;line-height:1.5;color:var(--text-2)}
 
+
+  /* soluções por segmento */
+  .segs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .seg{display:flex;flex-direction:column;overflow:hidden;text-decoration:none}
+  .seg:hover{border-color:var(--line-hi);box-shadow:var(--glow);transform:translateY(-4px)}
+  .seg-thumb{aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line)}
+  .seg-thumb img{width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .5s ease}
+  .seg:hover .seg-thumb img{transform:scale(1.04)}
+  .seg-body{padding:18px 20px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;flex:1}
+  .seg-body h3{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
+  .seg-body p{margin:0;font-size:14px;line-height:1.55;color:var(--text-2)}
+  .seg-body .link{margin-top:auto;padding-top:6px}
+
   /* serviços */
   .services{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(4,minmax(0,1fr));gap:20px;align-items:stretch}
   .services-intro{padding:8px 12px 8px 0;display:flex;flex-direction:column;align-items:flex-start}
@@ -366,7 +385,7 @@
   }
   .cta h2{margin:0;font-size:clamp(22px,2.4vw,26px);font-weight:800;line-height:1.2;letter-spacing:-.02em}
   .cta p{margin:0;padding-left:32px;border-left:1px solid var(--line-hi);font-size:14.5px;color:var(--text-2);line-height:1.6}
-  .cta .btn{position:relative;z-index:1}
+  .cta-actions{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
 
   /* rodapé */
   .foot{padding:36px 0 44px}
@@ -440,7 +459,7 @@
   }
   @media (max-width:640px){
     :root{--gutter:16px}
-    .projects,.services{grid-template-columns:1fr}
+    .projects,.services,.segs{grid-template-columns:1fr}
     .section{padding:36px 0}
     .section-top{flex-direction:column;gap:6px}
     .hero-actions .btn{flex:1 1 100%}
@@ -448,7 +467,7 @@
     .stats-note{padding-left:0;border-left:0;align-self:flex-start}
     .cta{grid-template-columns:1fr;padding:24px 20px;gap:14px}
     .cta p{grid-row:auto}
-    .cta .btn{width:100%}
+    .cta-actions .btn{width:100%}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -489,6 +508,7 @@
     <ul class="menu" id="menu">
       <li><a href="#inicio" data-spy>Início</a></li>
       <li><a href="#projetos" data-spy>Projetos</a></li>
+      <li><a href="#segmentos" data-spy>Soluções</a></li>
       <li><a href="#servicos" data-spy>Serviços</a></li>
       <li><a href="#sobre" data-spy>Sobre</a></li>
       <li><a href="#como-trabalho" data-spy>Como trabalho</a></li>
@@ -732,6 +752,28 @@
   </div>
 </section>
 
+<section class="section" id="segmentos" aria-labelledby="seg-title">
+  <div class="wrap">
+    <div class="section-top">
+      <h2 class="eyebrow" id="seg-title">Soluções por segmento</h2>
+    </div>
+    <div class="segs">
+      <a class="seg glass reveal" href="solucoes/igrejas.html">
+        <div class="seg-thumb"><img src="img/telas/lumen-musica.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+        <div class="seg-body"><span class="chip dim">3 projetos</span><h3>Igrejas</h3><p>Projeção do culto sem internet, festividades organizadas e slides a partir do PDF da pregação.</p><span class="link">Ver soluções <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+      </a>
+      <a class="seg glass reveal" href="solucoes/suporte-ti.html">
+        <div class="seg-thumb"><img src="img/telas/chamados-painel.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+        <div class="seg-body"><span class="chip dim">2 projetos</span><h3>Suporte de TI</h3><p>Diagnóstico de rede com relatório pronto e service desk com laboratório de treinamento.</p><span class="link">Ver soluções <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+      </a>
+      <a class="seg glass reveal" href="solucoes/pequenos-negocios.html">
+        <div class="seg-thumb"><img src="img/telas/frota-painel.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+        <div class="seg-body"><span class="chip dim">5 projetos</span><h3>Pequenos negócios</h3><p>Pedido pela mesa, manutenção de frota, pós-venda, foto de produto e planilhas.</p><span class="link">Ver soluções <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="servicos" aria-labelledby="svc-title">
   <div class="wrap services">
     <div class="services-intro">
@@ -801,9 +843,9 @@
         <p class="stats-note">Contados no roadmap.<br>Atualizados em set 2026.</p>
       </div>
       <div class="stat-grid">
-        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><b>14</b><span>Projetos no portfólio</span></div>
-        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>12</b><span>Com MVP ou além</span></div>
-        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg><b>4</b><span>Na prioridade A</span></div>
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><b data-stat="portfolio">14</b><span>Projetos no portfólio</span></div>
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b data-stat="mvp">12</b><span>Com MVP ou além</span></div>
+        <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg><b data-stat="prioridade-a">4</b><span>Na prioridade A</span></div>
         <div class="stat"><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg><b>6</b><span>Segmentos atendidos</span></div>
       </div>
       <a class="link" href="roadmap.html">Abrir o roadmap <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -847,7 +889,9 @@
     <div class="cta glass">
       <h2 id="cta-title">Vamos construir<br>seu próximo projeto?</h2>
       <p>Estou aberto a novos desafios e boas ideias. Me chama no LinkedIn e vamos conversar sobre o seu projeto.</p>
-      <a class="btn btn-primary" href="https://www.linkedin.com/in/orleanssamai/" target="_blank" rel="noopener">Fale comigo no LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+      <div class="cta-actions" data-contato data-assunto="Olá, Orleans! Vi seu portfólio e quero conversar sobre um projeto.">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/orleanssamai/" target="_blank" rel="noopener" data-goatcounter-click="contato-linkedin">Fale comigo no LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
@@ -860,6 +904,7 @@
     <ul class="foot-links">
       <li><a href="#inicio">Início</a></li>
       <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#segmentos">Soluções</a></li>
       <li><a href="#servicos">Serviços</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="roadmap.html">Roadmap</a></li>

@@ -140,6 +140,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 .proof-note{margin:10px 2px 0;font-size:12px;color:var(--muted)}
 
 /* ── seções ─────────────────────────────────────────────────── */
+/* telas reais: galeria justificada — telas da mesma linha com a mesma altura,
+   largura proporcional ao formato (--ar = largura/altura) */
+.shots{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.shot{margin:0;padding:10px 10px 14px;flex:calc(var(--ar)*100) 1 calc(var(--ar)*260px);min-width:0}
+.shot a{display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);transition:border-color .2s,box-shadow .2s}
+.shot a:hover{border-color:var(--line-hi);box-shadow:var(--glow)}
+.shot img{width:100%;height:auto;display:block;background:var(--bg-2)}
+.shot figcaption{margin:10px 4px 0;font-size:13.5px;line-height:1.5;color:var(--text-2)}
+.shots-note{margin:12px 2px 0;font-size:12px;color:var(--muted)}
 .sec{padding:52px 0 0}
 .sec-head{margin-bottom:22px}
 .duo{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px}
@@ -208,7 +217,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 }
 .cta h2{margin:0 0 6px;font-size:clamp(22px,2.4vw,27px);font-weight:800;letter-spacing:-.02em;line-height:1.2}
 .cta p{margin:0;color:var(--text-2);font-size:15px;line-height:1.6;max-width:56ch}
-.cta .btn{position:relative;z-index:1}
+.cta-actions{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
 
 /* ── anterior / próximo ─────────────────────────────────────── */
 .pager{margin:28px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -233,13 +242,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
   .why{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
+  .shot{flex-basis:calc(var(--ar)*200px)}
   .duo,.next,.why{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr}
   .flow li{flex-direction:row;align-items:flex-start;gap:14px}
   .flow li::after{flex-shrink:0}
   .proof{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cta{grid-template-columns:1fr;padding:24px 20px}
-  .cta .btn{width:100%}
+  .cta-actions .btn{width:100%}
 }
 @media (max-width:640px){
   :root{--gutter:16px}
@@ -254,4 +264,33 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition-duration:.01ms !important}
+}
+
+/* ── páginas por segmento (solucoes/*.html) ─────────────────── */
+.seg-hero-img{display:block;border-radius:18px;overflow:hidden}
+.seg-hero-img img{width:100%;height:auto;display:block}
+.seg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.seg-card{display:flex;flex-direction:column;overflow:hidden;text-decoration:none;transition:border-color .2s,box-shadow .2s,transform .2s}
+.seg-card:hover{border-color:var(--line-hi);box-shadow:var(--glow);transform:translateY(-3px)}
+.seg-thumb{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.seg-thumb img,.seg-thumb svg{width:100%;height:100%;display:block;object-fit:cover;object-position:top center}
+.seg-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.seg-body h3{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.seg-body p{margin:0;font-size:14px;line-height:1.55;color:var(--text-2)}
+.seg-body .link{margin-top:auto;padding-top:6px}
+.fix{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.fix a{display:grid;grid-template-columns:minmax(0,1.3fr) auto minmax(0,1fr);gap:16px;align-items:center;padding:16px 20px;text-decoration:none;transition:border-color .2s,box-shadow .2s}
+.fix a:hover{border-color:var(--line-hi);box-shadow:var(--glow)}
+.fix .prob{font-size:15px;color:var(--text-2)}
+.fix .ico{color:var(--blue-hi)}
+.fix .sol{font-weight:800;font-size:15.5px;color:var(--text)}
+.segs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.segs a{display:flex;flex-direction:column;gap:4px;padding:16px 18px;text-decoration:none;transition:border-color .2s,box-shadow .2s}
+.segs a:hover{border-color:var(--line-hi);box-shadow:var(--glow)}
+.segs b{font-size:16px}
+.segs span{font-size:13px;color:var(--text-2)}
+@media (max-width:760px){
+  .fix a{grid-template-columns:1fr;gap:6px}
+  .fix .ico{transform:rotate(90deg)}
+  .segs{grid-template-columns:1fr}
 }

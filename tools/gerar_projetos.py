@@ -9,6 +9,7 @@ Gera as 14 páginas, inclusive a do Lúmen. O CSS compartilhado fica em
 projetos/projeto.css. Só usa a biblioteca padrão do Python 3.
 """
 import html
+import json
 import os
 import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -351,6 +352,96 @@ LOGO = '<symbol id="i-logo" viewBox="0 0 32 32"><defs><linearGradient id="lg" x1
 def ico(name): return f'<svg class="ico" aria-hidden="true"><use href="#i-{name}"/></svg>'
 E = html.escape
 
+SITE_URL = 'https://orleans-samai.github.io'
+FAVICON = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23050b1a%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%232f7bff%22 stroke-width=%2210%22/><circle cx=%2257%22 cy=%2244%22 r=%2216%22 fill=%22%23050b1a%22/></svg>'
+
+def head_html(title, desc, og_title, path, og_slug, jsonld, css="projeto.css"):
+    """<head> comum: fonte local, canônico, imagem de compartilhamento e dados estruturados."""
+    url = f'{SITE_URL}/{path}'
+    img = f'{SITE_URL}/og/{og_slug}.jpg'
+    return f"""<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{E(title)}</title>
+<meta name="description" content="{E(desc)}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{E(og_title)}">
+<meta property="og:description" content="{E(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#050b1a">
+<link rel="icon" href="{FAVICON}">
+<link rel="preload" href="../fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fonts/manrope.css">
+<link rel="stylesheet" href="{css}">
+<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+"""
+
+PESSOA = {'@type': 'Person', 'name': 'Orleans', 'url': SITE_URL + '/',
+          'sameAs': ['https://www.linkedin.com/in/orleanssamai/', 'https://github.com/orleans-samai']}
+
+def jsonld_projeto(p):
+    d = {'@context': 'https://schema.org', '@type': 'SoftwareApplication', 'name': p['name'],
+         'description': p['desc'], 'url': f"{SITE_URL}/projetos/{p['slug']}.html",
+         'applicationCategory': 'BusinessApplication', 'author': PESSOA,
+         'image': f"{SITE_URL}/og/{p['slug']}.jpg"}
+    if p.get('os'): d['operatingSystem'] = p['os']
+    return d
+
+def nav_html():
+    return f"""<nav class="nav" aria-label="Principal">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html" aria-label="Orleans, página inicial"><svg aria-hidden="true"><use href="#i-logo"/></svg>Orleans</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projetos">Projetos</a></li>
+      <li><a href="../index.html#segmentos">Soluções</a></li>
+      <li><a href="../roadmap.html">Roadmap</a></li>
+    </ul>
+    <a class="btn btn-sm" href="#contato">Fale comigo {ico("arrow")}</a>
+  </div>
+</nav>"""
+
+def cta_html(titulo, texto, assunto):
+    return f"""  <section id="contato" class="cta glass" aria-labelledby="cta-title">
+    <div>
+      <h2 id="cta-title">{E(titulo)}</h2>
+      <p>{E(texto)}</p>
+    </div>
+    <div class="cta-actions" data-contato data-assunto="{E(assunto)}">
+      <a class="btn btn-primary" href="{LI}" target="_blank" rel="noopener" data-goatcounter-click="contato-linkedin">Fale comigo no LinkedIn {ico("arrow-up")}</a>
+    </div>
+  </section>"""
+
+def footer_html():
+    return f"""<footer class="foot">
+  <div class="wrap foot-inner">
+    <span>© <span id="year">2026</span> Orleans</span>
+    <nav aria-label="Rodapé">
+      <a href="../index.html">Início</a>
+      <a href="../index.html#projetos">Projetos</a>
+      <a href="../solucoes/igrejas.html">Igrejas</a>
+      <a href="../solucoes/suporte-ti.html">Suporte de TI</a>
+      <a href="../solucoes/pequenos-negocios.html">Pequenos negócios</a>
+      <a href="../roadmap.html">Roadmap</a>
+      <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub</a>
+      <a href="{LI}" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>"""
+
+
 def page(p):
     used = set(['arrow', 'arrow-up', 'check', 'code', 'swap'])
     used |= {w[0] for w in p['why']}
@@ -382,39 +473,29 @@ def page(p):
     roadmap_link = f'<p style="margin-top:14px"><a class="link" href="../roadmap.html">Ver no roadmap {ico("arrow")}</a></p>'
     spec = ''.join(f'<div><dt>{E(k)}</dt><dd>{v}</dd></div>' for k, v in p['spec'])
     prev, nxt = p['pager']
-    return f'''<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{E(p["name"])} — Orleans</title>
-<meta name="description" content="{E(p["desc"])}">
-<meta property="og:title" content="{E(p["name"])} — {E(p["og"])}">
-<meta property="og:description" content="{E(p["desc"])}">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#050b1a">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23050b1a%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%232f7bff%22 stroke-width=%2210%22/><circle cx=%2257%22 cy=%2244%22 r=%2216%22 fill=%22%23050b1a%22/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="projeto.css">
-</head>
-<body>
+    shots = ''
+    if p.get('screens'):
+        figs = ''.join(
+            f'<figure class="shot glass{" phone" if k == "phone" else ""}" style="--ar:{w / h:.3f}"><a href="../img/telas/{f}" target="_blank" rel="noopener">'
+            f'<img src="../img/telas/{f}" alt="{E(c)}" width="{w}" height="{h}" loading="lazy" decoding="async"></a><figcaption>{E(c)}</figcaption></figure>'
+            for f, c, k, w, h in p['screens'])
+        shots = f'''
+  <section class="sec" aria-labelledby="telas">
+    <div class="sec-head">
+      <p class="eyebrow">Direto do app</p>
+      <h2 class="h2" id="telas">Telas reais</h2>
+    </div>
+    <div class="shots">{figs}</div>
+    <p class="shots-note">Capturas do app rodando com dados de exemplo, em 25 set 2026. Clique para ampliar.</p>
+  </section>
+'''
+    return f'''{head_html(f"{p['name']} — Orleans", p['desc'], f"{p['name']} — {p['og']}", f"projetos/{p['slug']}.html", p['slug'], jsonld_projeto(p))}
 
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">{syms}</svg>
 
-<nav class="nav" aria-label="Principal">
-  <div class="wrap nav-inner">
-    <a class="brand" href="../index.html" aria-label="Orleans, página inicial"><svg aria-hidden="true"><use href="#i-logo"/></svg>Orleans</a>
-    <ul class="nav-links">
-      <li><a href="../index.html#projetos">Projetos</a></li>
-      <li><a href="../roadmap.html">Roadmap</a></li>
-    </ul>
-    <a class="btn btn-sm" href="#contato">Fale comigo {ico("arrow")}</a>
-  </div>
-</nav>
+{nav_html()}
 
 <main id="conteudo">
 
@@ -444,6 +525,7 @@ def page(p):
     <p class="proof-note">{E(p["proof_note"])}</p>
   </section>
 
+{shots}
   <section class="sec" aria-labelledby="entregue">
     <div class="sec-head">
       <p class="eyebrow">Prova de entrega</p>
@@ -495,13 +577,7 @@ def page(p):
     </div>
   </section>
 
-  <section id="contato" class="cta glass" aria-labelledby="cta-title">
-    <div>
-      <h2 id="cta-title">{E(p["cta"][0])}</h2>
-      <p>{E(p["cta"][1])}</p>
-    </div>
-    <a class="btn btn-primary" href="{LI}" target="_blank" rel="noopener">Fale comigo no LinkedIn {ico("arrow-up")}</a>
-  </section>
+{cta_html(p["cta"][0], p["cta"][1], p.get("assunto") or ("Olá, Orleans! Vi o " + p["name"] + " no seu site e quero saber mais."))}
 
   <nav class="pager" aria-label="Outros projetos">
     <a class="glass" href="{prev[0]}"><span class="dir">← Anterior</span><span class="pname">{E(prev[1])}</span></a>
@@ -511,32 +587,182 @@ def page(p):
 </div>
 </main>
 
-<footer class="foot">
-  <div class="wrap foot-inner">
-    <span>© <span id="year">2026</span> Orleans</span>
-    <nav aria-label="Rodapé">
-      <a href="../index.html">Início</a>
-      <a href="../index.html#projetos">Projetos</a>
-      <a href="../roadmap.html">Roadmap</a>
-      <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub</a>
-      <a href="{LI}" target="_blank" rel="noopener">LinkedIn</a>
-    </nav>
-  </div>
-</footer>
-
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+{footer_html()}
 </body>
 </html>
 '''
 
 exec(open(os.path.join(HERE, 'projetos_dados.py'), encoding='utf-8').read())
 
+# Sistema em que cada produto roda (dado estruturado para buscadores).
+SISTEMAS = {'lumen': 'Windows', 'netdiag-pro': 'Windows', 'autoatendimento-qr': 'Windows, Android',
+            'png-foto': 'Android, Web', 'backend-python-simulator': 'Windows, Linux, macOS',
+            'excel-dashboard': 'Windows, Web', 'ai-control-center': 'Windows', 'ai-orchestrator': 'Linux'}
+for _slug, _p in PROJECTS.items():
+    _p['slug'] = _slug
+    _p['os'] = SISTEMAS.get(_slug, 'Web')
+
+def seg_page(slug, s):
+    """Página de um segmento: junta os projetos do segmento e mostra como se encaixam."""
+    used = {'arrow', 'arrow-up'}
+    syms = ''.join(f'<symbol id="i-{k}" viewBox="0 0 24 24">{ICONS[k]}</symbol>' for k in sorted(used)) + LOGO
+    cards = ''
+    for ps in s['projects']:
+        p = PROJECTS[ps]
+        if p.get('screens'):
+            f, c, k, w, h = p['screens'][0]
+            thumb = f'<img src="../img/telas/{f}" alt="" width="{w}" height="{h}" loading="lazy" decoding="async">'
+        else:
+            thumb = p['art'].replace('<svg ', '<svg aria-hidden="true" preserveAspectRatio="xMidYMid slice" ', 1).replace(' role="img"', '')
+        cards += (f'<a class="seg-card glass" href="../projetos/{ps}.html"><div class="seg-thumb">{thumb}</div><div class="seg-body">'
+                  f'<div class="p-status" style="margin:0"><span class="chip"><span class="dot" aria-hidden="true"></span>{E(p["status"])}</span></div>'
+                  f'<h3>{E(p["name"])}</h3><p>{E(p["desc"])}</p><span class="link">Ver o projeto {ico("arrow")}</span></div></a>')
+    if s.get('fit'):
+        fit = f'<ol class="flow" style="--cols:{len(s["fit"])}">' + ''.join(f'<li class="glass"><p><b>{E(a)}</b>{E(b)}</p></li>' for a, b in s['fit']) + '</ol>'
+    else:
+        fit = '<ul class="fix">' + ''.join(
+            f'<li><a class="glass" href="../projetos/{ps}.html"><span class="prob">{E(prob)}</span>{ico("arrow")}<span class="sol">{E(PROJECTS[ps]["name"])}</span></a></li>'
+            for prob, ps in s['problems']) + '</ul>'
+    img, alt, w, h = s['hero_img']
+    jsonld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': s['title'], 'description': s['desc'],
+              'url': f'{SITE_URL}/solucoes/{slug}.html', 'author': PESSOA,
+              'mainEntity': {'@type': 'ItemList', 'itemListElement': [
+                  {'@type': 'ListItem', 'position': i + 1, 'url': f'{SITE_URL}/projetos/{ps}.html', 'name': PROJECTS[ps]['name']}
+                  for i, ps in enumerate(s['projects'])]}}
+    n = len(s['projects'])
+    return f"""{head_html(f"{s['title']} — Orleans", s['desc'], f"{s['title']} — {s['og']}", f"solucoes/{slug}.html", 'seg-' + slug, jsonld, css='../projetos/projeto.css')}
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">{syms}</svg>
+
+{nav_html()}
+
+<main id="conteudo">
+
+<header class="p-hero">
+  <div class="wrap p-hero-grid">
+    <div>
+      <p class="crumbs"><a href="../index.html#segmentos">Soluções</a><span aria-hidden="true">/</span><span>{E(s["name"])}</span></p>
+      <h1>{E(s["title"])}</h1>
+      <p class="pitch">{s["pitch"]}</p>
+      <p class="lede">{E(s["lede"])}</p>
+      <div class="p-status"><span class="chip"><span class="dot" aria-hidden="true"></span>{n} projetos</span></div>
+      <div class="p-actions">
+        <a class="btn btn-primary" href="#projetos">Ver os projetos {ico("arrow")}</a>
+        <a class="btn" href="#contato">Fale comigo {ico("arrow")}</a>
+      </div>
+    </div>
+    <figure class="p-art glass" style="margin:0">
+      <a class="seg-hero-img" href="../img/telas/{img}" target="_blank" rel="noopener"><img src="../img/telas/{img}" alt="{E(alt)}" width="{w}" height="{h}" decoding="async"></a>
+    </figure>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="sec" id="projetos" aria-labelledby="proj-title" style="padding-top:8px">
+    <div class="sec-head">
+      <p class="eyebrow">Projetos</p>
+      <h2 class="h2" id="proj-title">Feitos para {E(s["name"].lower())}</h2>
+    </div>
+    <div class="seg-grid">{cards}</div>
+  </section>
+
+  <section class="sec" aria-labelledby="fit-title">
+    <div class="sec-head">
+      <p class="eyebrow">Na prática</p>
+      <h2 class="h2" id="fit-title">{E(s["fit_title"])}</h2>
+    </div>
+    {fit}
+  </section>
+
+{cta_html(s["cta"][0], s["cta"][1], s["assunto"])}
+
+</div>
+</main>
+
+{footer_html()}
+</body>
+</html>
+"""
+
+# ── Roadmap: fonte da verdade de status, percentual e números da página inicial ──
+ROOT = os.path.join(HERE, '..')
+REPOS = {'lumen': 'igreja-projetor', 'frota-lite': 'frota-lite', 'autoatendimento-qr': 'autoatendimento',
+         'netdiag-pro': 'network-diagnostic', 'ebike-suporte': 'ebike-support', 'central-da-festividade': 'central-festividade',
+         'sistema-chamados': 'sistema-chamados', 'png-foto': 'png-foto', 'voice-finance': 'voice-finance',
+         'ai-orchestrator': 'ai-orchestrator', 'excel-dashboard': 'excel-dashboard',
+         'sliderevive-church-ai': 'slide-revive-church-ai', 'backend-python-simulator': 'backend-python-simulator',
+         'ai-control-center': 'ai-control-center'}
+STATUS_LABEL = {'ideia': 'Ideia', 'desenvolvimento': 'Em desenvolvimento', 'mvp': 'MVP', 'teste': 'Em teste',
+                'pronto': 'Pronto para venda', 'producao': 'Em produção'}
+
+def ler_roadmap():
+    import re
+    src = open(os.path.join(ROOT, 'roadmap.html'), encoding='utf-8').read()
+    itens = {}
+    for m in re.finditer(r"repo:'([^']+)', status:'(\w+)', priority:(?:'(\w)'|null).*?percent:(\w+)", src):
+        repo, status, prio, pct = m.groups()
+        itens[repo] = dict(status=status, priority=prio, percent=None if pct == 'null' else int(pct))
+    return itens
+
+def conferir_com_roadmap(road):
+    """Para a geração se o status ou o percentual de uma página divergir do ROADMAP."""
+    erros = []
+    for slug, p in PROJECTS.items():
+        r = road.get(REPOS[slug])
+        if not r:
+            erros.append(f'{slug}: repositório {REPOS[slug]} não está no ROADMAP'); continue
+        if STATUS_LABEL[r['status']] != p['status']:
+            erros.append(f"{slug}: página diz '{p['status']}', roadmap diz '{STATUS_LABEL[r['status']]}'")
+        if r['percent'] != p.get('percent'):
+            erros.append(f"{slug}: página diz {p.get('percent')}%, roadmap diz {r['percent']}%")
+    if erros:
+        sys.exit('Páginas divergem do ROADMAP em roadmap.html:\n  ' + '\n  '.join(erros))
+
+def atualizar_numeros_home(road):
+    """Preenche os números da página inicial marcados com data-stat."""
+    import re
+    numeros = {'portfolio': len(PROJECTS),
+               'mvp': sum(r['status'] in ('mvp', 'teste', 'pronto', 'producao') for r in road.values()),
+               'prioridade-a': sum(r['priority'] == 'A' for r in road.values())}
+    caminho = os.path.join(ROOT, 'index.html')
+    html_ = open(caminho, encoding='utf-8').read()
+    novo = html_
+    for chave, valor in numeros.items():
+        novo, n = re.subn(rf'(<b data-stat="{chave}">)\d+(</b>)', rf'\g<1>{valor}\g<2>', novo)
+        if n != 1:
+            sys.exit(f'index.html: marcador data-stat="{chave}" não encontrado')
+    if novo != html_:
+        open(caminho, 'w', encoding='utf-8').write(novo)
+    print('números da página inicial: ' + ', '.join(f'{k}={v}' for k, v in numeros.items()))
+
+def escrever_sitemap():
+    """sitemap.xml e robots.txt. O roadmap tem noindex e fica de fora, assim como a 404."""
+    urls = [f'{SITE_URL}/'] + [f'{SITE_URL}/solucoes/{s}.html' for s in SEGMENTS] + [f'{SITE_URL}/projetos/{p}.html' for p in PROJECTS]
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n')
+    open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(xml)
+    open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf-8').write(
+        f'User-agent: *\nDisallow: /tools/\n\nSitemap: {SITE_URL}/sitemap.xml\n')
+    print(f'sitemap.xml com {len(urls)} endereços')
+
 if __name__ == '__main__':
-    pedidos = sys.argv[1:] or list(PROJECTS)
-    desconhecidos = [s for s in pedidos if s not in PROJECTS]
+    SEG_OUT = os.path.join(HERE, '..', 'solucoes')
+    roadmap = ler_roadmap()
+    conferir_com_roadmap(roadmap)
+    atualizar_numeros_home(roadmap)
+    escrever_sitemap()
+    os.makedirs(SEG_OUT, exist_ok=True)
+    pedidos = sys.argv[1:] or list(PROJECTS) + list(SEGMENTS)
+    desconhecidos = [s for s in pedidos if s not in PROJECTS and s not in SEGMENTS]
     if desconhecidos:
-        sys.exit('Projeto não encontrado em projetos_dados.py: ' + ', '.join(desconhecidos))
+        sys.exit('Não encontrado em projetos_dados.py: ' + ', '.join(desconhecidos))
     for slug in pedidos:
-        with open(os.path.join(OUT, slug + '.html'), 'w', encoding='utf-8') as f:
-            f.write(page(PROJECTS[slug]))
-        print('gerado projetos/' + slug + '.html')
+        if slug in PROJECTS:
+            destino, html_ = os.path.join(OUT, slug + '.html'), page(PROJECTS[slug])
+        else:
+            destino, html_ = os.path.join(SEG_OUT, slug + '.html'), seg_page(slug, SEGMENTS[slug])
+        with open(destino, 'w', encoding='utf-8') as f:
+            f.write(html_)
+        print('gerado ' + os.path.relpath(destino, os.path.join(HERE, '..')))

@@ -1,0 +1,48 @@
+# Confere o site a cada push e pull request.
+#
+# 1. O gerador reproduz exatamente as páginas commitadas (ninguém editou
+#    projetos/*.html à mão) e os status batem com o ROADMAP de roadmap.html.
+# 2. Nenhuma página tem erro, rolagem horizontal ou link interno quebrado,
+#    em 320, 390, 768, 1280 e 1440 px.
+#
+# O GitHub Pages publica o branch main de qualquer forma; este check é o
+# aviso de que algo quebrado foi (ou está para ser) publicado.
+name: Verificar site
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Páginas geradas estão atualizadas
+        run: |
+          python3 tools/gerar_projetos.py
+          if ! git diff --quiet; then
+            echo "::error::As páginas commitadas não batem com tools/projetos_dados.py. Rode python3 tools/gerar_projetos.py e faça commit do resultado."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar o Playwright
+        run: |
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+
+      - name: Verificar páginas
+        run: node tools/verificar_site.mjs
