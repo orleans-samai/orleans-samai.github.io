@@ -181,11 +181,9 @@
   .hero-lede{margin:0 0 32px;max-width:48ch;font-size:17px;line-height:1.65;color:var(--text-2)}
   .hero-lede strong{color:var(--text);font-weight:700}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-  .hero-act{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .hero-act{display:flex;flex-direction:column;gap:12px}
   .hero-act .btn{width:100%}
-  .hero-link{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 6px;color:var(--text-2);font-size:14px;font-weight:600;text-decoration:none;transition:color .2s}
-  .hero-link svg{width:17px;height:17px;fill:currentColor;flex-shrink:0}
-  .hero-link:hover{color:var(--blue-soft)}
+  .hero-social .brand{width:18px;height:18px;flex-shrink:0;fill:currentColor}
   .perks{
     display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px 20px;
     margin:44px 0 0;padding:0;list-style:none;
@@ -546,11 +544,11 @@
       <div class="hero-actions">
         <div class="hero-act">
           <a class="btn btn-primary" href="#projetos">Ver meus projetos <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="hero-link" href="https://www.linkedin.com/in/orleanssamai/" target="_blank" rel="noopener" data-goatcounter-click="hero-linkedin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg>LinkedIn</a>
+          <a class="btn btn-primary hero-social" href="https://www.linkedin.com/in/orleanssamai/" target="_blank" rel="noopener" data-goatcounter-click="hero-linkedin"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg>LinkedIn <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
         </div>
         <div class="hero-act">
           <a class="btn" href="#contato">Falar comigo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="hero-link" href="https://github.com/orleans-samai" target="_blank" rel="noopener" data-goatcounter-click="hero-github"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>GitHub</a>
+          <a class="btn btn-primary hero-social" href="https://github.com/orleans-samai" target="_blank" rel="noopener" data-goatcounter-click="hero-github"><svg class="brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>GitHub <svg class="ico" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
         </div>
       </div>
       <ul class="perks">
