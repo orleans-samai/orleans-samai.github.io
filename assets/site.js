@@ -7,7 +7,7 @@
    ═══════════════════════════════════════════════════════════════ */
 const SITE = {
   // Só dígitos, com DDI e DDD. Ex.: '5511999998888'
-  whatsapp: '',
+  whatsapp: '5527988255629',
   // Ex.: 'contato@seudominio.com'
   email: '',
   // Link de agendamento de conversa (Cal.com, Calendly, Google Agenda…)
