@@ -105,10 +105,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 }
 .nav-inner{display:flex;align-items:center;gap:22px;height:68px}
 .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.02em}
-.brand svg{width:26px;height:26px}
+.brand svg{width:26px;height:26px;flex-shrink:0}
 .nav-links{display:flex;gap:4px;margin:0 0 0 auto;padding:0;list-style:none}
 .nav-links a{display:block;padding:10px 12px;border-radius:8px;font-size:14px;font-weight:600;color:var(--text-2);text-decoration:none}
 .nav-links a:hover{color:var(--text)}
+.nav-li{
+  flex-shrink:0;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  color:var(--text);border:1px solid var(--line-hi);transition:border-color .2s,color .2s,box-shadow .2s;
+}
+.nav-li:hover{border-color:var(--blue-hi);color:var(--blue-soft);box-shadow:var(--glow)}
+.nav-li svg{width:18px;height:18px;fill:currentColor}
 
 /* ── topo do projeto ────────────────────────────────────────── */
 .p-hero{position:relative;overflow:hidden;padding:52px 0 44px}
@@ -254,7 +260,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue-hi);outline-of
 @media (max-width:640px){
   :root{--gutter:16px}
   .nav-links{display:none}
-  .nav-inner .btn{margin-left:auto}
+  .nav-li{margin-left:auto}
+  .nav-inner{gap:10px}
+  .nav-inner .btn-sm{padding:0 14px}
+  .nav-inner .btn-sm .ico{display:none}
   .p-hero{padding-top:34px}
   .p-actions .btn{flex:1 1 100%}
   .card,.next-main,.spec{padding:22px 20px}

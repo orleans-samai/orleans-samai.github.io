@@ -146,6 +146,12 @@
     background:var(--blue);box-shadow:0 0 12px var(--blue);
   }
   .nav-cta{flex-shrink:0}
+  .nav-li{
+    flex-shrink:0;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+    color:var(--text);border:1px solid var(--line-hi);transition:border-color .2s,color .2s,box-shadow .2s;
+  }
+  .nav-li:hover{border-color:var(--blue-hi);color:var(--blue-soft);box-shadow:var(--glow)}
+  .nav-li svg{width:18px;height:18px;fill:currentColor}
   .burger{
     display:none;margin-left:auto;width:44px;height:44px;border-radius:12px;cursor:pointer;
     border:1px solid var(--line-hi);background:transparent;color:var(--text);
@@ -427,7 +433,8 @@
   }
   @media (max-width:1024px){
     .menu,.nav-cta{display:none}
-    .burger{display:inline-flex}
+    .burger{display:inline-flex;margin-left:8px}
+    .nav-li{margin-left:auto;width:44px;height:44px}
     .nav.open .menu{
       display:flex;flex-direction:column;gap:2px;position:absolute;left:0;right:0;top:72px;margin:0;
       padding:12px var(--gutter) 20px;background:rgba(5,11,26,.97);border-bottom:1px solid var(--line);
@@ -515,6 +522,7 @@
       <li><a href="roadmap.html">Roadmap</a></li>
       <li><a href="#contato" data-spy>Contato</a></li>
     </ul>
+    <a class="nav-li" href="https://www.linkedin.com/in/orleanssamai/" target="_blank" rel="noopener" aria-label="LinkedIn de Orleans" title="LinkedIn" data-goatcounter-click="topo-linkedin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a>
     <a class="btn btn-sm nav-cta" href="#contato">Fale comigo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">
       <span class="sr-only">Abrir menu</span>
