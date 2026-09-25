@@ -7,9 +7,8 @@ GitHub Pages serve o HTML que já está commitado.
 
 `gerar_projetos.py` gera as 14 páginas de projeto (`projetos/*.html`), as 3
 páginas por segmento (`solucoes/*.html`), o `sitemap.xml` e o `robots.txt`, e
-preenche os números da página inicial (`data-stat` em `index.html`) a partir do
-`ROADMAP` de `roadmap.html`. Se o status ou o percentual de alguma página não
-bater com o roadmap, ele para com erro e diz qual.
+preenche os números da página inicial (`data-stat` em `index.html`) a partir
+dos dados dos projetos.
 
 ## Gerador das páginas de projeto
 
@@ -27,8 +26,8 @@ rode o gerador. Para mudar o layout de todas, edite o modelo `page()` em
 
 - **Todas as 14 páginas** saem do gerador, inclusive a do Lúmen. Não edite
   `projetos/*.html` à mão: a próxima execução sobrescreve.
-- **Status, percentual e próxima tarefa** precisam bater com o array
-  `ROADMAP` em `roadmap.html`. Ao mudar um, mude o outro.
+- **Status, percentual e próxima tarefa** de cada projeto ficam em
+  `projetos_dados.py`, e os números da página inicial saem deles.
 - **Números** na faixa de prova são só os conferidos no repositório de cada
   projeto (testes, migrações, commits, versões). Não entram depoimentos,
   clientes nem métricas de uso que não existam.

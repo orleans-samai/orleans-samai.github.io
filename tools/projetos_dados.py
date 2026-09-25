@@ -1,11 +1,10 @@
 # Conteúdo de cada página de projeto, lido por tools/gerar_projetos.py.
 #
-# Fontes: README e código de cada repositório e o array ROADMAP de
-# roadmap.html. Ao mudar status, percentual ou próxima tarefa aqui, mude
-# também no ROADMAP — os dois precisam dizer a mesma coisa.
+# Fontes: README e código de cada repositório. Status, percentual e próxima
+# tarefa de cada projeto ficam aqui; os números da página inicial saem daqui.
 #
 # Campos principais de cada projeto:
-#   status/percent  rótulo e % do ROADMAP (percent=None esconde a barra)
+#   status/percent  estágio e % até a versão vendável (percent=None esconde a barra)
 #   actions         botões do topo; DEMO para código privado, TALK para
 #                   projeto em espera ou de uso pessoal
 #   proof           faixa de números (só números conferidos no repositório)
@@ -14,7 +13,7 @@
 #                   commits, ou "como está construído"
 #   flow            4, 5 ou 6 passos de uso
 #   why / vs        três diferenciais e a comparação com o jeito atual
-#   next / spec     próximo passo do ROADMAP e ficha técnica
+#   next / spec     próximo passo e ficha técnica
 #   art             ilustração SVG (funções art_* no gerador)
 DEMO = [{'label': 'Pedir uma demonstração', 'href': '#contato', 'primary': True}]
 TALK = [{'label': 'Conversar sobre o projeto', 'href': '#contato', 'primary': True}]
@@ -44,7 +43,7 @@ PROJECTS['ebike-suporte'] = dict(
        ('history', 'Histórico por bicicleta', 'Garantia, revisões e defeitos ficam na ficha da bike, e não perdidos em conversas.'),
        ('users', 'Equipe com papéis', 'Cliente, funcionário e admin veem só o que precisam ver.')],
   vs=('Em vez de atender pelo WhatsApp pessoal da loja:', 'cada problema vira um chamado com dono, status e histórico.'),
-  next=('Próximo passo', 'Validar com a primeira loja piloto', 'O sistema funciona; o próximo passo é colocá-lo numa loja real e ajustar com o uso. Pendências técnicas: recuperação de senha por e-mail e reabertura de chamado. 3 de 4 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Validar com a primeira loja piloto', 'O sistema funciona; o próximo passo é colocá-lo numa loja real e ajustar com o uso. Pendências técnicas: recuperação de senha por e-mail e reabertura de chamado. 3 de 4 itens do plano concluídos.'),
   spec=[('Para quem é', 'Lojas e oficinas de bicicletas elétricas que precisam de histórico de atendimento por bike e controle de equipe.'),
         ('Como usar', 'Sistema web: a loja e o cliente usam pelo navegador, com o servidor e o banco PostgreSQL hospedados.'),
         ('Tecnologia', 'Next.js 16, TypeScript, PostgreSQL 17, Zod, Tailwind CSS 4 e Vitest.')],
@@ -73,7 +72,7 @@ PROJECTS['autoatendimento-qr'] = dict(
        ('printer', 'Cozinha sem pedido perdido', 'O cupom sai na impressora térmica, sem duplicar e com nova tentativa se falhar.'),
        ('phone', 'Nada para o cliente instalar', 'O cardápio abre no navegador do celular, direto do QR code.')],
   vs=('Em vez de comanda de papel e garçom indo e voltando:', 'o pedido sai da mesa e chega na cozinha sozinho.'),
-  next=('Próximo passo', 'Cobrança recorrente (Pix ou assinatura)', 'Para vender como serviço, faltam a assinatura mensal, o modo com várias lojas num só servidor e uma configuração inicial sem ajuda técnica. 4 de 7 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Cobrança recorrente (Pix ou assinatura)', 'Para vender como serviço, faltam a assinatura mensal, o modo com várias lojas num só servidor e uma configuração inicial sem ajuda técnica. 4 de 7 itens do plano concluídos.'),
   spec=[('Para quem é', 'Bares, lanchonetes, food trucks e eventos pequenos com internet instável.'),
         ('Como instalar', 'Instalador para Windows no PC do caixa; o app Android e o cardápio no celular se conectam pela rede da loja.'),
         ('Tecnologia', 'FastAPI, SQLite, Socket.IO, PWA, PyInstaller e Inno Setup.')],
@@ -102,7 +101,7 @@ PROJECTS['frota-lite'] = dict(
        ('send', 'Lista pronta para a oficina', 'A agenda sai formatada para WhatsApp, para copiar ou para imprimir.'),
        ('chart', 'Custo por km', 'O painel mostra quanto cada veículo custa para rodar.')],
   vs=('Em vez de controlar revisão num caderno:', 'o hodômetro entra e o sistema calcula sozinho o que está vencendo.'),
-  next=('Próximo passo', 'Cobrança recorrente e passo a passo inicial', 'Faltam a assinatura mensal, um passo a passo para o dono configurar sozinho e o relatório de custo por km para exportar. 5 de 8 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Cobrança recorrente e passo a passo inicial', 'Faltam a assinatura mensal, um passo a passo para o dono configurar sozinho e o relatório de custo por km para exportar. 5 de 8 itens do plano concluídos.'),
   spec=[('Para quem é', 'Instaladoras, assistências técnicas e transportadoras pequenas que hoje controlam revisão no caderno.'),
         ('Como usar', 'Sistema web no computador ou no celular. Para testar, carregue a frota de exemplo.'),
         ('Tecnologia', 'React 19, TanStack Start, Tailwind v4, Better Auth e PostgreSQL (Neon) ou PGLite.')],
@@ -138,7 +137,7 @@ PROJECTS['lumen'] = dict(
        ('moon', 'Pensado para o escuro', 'O que está no ar é sempre o mais claro da tela, e os controles nunca mudam de lugar.'),
        ('cpu', 'Roda em PC modesto', 'Os temas animados são desenhados em código, não em vídeo: instalador leve e pouco uso de processador.')],
   vs=('Em vez de montar slides no PowerPoint a cada culto:', 'a letra é buscada e quebrada em slides sozinha, a Bíblia inteira já está no app e o operador controla tudo pelo teclado ou pelo celular.'),
-  next=('Próximo passo', 'Assinar o instalador', 'Hoje, na primeira instalação, o Windows avisa “editor desconhecido” porque o app ainda não tem certificado de assinatura. É o único item pendente do Lúmen no roadmap: 8 de 9 concluídos.'),
+  next=('Próximo passo', 'Assinar o instalador', 'Hoje, na primeira instalação, o Windows avisa “editor desconhecido” porque o app ainda não tem certificado de assinatura. É o único item pendente do plano do Lúmen: 8 de 9 concluídos.'),
   spec=[('Para quem é', 'Igrejas pequenas e médias que projetam o culto num notebook ou PC com Windows.'),
         ('Como instalar', 'Baixe o <b>.exe</b> nas Releases do GitHub. Não precisa de Node.js nem de mais nada instalado antes.'),
         ('Tecnologia', 'Electron, React 19, TypeScript, TanStack Start e PGLite (banco local).')],
@@ -177,7 +176,7 @@ PROJECTS['voice-finance'] = dict(
   desc='Registro de gastos por voz em português: o app entende valor, categoria e data. Projeto em espera.',
   pitch='Fale o gasto <span class="grad">e ele já está anotado.</span>',
   lede='“Gastei 45 no mercado hoje”: o app entende o valor, a categoria e a data e registra o lançamento — em português.',
-  status='Em desenvolvimento', chips=['Código privado', 'Mobile', 'Em espera'], percent=None, actions=TALK, hero_note='Código privado. O projeto está em espera no roadmap.', art=art_voice(),
+  status='Em desenvolvimento', chips=['Código privado', 'Mobile', 'Em espera'], percent=None, actions=TALK, hero_note='Código privado. O projeto está em espera.', art=art_voice(),
   proof=[('15', 'casos de teste do intérprete e das regras'), ('3', 'migrações com permissão por usuário'), ('LGPD', 'exportar e excluir os próprios dados')],
   proof_note=NOTE_PRIV,
   done=[('Registro por voz', ' com intérprete de linguagem natural'), ('Categorias e contas', ' configuráveis'), ('Exportação em JSON', ' e exclusão de conta (LGPD)'),
@@ -191,7 +190,7 @@ PROJECTS['voice-finance'] = dict(
        ('lock', 'Privacidade desde o banco', 'Cada usuário só acessa os próprios lançamentos, garantido no banco de dados.'),
        ('check', 'Você confirma antes', 'Nada é salvo sem você conferir o valor, a categoria e a data.')],
   vs=('Em vez de abrir o app e preencher um formulário a cada compra:', 'fala uma frase e confirma.'),
-  next=('Situação', 'Projeto em espera', 'O Voice Finance não está entre as prioridades atuais do roadmap. A base — voz, banco e privacidade — funciona, mas não há data de lançamento.'),
+  next=('Situação', 'Projeto em espera', 'O Voice Finance não está entre as prioridades atuais. A base — voz, banco e privacidade — funciona, mas não há data de lançamento.'),
   spec=[('Para quem é', 'Pessoas que pagam com Pix e cartão no dia a dia e esquecem de anotar os gastos.'),
         ('Como usar', 'App mobile com Expo; também roda no navegador para testes.'),
         ('Tecnologia', 'React Native, Expo, Supabase (Postgres com RLS) e Jest.')],
@@ -221,7 +220,7 @@ PROJECTS['sistema-chamados'] = dict(
        ('clock', 'SLA à vista', 'O prazo de cada chamado aparece com alerta antes de estourar.'),
        ('eye', 'Tudo auditado', 'Quem fez o quê e quando fica registrado.')],
   vs=('Em vez de controlar chamados em planilha ou e-mail:', 'cada pedido tem número, prazo, responsável e histórico.'),
-  next=('Próximo passo', 'Definir o uso comercial', 'O sistema está pronto e testado. Falta definir o foco comercial — como ferramenta de capacitação para escolas de TI e equipes de suporte. 2 de 3 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Definir o uso comercial', 'O sistema está pronto e testado. Falta definir o foco comercial — como ferramenta de capacitação para escolas de TI e equipes de suporte. 2 de 3 itens do plano concluídos.'),
   spec=[('Para quem é', 'Equipes de suporte internas, escolas de TI e MSPs.'),
         ('Como usar', 'Sistema web em Python: roda num servidor da empresa ou localmente para treinamento.'),
         ('Tecnologia', 'Python, Flask, SQLite ou PostgreSQL, Bootstrap 5, Chart.js e Swagger.')],
@@ -250,7 +249,7 @@ PROJECTS['ai-orchestrator'] = dict(
        ('layers', 'Um agente por vez', 'Os agentes não disputam os mesmos arquivos.'),
        ('file', 'Tudo rastreável', 'Cada execução gera um relatório com o que foi feito.')],
   vs=('Em vez de copiar e colar entre três ferramentas de IA:', 'um comando conduz o fluxo e para em cada decisão sua.'),
-  next=('Próximo passo', 'Ainda não definido', 'O fluxo principal funciona e está documentado. O roadmap ainda não definiu a próxima etapa.'),
+  next=('Próximo passo', 'Ainda não definido', 'O fluxo principal funciona e está documentado. A próxima etapa ainda não foi definida.'),
   spec=[('Para quem é', 'Desenvolvedores que usam vários agentes de programação no mesmo projeto e querem controle e rastreabilidade.'),
         ('Como usar', 'Script de linha de comando para Linux. Precisa das CLIs dos três agentes instaladas.'),
         ('Tecnologia', 'Bash e as CLIs agy, codex e claude.')],
@@ -278,7 +277,7 @@ PROJECTS['excel-dashboard'] = dict(
        ('sparkles', 'Gráficos sugeridos', 'O painel se monta sozinho a partir das colunas da planilha.'),
        ('chart', 'Mais que gráficos', 'Tendência, previsão, correlação e alertas de anomalia.')],
   vs=('Em vez de montar gráfico por gráfico no Excel ou subir a planilha para um BI na nuvem:', 'importe e o painel se monta.'),
-  next=('Próximo passo', 'Ainda não definido', 'O painel funciona na web e no desktop. O roadmap ainda não definiu a próxima etapa.'),
+  next=('Próximo passo', 'Ainda não definido', 'O painel funciona na web e no desktop. A próxima etapa ainda não foi definida.'),
   spec=[('Para quem é', 'Analistas, consultores e o financeiro de pequenas e médias empresas que não podem enviar planilhas para a nuvem.'),
         ('Como usar', 'Abre no navegador ou como programa de desktop; a planilha é lida localmente.'),
         ('Tecnologia', 'Next.js 14, React 18, TypeScript, Tailwind CSS, Recharts, SheetJS e Electron.')],
@@ -307,7 +306,7 @@ PROJECTS['central-da-festividade'] = dict(
        ('eye', 'Ao vivo no púlpito', 'O dirigente acompanha programação, visitantes e pedidos em tempo real.'),
        ('shield', 'Tudo registrado', 'Auditoria das ações sensíveis e backup completo.')],
   vs=('Em vez de grupos de WhatsApp e planilhas de escala:', 'cada voluntário confirma pelo link e o dirigente vê tudo num painel.'),
-  next=('Próximo passo', 'Facilitar a instalação para novas igrejas', 'Hoje, instalar exige configurar o banco PostgreSQL e o tempo real. O próximo passo é um roteiro de instalação para cada nova igreja. 6 de 7 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Facilitar a instalação para novas igrejas', 'Hoje, instalar exige configurar o banco PostgreSQL e o tempo real. O próximo passo é um roteiro de instalação para cada nova igreja. 6 de 7 itens do plano concluídos.'),
   spec=[('Para quem é', 'Igrejas que promovem festividades de vários dias, com voluntários escalados e recepção de visitantes.'),
         ('Como usar', 'Sistema web: organizadores, recepção e dirigente usam pelo navegador, inclusive no celular.'),
         ('Tecnologia', 'Next.js 16, React 19, TypeScript, Prisma 7, PostgreSQL, Vercel e Supabase.')],
@@ -333,7 +332,7 @@ PROJECTS['sliderevive-church-ai'] = dict(
        ('lock', 'O arquivo não sai do computador', 'Tudo é processado no navegador, sem upload.'),
        ('file', 'Volta para o PowerPoint', 'Exporta em .pptx ou .ppsx para quem usa outro programa.')],
   vs=('Em vez de copiar o texto da pregação slide por slide:', 'importe o arquivo e só revise.'),
-  next=('Próximo passo', 'Ainda não definido', 'É uma primeira versão: funciona com PDF e apresentações com texto editável, ainda sem ler texto de imagens. O roadmap ainda não definiu a próxima etapa.'),
+  next=('Próximo passo', 'Ainda não definido', 'É uma primeira versão: funciona com PDF e apresentações com texto editável, ainda sem ler texto de imagens. A próxima etapa ainda não foi definida.'),
   spec=[('Para quem é', 'Equipes de mídia de igreja que recebem a pregação em PDF ou PowerPoint e precisam adaptar para o telão.'),
         ('Como usar', 'Abre no navegador; os arquivos ficam no próprio aparelho.'),
         ('Tecnologia', 'Next.js, React, TypeScript, Zustand, Framer Motion e pdfjs-dist.')],
@@ -359,7 +358,7 @@ PROJECTS['netdiag-pro'] = dict(
        ('file', 'Relatório pronto', 'O PDF sai com os testes, a causa provável e a recomendação.'),
        ('monitor', 'Um .exe só', 'Não precisa instalar Python nem nada na máquina do cliente.')],
   vs=('Em vez de rodar ping, ipconfig e tracert na mão e copiar para o chamado:', 'um clique gera o relatório completo.'),
-  next=('Próximo passo', 'Chave de licença', 'Para vender por licença a empresas de suporte, faltam a chave de licença, a assinatura do .exe e uma página com um PDF de exemplo. 3 de 6 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Chave de licença', 'Para vender por licença a empresas de suporte, faltam a chave de licença, a assinatura do .exe e uma página com um PDF de exemplo. 3 de 6 itens do plano concluídos.'),
   spec=[('Para quem é', 'Equipes de suporte técnico N1/N2 e empresas que prestam suporte de TI (MSPs).'),
         ('Como usar', 'Um .exe para Windows, sem instalação. Roda na máquina que está com problema.'),
         ('Tecnologia', 'Python, CustomTkinter, psutil, reportlab e PyInstaller.')],
@@ -386,7 +385,7 @@ PROJECTS['backend-python-simulator'] = dict(
        ('wifi-off', '100% offline', 'Sem Docker, sem servidor: instala e usa.'),
        ('award', 'Carreira gamificada', 'Do estagiário ao principal engineer, com certificados.')],
   vs=('Em vez de questionário de múltipla escolha:', 'o código do aluno roda, e o teste diz se passou.'),
-  next=('Próximo passo', 'Painel para o professor', 'Para vender a escolas, faltam o painel da turma para acompanhar os alunos e mais trilhas de conteúdo. 2 de 4 itens do roadmap concluídos.'),
+  next=('Próximo passo', 'Painel para o professor', 'Para vender a escolas, faltam o painel da turma para acompanhar os alunos e mais trilhas de conteúdo. 2 de 4 itens do plano concluídos.'),
   spec=[('Para quem é', 'Estudantes de backend Python, escolas de TI, bootcamps e trilhas corporativas.'),
         ('Como instalar', 'Instaladores para Windows, Linux (AppImage e .deb) e macOS.'),
         ('Tecnologia', 'Python 3.10+, PySide6, SQLAlchemy 2.0, SQLite, FastAPI e reportlab.')],

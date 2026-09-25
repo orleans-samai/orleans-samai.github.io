@@ -405,7 +405,6 @@ def nav_html():
     <ul class="nav-links">
       <li><a href="../index.html#projetos">Projetos</a></li>
       <li><a href="../index.html#segmentos">Soluções</a></li>
-      <li><a href="../roadmap.html">Roadmap</a></li>
     </ul>
     <a class="nav-li" href="https://www.linkedin.com/in/orleanssamai/" target="_blank" rel="noopener" aria-label="LinkedIn de Orleans" title="LinkedIn" data-goatcounter-click="topo-linkedin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a>
     <a class="btn btn-sm" href="#contato">Fale comigo {ico("arrow")}</a>
@@ -433,7 +432,6 @@ def footer_html():
       <a href="../solucoes/igrejas.html">Igrejas</a>
       <a href="../solucoes/suporte-ti.html">Suporte de TI</a>
       <a href="../solucoes/pequenos-negocios.html">Pequenos negócios</a>
-      <a href="../roadmap.html">Roadmap</a>
       <a href="https://github.com/orleans-samai" target="_blank" rel="noopener">GitHub</a>
       <a href="{LI}" target="_blank" rel="noopener">LinkedIn</a>
     </nav>
@@ -471,7 +469,6 @@ def page(p):
     why = ''.join(f'<div class="card glass"><span class="why-ico">{ico(i)}</span><h3>{E(h)}</h3><p>{E(tx)}</p></div>' for i, h, tx in p['why'])
     vs_b, vs_rest = p['vs']
     nx = p['next']
-    roadmap_link = f'<p style="margin-top:14px"><a class="link" href="../roadmap.html">Ver no roadmap {ico("arrow")}</a></p>'
     spec = ''.join(f'<div><dt>{E(k)}</dt><dd>{v}</dd></div>' for k, v in p['spec'])
     prev, nxt = p['pager']
     shots = ''
@@ -570,7 +567,6 @@ def page(p):
         <span class="label">{E(nx[0])}</span>
         <h3>{E(nx[1])}</h3>
         <p>{E(nx[2])}</p>
-        {roadmap_link}
       </div>
       <div class="spec glass">
         <dl>{spec}</dl>
@@ -687,46 +683,14 @@ def seg_page(slug, s):
 </html>
 """
 
-# ── Roadmap: fonte da verdade de status, percentual e números da página inicial ──
 ROOT = os.path.join(HERE, '..')
-REPOS = {'lumen': 'igreja-projetor', 'frota-lite': 'frota-lite', 'autoatendimento-qr': 'autoatendimento',
-         'netdiag-pro': 'network-diagnostic', 'ebike-suporte': 'ebike-support', 'central-da-festividade': 'central-festividade',
-         'sistema-chamados': 'sistema-chamados', 'png-foto': 'png-foto', 'voice-finance': 'voice-finance',
-         'ai-orchestrator': 'ai-orchestrator', 'excel-dashboard': 'excel-dashboard',
-         'sliderevive-church-ai': 'slide-revive-church-ai', 'backend-python-simulator': 'backend-python-simulator',
-         'ai-control-center': 'ai-control-center'}
-STATUS_LABEL = {'ideia': 'Ideia', 'desenvolvimento': 'Em desenvolvimento', 'mvp': 'MVP', 'teste': 'Em teste',
-                'pronto': 'Pronto para venda', 'producao': 'Em produção'}
 
-def ler_roadmap():
-    import re
-    src = open(os.path.join(ROOT, 'roadmap.html'), encoding='utf-8').read()
-    itens = {}
-    for m in re.finditer(r"repo:'([^']+)', status:'(\w+)', priority:(?:'(\w)'|null).*?percent:(\w+)", src):
-        repo, status, prio, pct = m.groups()
-        itens[repo] = dict(status=status, priority=prio, percent=None if pct == 'null' else int(pct))
-    return itens
-
-def conferir_com_roadmap(road):
-    """Para a geração se o status ou o percentual de uma página divergir do ROADMAP."""
-    erros = []
-    for slug, p in PROJECTS.items():
-        r = road.get(REPOS[slug])
-        if not r:
-            erros.append(f'{slug}: repositório {REPOS[slug]} não está no ROADMAP'); continue
-        if STATUS_LABEL[r['status']] != p['status']:
-            erros.append(f"{slug}: página diz '{p['status']}', roadmap diz '{STATUS_LABEL[r['status']]}'")
-        if r['percent'] != p.get('percent'):
-            erros.append(f"{slug}: página diz {p.get('percent')}%, roadmap diz {r['percent']}%")
-    if erros:
-        sys.exit('Páginas divergem do ROADMAP em roadmap.html:\n  ' + '\n  '.join(erros))
-
-def atualizar_numeros_home(road):
-    """Preenche os números da página inicial marcados com data-stat."""
+def atualizar_numeros_home():
+    """Preenche os números da página inicial marcados com data-stat, a partir dos projetos."""
     import re
     numeros = {'portfolio': len(PROJECTS),
-               'mvp': sum(r['status'] in ('mvp', 'teste', 'pronto', 'producao') for r in road.values()),
-               'prioridade-a': sum(r['priority'] == 'A' for r in road.values())}
+               'mvp': sum(p['status'] in ('MVP', 'Em teste', 'Pronto para venda', 'Em produção') for p in PROJECTS.values()),
+               'publico': sum('Código público' in p['chips'] for p in PROJECTS.values())}
     caminho = os.path.join(ROOT, 'index.html')
     html_ = open(caminho, encoding='utf-8').read()
     novo = html_
@@ -739,7 +703,7 @@ def atualizar_numeros_home(road):
     print('números da página inicial: ' + ', '.join(f'{k}={v}' for k, v in numeros.items()))
 
 def escrever_sitemap():
-    """sitemap.xml e robots.txt. O roadmap tem noindex e fica de fora, assim como a 404."""
+    """sitemap.xml e robots.txt. A 404 fica de fora."""
     urls = [f'{SITE_URL}/'] + [f'{SITE_URL}/solucoes/{s}.html' for s in SEGMENTS] + [f'{SITE_URL}/projetos/{p}.html' for p in PROJECTS]
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
            + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n')
@@ -750,9 +714,7 @@ def escrever_sitemap():
 
 if __name__ == '__main__':
     SEG_OUT = os.path.join(HERE, '..', 'solucoes')
-    roadmap = ler_roadmap()
-    conferir_com_roadmap(roadmap)
-    atualizar_numeros_home(roadmap)
+    atualizar_numeros_home()
     escrever_sitemap()
     os.makedirs(SEG_OUT, exist_ok=True)
     pedidos = sys.argv[1:] or list(PROJECTS) + list(SEGMENTS)

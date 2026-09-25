@@ -1,7 +1,7 @@
 # Confere o site a cada push e pull request.
 #
 # 1. O gerador reproduz exatamente as páginas commitadas (ninguém editou
-#    projetos/*.html à mão) e os status batem com o ROADMAP de roadmap.html.
+#    projetos/*.html à mão).
 # 2. Nenhuma página tem erro, rolagem horizontal ou link interno quebrado,
 #    em 320, 390, 768, 1280 e 1440 px.
 #

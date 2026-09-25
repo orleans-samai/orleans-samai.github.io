@@ -37,7 +37,7 @@ const servidor = createServer((req, res) => {
 }).listen(0);
 const BASE = `http://127.0.0.1:${servidor.address().port}`;
 
-const paginas = ['index.html', 'roadmap.html', '404.html']
+const paginas = ['index.html', '404.html']
   .concat(readdirSync(join(ROOT, 'projetos')).filter((f) => f.endsWith('.html')).map((f) => 'projetos/' + f))
   .concat(readdirSync(join(ROOT, 'solucoes')).filter((f) => f.endsWith('.html')).map((f) => 'solucoes/' + f));
 
